@@ -6,7 +6,7 @@ namespace ChessMeters.Core.Tests
     public class StockfishEngineTests
     {
         [Fact]
-        public async Task StartAnalyse_Should_StartAnalyzingInitialPositionOnWindows()
+        public async Task StartAnalyse_Should_StartAnalyzingInitialPosition()
         {
             var stockfishEngine = new StockfishEngine();
             var result = await stockfishEngine.StartAnalyse(20);

@@ -10,14 +10,16 @@ namespace ChessMeters.Core
     {
         public async Task<string> StartAnalyse(short depth)
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                throw new NotImplementedException("Stockfish for Linux is not implemented yet");
 
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                throw new NotImplementedException("Stockfish not supported.");
+
+	    var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "StockfishLinux" : "StockfishWindows.exe";
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "StockfishWindows.exe"),
+                    FileName = Path.Combine(Directory.GetCurrentDirectory(), "Resources", exe),
                     UseShellExecute = false,
                     RedirectStandardError = true,
                     RedirectStandardInput = true,
