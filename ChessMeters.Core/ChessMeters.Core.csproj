@@ -31,4 +31,10 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\StockfishWindows.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
