@@ -1,7 +1,8 @@
-﻿namespace ChessMeters.Core
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace ChessMeters.Core
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
     }
 }

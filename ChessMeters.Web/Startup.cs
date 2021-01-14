@@ -1,4 +1,5 @@
 using ChessMeters.Core;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -22,9 +23,17 @@ namespace ChessMeters.Web
         public void ConfigureServices(IServiceCollection services)
         {
             string mySqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContextPool<ChessMetersContext>(options => options.UseMySql(mySqlConnectionString, ServerVersion.AutoDetect(mySqlConnectionString)));
+            services.AddDbContext<ChessMetersContext>(options => options.UseMySql(mySqlConnectionString,
+                ServerVersion.AutoDetect(mySqlConnectionString)));
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ChessMetersContext>();
+            services.AddIdentityServer().AddApiAuthorization<User, ChessMetersContext>();
+            services.AddAuthentication().AddIdentityServerJwt();
 
             services.AddControllersWithViews();
+            services.AddRazorPages();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -40,6 +49,7 @@ namespace ChessMeters.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -61,12 +71,15 @@ namespace ChessMeters.Web
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
+            app.UseIdentityServer();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
 
             app.UseSpa(spa =>

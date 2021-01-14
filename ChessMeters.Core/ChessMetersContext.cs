@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IdentityServer4.EntityFramework.Options;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace ChessMeters.Core
 {
-    public class ChessMetersContext : DbContext
+    public class ChessMetersContext : ApiAuthorizationDbContext<User>
     {
-        public DbSet<User> Users { get; set; }
-
-        public ChessMetersContext(DbContextOptions<ChessMetersContext> options) : base(options)
+        public ChessMetersContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
+            : base(options, operationalStoreOptions)
         {
         }
     }

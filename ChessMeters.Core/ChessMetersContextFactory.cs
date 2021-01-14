@@ -14,7 +14,7 @@ namespace ChessMeters.Core
             var optionsBuilder = new DbContextOptionsBuilder<ChessMetersContext>();
             optionsBuilder.UseMySql(mySqlConnectionString, ServerVersion.AutoDetect(mySqlConnectionString));
 
-            return new ChessMetersContext(optionsBuilder.Options);
+            return new ChessMetersContext(optionsBuilder.Options, new OperationalStoreOptionsMigrations());
         }
     }
 }
