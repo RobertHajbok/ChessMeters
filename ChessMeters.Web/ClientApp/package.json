@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "11.0.8",
+    "@angular/cdk": "^11.0.4",
     "@angular/common": "11.0.8",
     "@angular/compiler": "11.0.8",
     "@angular/core": "11.0.8",
@@ -26,6 +27,7 @@
     "bootstrap": "^4.3.1",
     "core-js": "^3.3.3",
     "jquery": "^3.5.1",
+    "ngx-chess-board": "^2.0.4",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
     "rxjs": "^6.5.3",
