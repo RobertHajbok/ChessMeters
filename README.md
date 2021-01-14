@@ -1,5 +1,5 @@
 # ChessMeters
-# Analizes your chess games
+Analizes your chess games
 
 
 # Database update:
