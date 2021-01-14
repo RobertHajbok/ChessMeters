@@ -38,10 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Shared\_LoginPartial.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ChessMeters.Core\ChessMeters.Core.csproj" />
   </ItemGroup>
 
