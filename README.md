@@ -12,3 +12,7 @@ dotnet run
 cd ChessMeters.Core
 
 dotnet ef database update
+
+## Tests:
+cd ChessMeters.Core.Tests
+dotnet test
