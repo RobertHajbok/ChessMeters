@@ -1,12 +1,12 @@
-using ChessMeters.Core.Engines;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ChessMeters.Core.Tests
+namespace ChessMeters.Core.Engines.Tests
 {
     public class StockfishEngineTests
     {
         [Fact]
+        [Trait("Category", "Integration")]
         public async Task AnalyzePosition_Should_ShouldAnalyzePositionAfterACoupleOfMoves()
         {
             var engineProcess = new EngineProcess();
