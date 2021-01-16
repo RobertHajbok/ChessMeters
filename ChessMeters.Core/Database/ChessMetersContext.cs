@@ -14,6 +14,8 @@ namespace ChessMeters.Core.Database
 
         public DbSet<Engine> Engines { get; set; }
 
+        public DbSet<EngineEvaluation> EngineEvaluations { get; set; }
+
         public ChessMetersContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)
         {

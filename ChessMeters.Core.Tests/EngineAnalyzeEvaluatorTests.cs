@@ -1,19 +1,20 @@
 ﻿using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
+using ChessMeters.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace ChessMeters.Core.Tests
 {
-    public class GameAnalyzerTests
+    public class EngineAnalyzeEvaluatorTests
     {
         private readonly DbContextOptions<ChessMetersContext> options;
 
-        public GameAnalyzerTests()
+        public EngineAnalyzeEvaluatorTests()
         {
             var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             string mySqlConnectionString = configuration.GetConnectionString("DefaultConnection");
@@ -23,19 +24,22 @@ namespace ChessMeters.Core.Tests
 
         [Fact]
         [Trait("Category", "Integration")]
-        public async Task AnalyzeGame_Should_ShouldAnalyzeGameAndSaveToDb()
+        public async Task BuildEngineEvaluations_Should_EvaluateWithStockfishAndSaveToDbIfEvaluationNotFound()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
             var engineProcess = new EngineProcess();
-            var stockfishEngine = new StockfishEngine(engineProcess, 10);
-            var gameAnalyzer = new GameAnalyzer(stockfishEngine, context);
-            var moves = await gameAnalyzer.AnalizeGame("e2e4", "e7e5", "f1c4", "f8e7", "d1h5");
+            var stockfishEngine = new StockfishEngine(engineProcess);
+            var engineAnalyzeEvaluator = new EngineAnalyzeEvaluator(stockfishEngine, context);
 
-            Assert.Equal(5, moves.Count());
-            Assert.All(moves, x => Assert.NotEqual(0, x.Id));
-            Assert.Null(moves.First().ParentTreeMoveId);
-            Assert.NotNull(moves.Last().ParentTreeMoveId);
-            Assert.NotNull(moves.Last().ParentTreeMove);
+            // TODO: remove this hardcoded construction
+            var treeMoves = new List<TreeMove>
+            {
+                new TreeMove
+                {
+                    Id = 5
+                }
+            };
+            await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMoves, 10);
         }
     }
 }

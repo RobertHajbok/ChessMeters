@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChessMeters.Core.Entities
 {
@@ -20,6 +21,7 @@ namespace ChessMeters.Core.Entities
 
         public long? ParentTreeMoveId { get; set; }
 
+        [ForeignKey(nameof(ParentTreeMoveId))]
         public virtual TreeMove ParentTreeMove { get; set; }
 
         public string FullPath { get; set; }

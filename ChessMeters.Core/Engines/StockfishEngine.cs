@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ChessMeters.Core.Engines.Enums;
+using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -8,20 +10,23 @@ namespace ChessMeters.Core.Engines
     public class StockfishEngine : IEngine
     {
         private readonly IEngineProcess engineProcess;
-        private readonly int depth;
         private const int MAX_TRIES = 200;
+        private short depth;
 
-        public StockfishEngine(IEngineProcess engineProcess, int depth = 2)
+        public EngineEnum EngineId { get; }
+
+        public StockfishEngine(IEngineProcess engineProcess)
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 throw new NotImplementedException("Stockfish not supported.");
 
             this.engineProcess = engineProcess;
-            this.depth = depth;
+            EngineId = EngineEnum.Stockfish12;
         }
 
-        public async Task Initialize()
+        public async Task Initialize(short depth = 2)
         {
+            this.depth = depth;
             var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "StockfishLinux" : "StockfishWindows.exe";
             engineProcess.Initialize(Path.Combine(Directory.GetCurrentDirectory(), "Resources", exe));
             engineProcess.Start();
@@ -73,6 +78,14 @@ namespace ChessMeters.Core.Engines
                 data += Environment.NewLine;
                 tries++;
             }
+        }
+
+        public async Task<short> GetEvaluationCentipawns()
+        {
+            var data = await AnalyzePosition();
+            var search = $"info depth {depth} ";
+            var currentDepthData = data[(data.IndexOf(search) + search.Length)..]; //"info depth 20 seldepth 24 multipv 1 score cp -25";
+            return short.Parse(currentDepthData[(currentDepthData.IndexOf(" cp ") + 4)..].Split(' ')[0]);
         }
 
         private async Task<bool> IsReady()
