@@ -47,7 +47,6 @@ sudo ~/.dotnet/tools/dotnet-ef database update
 - Chart for centipawns on UI
 - Login with Facebook, Google
 - Grid to view uploaded games from PGN
-- Add reset button to enable you to play more games
 - Light/dark themes (maybe from Bootstrap)
 - CI/CD fail to commit if unit tests are not passing
 - Report tables, grid on UI, possibility to create, report details, game details etc.
