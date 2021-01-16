@@ -22,3 +22,7 @@ dotnet ef database update
 cd ChessMeters.Core.Tests
 
 dotnet test
+
+## Linux Setup:
+
+npm install -g @angular/cli
