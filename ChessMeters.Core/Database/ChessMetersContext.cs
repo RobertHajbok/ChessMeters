@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Database
 {
     public class ChessMetersContext : ApiAuthorizationDbContext<User>
     {
@@ -19,13 +19,18 @@ namespace ChessMeters.Core
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.SeedEnumValues<Engine, EngineEnum>(e => e);
 
-            builder.Entity<TreeMove>().Property(p => p.Color).HasComputedColumnSql("(LENGTH(FullPath) - LENGTH(REPLACE(FullPath, ' ', ''))) / 2 <> 0");
+            builder.Entity<TreeMove>().Property(p => p.Color).HasComputedColumnSql("IF(ISNULL(FullPath), 0, (LENGTH(FullPath) - LENGTH(REPLACE(FullPath, ' ', '')))) / 2 <> 0");
         }
     }
 }

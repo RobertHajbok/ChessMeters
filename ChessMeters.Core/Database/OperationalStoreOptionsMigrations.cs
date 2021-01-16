@@ -1,7 +1,7 @@
 ﻿using IdentityServer4.EntityFramework.Options;
 using Microsoft.Extensions.Options;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Database
 {
     public class OperationalStoreOptionsMigrations : IOptions<OperationalStoreOptions>
     {

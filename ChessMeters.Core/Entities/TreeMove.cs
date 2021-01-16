@@ -20,9 +20,8 @@ namespace ChessMeters.Core.Entities
 
         public long? ParentTreeMoveId { get; set; }
 
-        public TreeMove ParentTreeMove { get; set; }
+        public virtual TreeMove ParentTreeMove { get; set; }
 
-        [Required]
         public string FullPath { get; set; }
     }
 }

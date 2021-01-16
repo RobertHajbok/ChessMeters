@@ -1,4 +1,4 @@
-using ChessMeters.Core;
+using ChessMeters.Core.Database;
 using ChessMeters.Core.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
