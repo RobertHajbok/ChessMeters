@@ -10,7 +10,7 @@ dotnet run
 
 ## Database update:
 cd ChessMeters.Core
-
+export PATH="$PATH:/root/.dotnet/tools"
 dotnet ef database update
 
 ## Tests:
