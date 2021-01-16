@@ -2,8 +2,6 @@
 using ChessMeters.Core.Engines;
 using ChessMeters.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChessMeters.Core
@@ -12,6 +10,7 @@ namespace ChessMeters.Core
     {
         private readonly IEngine engine;
         private readonly ChessMetersContext chessMetersContext;
+        private short engineDepth;
 
         public EngineAnalyzeEvaluator(IEngine engine, ChessMetersContext chessMetersContext)
         {
@@ -19,42 +18,40 @@ namespace ChessMeters.Core
             this.chessMetersContext = chessMetersContext;
         }
 
-        public async Task BuildEngineEvaluations(IEnumerable<TreeMove> treeMoves, short depth)
+        public async Task StartNewGame(short engineDepth)
         {
-            if (!treeMoves.Any())
-                return;
+            this.engineDepth = engineDepth;
+            await engine.Initialize(engineDepth);
+        }
 
-            await engine.Initialize();
+        public async Task<EngineEvaluation> BuildEngineEvaluations(TreeMove treeMove)
+        {
+            var engineEvaluation = await chessMetersContext.EngineEvaluations.SingleOrDefaultAsync(x => x.TreeMoveId == treeMove.Id && x.EngineId == engine.EngineId);
+            if (engineEvaluation?.Depth >= engineDepth)
+                return engineEvaluation;
 
-            for (var i = 0; i < treeMoves.Count(); i++)
+            await engine.SetPosition(treeMove.Move);
+            var evaluationCentipawns = await engine.GetEvaluationCentipawns();
+
+            if (engineEvaluation != null)
             {
-                var treeMove = treeMoves.ElementAt(i);
-                var engineEvaluation = await chessMetersContext.EngineEvaluations.SingleOrDefaultAsync(x => x.TreeMoveId == treeMove.Id && x.EngineId == engine.EngineId);
-                if (engineEvaluation?.Depth >= depth)
-                    continue;
-
-                //await engine.SetPosition(..); TODO: set position
-                var evaluationCentipawns = await engine.GetEvaluationCentipawns();
-
-                if (engineEvaluation != null)
-                {
-                    engineEvaluation.Depth = depth;
-                    engineEvaluation.EvaluationCentipawns = evaluationCentipawns;
-                    chessMetersContext.Update(engineEvaluation);
-                    await chessMetersContext.SaveChangesAsync();
-                }
-                else
-                {
-                    await chessMetersContext.EngineEvaluations.AddAsync(new EngineEvaluation
-                    {
-                        TreeMoveId = treeMove.Id,
-                        EngineId = engine.EngineId,
-                        Depth = depth,
-                        EvaluationCentipawns = evaluationCentipawns
-                    });
-                    await chessMetersContext.SaveChangesAsync();
-                }
+                engineEvaluation.Depth = engineDepth;
+                engineEvaluation.EvaluationCentipawns = evaluationCentipawns;
+                chessMetersContext.Update(engineEvaluation);
+                await chessMetersContext.SaveChangesAsync();
             }
+            else
+            {
+                await chessMetersContext.EngineEvaluations.AddAsync(new EngineEvaluation
+                {
+                    TreeMoveId = treeMove.Id,
+                    EngineId = engine.EngineId,
+                    Depth = engineDepth,
+                    EvaluationCentipawns = evaluationCentipawns
+                });
+                await chessMetersContext.SaveChangesAsync();
+            }
+            return engineEvaluation;
         }
     }
 }

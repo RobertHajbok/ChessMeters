@@ -10,13 +10,15 @@ namespace ChessMeters.Core
     public class TreeMovesBuilder : ITreeMovesBuilder
     {
         private readonly ChessMetersContext chessMetersContext;
+        private readonly IEngineAnalyzeEvaluator engineAnalyzeEvaluator;
 
-        public TreeMovesBuilder(ChessMetersContext chessMetersContext)
+        public TreeMovesBuilder(ChessMetersContext chessMetersContext, IEngineAnalyzeEvaluator engineAnalyzeEvaluator)
         {
             this.chessMetersContext = chessMetersContext;
+            this.engineAnalyzeEvaluator = engineAnalyzeEvaluator;
         }
 
-        public async Task<IEnumerable<TreeMove>> BuildTree(params string[] moves)
+        public async Task<IEnumerable<TreeMove>> BuildTree(short analyzeDepth, params string[] moves)
         {
             var treeMoves = new List<TreeMove>();
             if (!moves.Any())
@@ -24,6 +26,8 @@ namespace ChessMeters.Core
 
             var fullPathIds = new List<long>();
             TreeMove parentTreeMove = null;
+
+            await engineAnalyzeEvaluator.StartNewGame(analyzeDepth);
 
             foreach (var move in moves)
             {
@@ -42,6 +46,8 @@ namespace ChessMeters.Core
                     await chessMetersContext.TreeMoves.AddAsync(treeMove);
                     await chessMetersContext.SaveChangesAsync();
                 }
+
+                await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMove);
 
                 treeMoves.Add(treeMove);
                 fullPathIds.Add(treeMove.Id);

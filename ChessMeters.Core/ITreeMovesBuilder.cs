@@ -6,6 +6,6 @@ namespace ChessMeters.Core
 {
     public interface ITreeMovesBuilder
     {
-        Task<IEnumerable<TreeMove>> BuildTree(params string[] moves);
+        Task<IEnumerable<TreeMove>> BuildTree(short analyzeDepth, params string[] moves);
     }
 }

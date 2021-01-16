@@ -1,9 +1,7 @@
 ﻿using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
-using ChessMeters.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
@@ -31,15 +29,12 @@ namespace ChessMeters.Core.Tests
             var stockfishEngine = new StockfishEngine(engineProcess);
             var engineAnalyzeEvaluator = new EngineAnalyzeEvaluator(stockfishEngine, context);
 
-            // TODO: remove this hardcoded construction
-            var treeMoves = new List<TreeMove>
-            {
-                new TreeMove
-                {
-                    Id = 5
-                }
-            };
-            await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMoves, 10);
+            var treeMove = await context.TreeMoves.FirstAsync(x => !x.ParentTreeMoveId.HasValue);
+            await engineAnalyzeEvaluator.StartNewGame(10);
+            var result = await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMove);
+
+            Assert.NotNull(result);
+            Assert.True(result.Id > 0);
         }
     }
 }
