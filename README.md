@@ -31,6 +31,10 @@ dotnet test
 
 npm install -g @angular/cli
 
+## Linux / DB:
+
+sudo ~/.dotnet/tools/dotnet-ef database update
+
 ## TODO
 - PGN convert to uci movees using pgn-extract
 - After extracting with pgn-extract, insert to DB in Games table
