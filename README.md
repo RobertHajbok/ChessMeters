@@ -49,3 +49,4 @@ npm install -g @angular/cli
 - Report tables, grid on UI, possibility to create, report details, game details etc.
 - Admin UI to change flags
 - Traffic logging
+- Docker images for Linux and Windows
