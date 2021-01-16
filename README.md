@@ -1,6 +1,10 @@
 # ChessMeters
 Analizes your chess games
 
+## Stockfish
+position startpos moves e2e4 e7e5
+go depth 15
+
 ## Start the webserver:
 
 cd ChessMeters.Web
