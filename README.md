@@ -35,8 +35,13 @@ npm install -g @angular/cli
 
 sudo ~/.dotnet/tools/dotnet-ef database update
 
+## Google authentication:
+
+dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
+dotnet user-secrets set "Authentication:Google:ClientSecret" "<client-secret>"
+
 ## TODO
-- PGN convert to uci movees using pgn-extract
+- PGN convert to uci moves using pgn-extract
 - After extracting with pgn-extract, insert to DB in Games table
 - Analyze games from Games table
 - Fix authentication
@@ -45,7 +50,7 @@ sudo ~/.dotnet/tools/dotnet-ef database update
 - Upload PGN from file to analyze
 - Chessboard game to PGN and analyze
 - Chart for centipawns on UI
-- Login with Facebook, Google
+- Login with Facebook
 - Grid to view uploaded games from PGN
 - Light/dark themes (maybe from Bootstrap)
 - CI/CD fail to commit if unit tests are not passing

@@ -31,7 +31,14 @@ namespace ChessMeters.Web
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ChessMetersContext>();
             services.AddIdentityServer().AddApiAuthorization<User, ChessMetersContext>();
-            services.AddAuthentication().AddIdentityServerJwt();
+            services.AddAuthentication().AddIdentityServerJwt().AddGoogle(options =>
+            {
+                IConfigurationSection googleAuthNSection =
+                    Configuration.GetSection("Authentication:Google");
+
+                options.ClientId = googleAuthNSection["ClientId"];
+                options.ClientSecret = googleAuthNSection["ClientSecret"];
+            }); ;
 
             services.AddControllersWithViews();
             services.AddRazorPages();
