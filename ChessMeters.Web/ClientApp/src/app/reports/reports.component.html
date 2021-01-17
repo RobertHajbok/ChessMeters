@@ -1,0 +1,18 @@
+<h1 id="tableLabel">Reports</h1>
+
+<p *ngIf="!reports"><em>Loading...</em></p>
+
+<table class="table table-striped mt-5" aria-labelledby="tableLabel" *ngIf="reports">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Creation time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of reports">
+      <td>{{ report.description }}</td>
+      <td>{{ report.creationTime | date }}</td>
+    </tr>
+  </tbody>
+</table>

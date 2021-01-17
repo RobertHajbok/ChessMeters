@@ -8,17 +8,17 @@ import { NgxChessBoardModule } from 'ngx-chess-board';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
 import { AuthorizeGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    FetchDataComponent
+    ReportsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,7 +28,7 @@ import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor
     NgxChessBoardModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
+      { path: 'reports', component: ReportsComponent, canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [
