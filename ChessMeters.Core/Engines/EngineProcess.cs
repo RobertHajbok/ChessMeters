@@ -22,7 +22,6 @@ namespace ChessMeters.Core.Engines
             process = new Process { StartInfo = processStartInfo };
         }
 
-
         public void Wait(int millisecond)
         {
             process.WaitForExit(millisecond);

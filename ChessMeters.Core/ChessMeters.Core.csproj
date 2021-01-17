@@ -34,6 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\pgn-extract-linux">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\pgn-extract-windows.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\StockfishWindows.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

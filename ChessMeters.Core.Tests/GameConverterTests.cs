@@ -7,9 +7,14 @@ namespace ChessMeters.Core.Tests
     {
         [Fact]
         [Trait("Category", "Integration")]
-        public async Task GameConverter_Should_PGNToLatinAlgebraicNotation()
+        public async Task ConvertFromPGN_Should_GetGameFromPGN()
         {
-            Assert.Equal(5, 5);
+            var gameConverter = new GameConverter();
+            var game = await gameConverter.ConvertFromPGN("1. e4 c5 2. f4 { B21 Sicilian Defense: McDonnell Attack } d5 3. e5 { Black resigns. } 0-1");
+
+            Assert.NotNull(game);
+            Assert.Equal("0-1", game.Result);
+            Assert.Equal("e2e4 c7c5 f2f4 d7d5 e4e5", game.Moves);
         }
     }
 }
