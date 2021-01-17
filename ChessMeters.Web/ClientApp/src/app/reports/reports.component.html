@@ -2,17 +2,20 @@
 
 <p *ngIf="!reports"><em>Loading...</em></p>
 
-<table class="table table-striped mt-5" aria-labelledby="tableLabel" *ngIf="reports">
+<div *ngIf="reports" class="float-right mb-4">
+  <button class="btn btn-success" (click)="openReportGenerator()">Generate new report</button>
+</div>
+<table class="table table-striped" aria-labelledby="tableLabel" *ngIf="reports">
   <thead>
     <tr>
       <th>Description</th>
-      <th>Creation time</th>
+      <th>Creation date</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let report of reports">
       <td>{{ report.description }}</td>
-      <td>{{ report.creationTime | date }}</td>
+      <td>{{ report.creationDate | date:'long' }}</td>
     </tr>
   </tbody>
 </table>

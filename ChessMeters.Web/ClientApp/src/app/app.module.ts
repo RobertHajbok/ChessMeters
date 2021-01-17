@@ -12,13 +12,15 @@ import { ApiAuthorizationModule } from '../api-authorization/api-authorization.m
 import { AuthorizeGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 import { ReportsComponent } from './reports/reports.component';
+import { ReportGeneratorComponent } from './reports/report-generator/report-generator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    ReportsComponent
+    ReportsComponent,
+    ReportGeneratorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,7 +30,13 @@ import { ReportsComponent } from './reports/reports.component';
     NgxChessBoardModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'reports', component: ReportsComponent, canActivate: [AuthorizeGuard] }
+      {
+        path: 'reports', canActivate: [AuthorizeGuard] , children:
+          [
+            { path: '', component: ReportsComponent },
+            { path: 'generate', component: ReportGeneratorComponent }
+          ]
+      }
     ])
   ],
   providers: [

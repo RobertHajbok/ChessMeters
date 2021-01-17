@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Report } from './reports.models';
 import { ReportsService } from './reports.service';
@@ -10,7 +11,7 @@ import { ReportsService } from './reports.service';
 export class ReportsComponent implements OnInit {
   public reports: Report[];
 
-  constructor(private reportsService: ReportsService) {
+  constructor(private reportsService: ReportsService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -19,5 +20,9 @@ export class ReportsComponent implements OnInit {
     }, () => {
       alert('An error occurred while trying to fetch your reports, please try again later.');
     });
+  }
+
+  public openReportGenerator(): void {
+    this.router.navigateByUrl('/reports/generate');
   }
 }

@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Report } from './reports.models';
+import { GenerateReport, Report } from './reports.models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +13,11 @@ export class ReportsService {
 
   public getAll(): Observable<Report[]> {
     return this.http.get<Report[]>(`${this.baseUrl}api/reports`);
+  }
+
+  public generate(report: GenerateReport): Observable<any> {
+    const headerPost: HttpHeaders = new HttpHeaders();
+    headerPost.set('Content-type', 'application/json');
+    return this.http.post(`${this.baseUrl}api/reports`, report, { headers: headerPost });
   }
 }
