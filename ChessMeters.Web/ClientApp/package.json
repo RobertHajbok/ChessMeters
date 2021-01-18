@@ -1,11 +1,11 @@
 {
-  "name": "chessmeters.web",
-  "version": "0.0.0",
+  "name": "chessmeters",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "echo Starting && ng serve",
     "build": "ng build",
-    "build:ssr": "ng run ChessMeters.Web:server:dev",
+    "build:ssr": "ng run ChessMeters:server:dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

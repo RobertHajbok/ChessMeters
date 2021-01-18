@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ChessMeters.Web": {
+    "ChessMeters": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -51,18 +51,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ChessMeters.Web:build"
+            "browserTarget": "ChessMeters:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ChessMeters.Web:build:production"
+              "browserTarget": "ChessMeters:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ChessMeters.Web:build"
+            "browserTarget": "ChessMeters:build"
           }
         },
         "test": {
@@ -112,7 +112,7 @@
         }
       }
     },
-    "ChessMeters.Web-e2e": {
+    "ChessMeters-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -120,7 +120,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ChessMeters.Web:serve"
+            "devServerTarget": "ChessMeters:serve"
           }
         },
         "lint": {
@@ -133,5 +133,5 @@
       }
     }
   },
-  "defaultProject": "ChessMeters.Web"
+  "defaultProject": "ChessMeters"
 }
