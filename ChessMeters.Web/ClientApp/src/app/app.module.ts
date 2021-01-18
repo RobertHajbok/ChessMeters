@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChessBoardModule } from 'ngx-chess-board';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -24,6 +26,8 @@ import { ReportGeneratorComponent } from './reports/report-generator/report-gene
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
