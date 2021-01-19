@@ -41,7 +41,13 @@ namespace ChessMeters.Web
 
                 options.ClientId = googleAuthNSection["ClientId"];
                 options.ClientSecret = googleAuthNSection["ClientSecret"];
-            }); ;
+                options.AccessDeniedPath = "/AccessDeniedPathInfo";
+            }).AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                facebookOptions.AccessDeniedPath = "/AccessDeniedPathInfo";
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();

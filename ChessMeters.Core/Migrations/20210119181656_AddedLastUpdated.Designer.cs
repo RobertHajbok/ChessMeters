@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210119181656_AddedLastUpdated")]
+    partial class AddedLastUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,17 +83,12 @@ namespace ChessMeters.Core.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Result")
                         .IsRequired()
                         .HasMaxLength(7)
                         .HasColumnType("varchar(7) CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReportId");
 
                     b.ToTable("Games");
                 });
@@ -472,17 +469,6 @@ namespace ChessMeters.Core.Migrations
                     b.Navigation("TreeMove");
                 });
 
-            modelBuilder.Entity("ChessMeters.Core.Entities.Game", b =>
-                {
-                    b.HasOne("ChessMeters.Core.Entities.Report", "Report")
-                        .WithMany("Games")
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Report");
-                });
-
             modelBuilder.Entity("ChessMeters.Core.Entities.Report", b =>
                 {
                     b.HasOne("ChessMeters.Core.Entities.User", "LastUpdateUser")
@@ -558,11 +544,6 @@ namespace ChessMeters.Core.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ChessMeters.Core.Entities.Report", b =>
-                {
-                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

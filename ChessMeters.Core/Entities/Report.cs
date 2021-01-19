@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,6 +14,7 @@ namespace ChessMeters.Core.Entities
 
         public DateTime CreationDate { get; set; }
 
+        [Required]
         public string UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
@@ -20,5 +22,14 @@ namespace ChessMeters.Core.Entities
 
         [Required]
         public string PGN { get; set; }
+
+        public DateTime? LastUpdated { get; set; }
+
+        public string LastUpdateUserId { get; set; }
+
+        [ForeignKey(nameof(LastUpdateUserId))]
+        public virtual User LastUpdateUser { get; set; }
+
+        public virtual ICollection<Game> Games { get; set; }
     }
 }
