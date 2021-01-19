@@ -92,5 +92,16 @@ namespace ChessMeters.Web.Controllers
                 Description = x.Description
             }).SingleAsync(x => x.Id == id);
         }
+
+        [HttpDelete]
+        [Route("Delete/{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var report = await chessMetersContext.Reports.Include(x => x.Games).SingleAsync(x => x.Id == id);
+            chessMetersContext.Games.RemoveRange(report.Games);
+            chessMetersContext.Reports.Remove(report);
+            await chessMetersContext.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChessMeters.Core.Entities
 {
@@ -12,5 +13,12 @@ namespace ChessMeters.Core.Entities
         [Required]
         [MaxLength(7)]
         public string Result { get; set; }
+
+        [Required]
+        public int ReportId { get; set; }
+
+        [ForeignKey(nameof(ReportId))]
+        public virtual Report Report { get; set; }
+
     }
 }

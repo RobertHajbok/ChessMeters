@@ -30,4 +30,8 @@ export class ReportsService {
   public getForEdt(id: number): Observable<EditReport> {
     return this.http.get<Report>(`${this.baseUrl}api/reports/getForEdit/${id}`);
   }
+
+  public delete(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}api/reports/delete/${id}`);
+  }
 }
