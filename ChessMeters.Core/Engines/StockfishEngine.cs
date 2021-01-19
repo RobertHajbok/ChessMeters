@@ -1,6 +1,7 @@
 ﻿using ChessMeters.Core.Engines.Enums;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -26,9 +27,8 @@ namespace ChessMeters.Core.Engines
         public async Task Initialize(short depth = 2)
         {
             this.depth = depth;
-            // var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "StockfishLinux" : "StockfishWindows.exe";
-            // engineProcess.Initialize(Path.Combine(Directory.GetCurrentDirectory(), "Resources", exe));
-            engineProcess.Initialize("/home/claudiuoprea/ChessMeters/ChessMeters.Web/bin/Debug/net5.0/Resources/StockfishLinux");
+            var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "StockfishLinux" : "StockfishWindows.exe";
+            engineProcess.Initialize(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Resources", exe));
             engineProcess.Start();
             await engineProcess.ReadLine();
             await StartNewGame();

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ChessMeters.Core
 {
-    public class ReportGenerator: IReportGenerator
+    public class ReportGenerator : IReportGenerator
     {
         private readonly IGameConverter gameConverter;
         private readonly ITreeMovesBuilder treeMoveBuilder;
@@ -19,7 +19,8 @@ namespace ChessMeters.Core
             var games = await gameConverter.ConvertFromPGN(report.PGN);
             foreach (var game in games)
             {
-                await treeMoveBuilder.BuildTree(engineDepth, game.Moves);
+                game.ReportId = report.Id;
+                await treeMoveBuilder.BuildTree(engineDepth, game);
             }
         }
     }

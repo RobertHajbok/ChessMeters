@@ -18,9 +18,10 @@ namespace ChessMeters.Core
             this.engineAnalyzeEvaluator = engineAnalyzeEvaluator;
         }
 
-        public async Task<IEnumerable<TreeMove>> BuildTree(short analyzeDepth, params string[] moves)
+        public async Task<IEnumerable<TreeMove>> BuildTree(short analyzeDepth, Game game)
         {
             var treeMoves = new List<TreeMove>();
+            var moves = game.Moves.Split(' ');
             if (!moves.Any())
                 return treeMoves;
 
@@ -53,6 +54,9 @@ namespace ChessMeters.Core
                 fullPathIds.Add(treeMove.Id);
                 parentTreeMove = treeMove;
             }
+
+            await chessMetersContext.Games.AddAsync(game);
+            await chessMetersContext.SaveChangesAsync();
 
             return treeMoves;
         }

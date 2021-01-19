@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -26,14 +27,10 @@ namespace ChessMeters.Core
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 throw new NotImplementedException("Conversion not supported.");
 
-            // var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "pgn-extract-linux" : "pgn-extract-windows.exe";
-            // System.Console.WriteLine(Path.Combine(Directory.GetCurrentDirectory(), "Resources", exe));
-
-
+            var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "pgn-extract-linux" : "pgn-extract-windows.exe";
             var processStartInfo = new ProcessStartInfo
             {
-                // FileName = Path.Combine(Directory.GetCurrentDirectory(), "Resources", exe),
-                FileName = "/home/claudiuoprea/ChessMeters/ChessMeters.Web/bin/Debug/net5.0/Resources/pgn-extract-linux",
+                FileName = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Resources", exe),
                 UseShellExecute = false,
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
@@ -64,8 +61,6 @@ namespace ChessMeters.Core
                         Result = line.Split(' ').Last().Trim()
                     };
                     game.Moves = line.Remove(line.LastIndexOf(' ')).Trim();
-                    System.Console.WriteLine("Missing FUCKING debugger!!!");
-                    System.Console.Write(game.Moves);
                     games.Add(game);
                 }
                 else
