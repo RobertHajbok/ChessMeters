@@ -35,11 +35,15 @@ npm install -g @angular/cli
 
 sudo ~/.dotnet/tools/dotnet-ef database update
 
-## Google authentication:
+## Google and Facebook authentication:
 
 dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
   
 dotnet user-secrets set "Authentication:Google:ClientSecret" "<client-secret>"
+
+dotnet user-secrets set "Authentication:Facebook:AppId" "<app-id>"
+
+dotnet user-secrets set "Authentication:Facebook:AppSecret" "<app-secret>"
 
 ## TODO
 - PROD environments for swap
