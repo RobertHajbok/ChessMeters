@@ -26,8 +26,9 @@ namespace ChessMeters.Core.Engines
         public async Task Initialize(short depth = 2)
         {
             this.depth = depth;
-            var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "StockfishLinux" : "StockfishWindows.exe";
-            engineProcess.Initialize(Path.Combine(Directory.GetCurrentDirectory(), "Resources", exe));
+            // var exe = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "StockfishLinux" : "StockfishWindows.exe";
+            // engineProcess.Initialize(Path.Combine(Directory.GetCurrentDirectory(), "Resources", exe));
+            engineProcess.Initialize("/home/claudiuoprea/ChessMeters/ChessMeters.Web/bin/Debug/net5.0/Resources/StockfishLinux");
             engineProcess.Start();
             await engineProcess.ReadLine();
             await StartNewGame();
