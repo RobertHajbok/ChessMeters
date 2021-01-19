@@ -1,4 +1,5 @@
-﻿using ChessMeters.Core.Database;
+﻿using ChessMeters.Core;
+using ChessMeters.Core.Database;
 using ChessMeters.Core.Entities;
 using ChessMeters.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -18,10 +19,12 @@ namespace ChessMeters.Web.Controllers
     public class ReportsController : ControllerBase
     {
         private readonly ChessMetersContext chessMetersContext;
+        private readonly IReportGenerator reportGenerator;
 
-        public ReportsController(ChessMetersContext chessMetersContext)
+        public ReportsController(ChessMetersContext chessMetersContext, IReportGenerator reportGenerator)
         {
             this.chessMetersContext = chessMetersContext;
+            this.reportGenerator = reportGenerator;
         }
 
         [HttpGet]
@@ -57,6 +60,7 @@ namespace ChessMeters.Web.Controllers
 
             await chessMetersContext.Reports.AddAsync(report);
             await chessMetersContext.SaveChangesAsync();
+            await reportGenerator.Schedule(report, 10);
             return Ok();
         }
 
