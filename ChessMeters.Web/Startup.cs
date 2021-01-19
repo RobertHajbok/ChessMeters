@@ -1,8 +1,11 @@
+using ChessMeters.Core;
 using ChessMeters.Core.Database;
+using ChessMeters.Core.Engines;
 using ChessMeters.Core.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -49,6 +52,12 @@ namespace ChessMeters.Web
             });
 
             services.AddSwaggerGen();
+            services.AddTransient<IReportGenerator, ReportGenerator>();
+            services.AddTransient<IEngineAnalyzeEvaluator, EngineAnalyzeEvaluator>();
+            services.AddTransient<ITreeMovesBuilder, TreeMovesBuilder>();
+            services.AddTransient<IEngineProcess, EngineProcess>();
+            services.AddTransient<IEngine, StockfishEngine>();
+            services.AddTransient<IGameConverter, GameConverter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +88,11 @@ namespace ChessMeters.Web
             }
 
             app.UseRouting();
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.Lax
+            });
+            
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
