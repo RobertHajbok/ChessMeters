@@ -42,20 +42,17 @@ dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
 dotnet user-secrets set "Authentication:Google:ClientSecret" "<client-secret>"
 
 ## TODO
-- PGN convert to uci moves using pgn-extract
-- After extracting with pgn-extract, insert to DB in Games table
-- Analyze games from Games table
-- Fix authentication
-- PROD environments
+- PROD environments for swap
 - Notation for games on UI
 - Upload PGN from file to analyze
 - Chessboard game to PGN and analyze
 - Chart for centipawns on UI
-- Login with Facebook
 - Grid to view uploaded games from PGN
-- Light/dark themes (maybe from Bootstrap)
 - CI/CD fail to commit if unit tests are not passing
 - Report tables, grid on UI, possibility to create, report details, game details etc.
-- Admin UI to change flags
 - Traffic logging
+- Admin UI to change flags
+- Light/dark themes (maybe from Bootstrap)
 - Docker images for Linux and Windows
+
+
