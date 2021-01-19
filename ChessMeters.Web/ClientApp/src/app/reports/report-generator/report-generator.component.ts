@@ -13,7 +13,7 @@ export class ReportGeneratorComponent {
   public report: GenerateReport;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
-    this.report = { description: '' };
+    this.report = { description: '', pgn: '' };
   }
 
   public generate(): void {

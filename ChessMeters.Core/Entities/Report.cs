@@ -17,5 +17,8 @@ namespace ChessMeters.Core.Entities
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
+
+        [Required]
+        public string PGN { get; set; }
     }
 }

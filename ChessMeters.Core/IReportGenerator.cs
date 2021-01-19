@@ -5,6 +5,6 @@ namespace ChessMeters.Core
 {
     public interface IReportGenerator
     {
-        Task Schedule(Report report, string pgn);
+        Task Schedule(Report report, short engineDepth);
     }
 }

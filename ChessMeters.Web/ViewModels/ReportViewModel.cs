@@ -7,5 +7,7 @@ namespace ChessMeters.Web.ViewModels
         public string Description { get; set; }
 
         public DateTime CreationDate { get; set; }
+
+        public string PGN { get; set; }
     }
 }

@@ -5,16 +5,18 @@
 <div *ngIf="reports" class="float-right mb-4">
   <button class="btn btn-success" (click)="openReportGenerator()">Generate new report</button>
 </div>
-<table class="table table-striped" aria-labelledby="tableLabel" *ngIf="reports">
+<table class="table table-responsive table-body table-striped" aria-labelledby="tableLabel" *ngIf="reports">
   <thead>
     <tr>
       <th>Description</th>
+      <th>PGN</th>
       <th>Creation date</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let report of reports">
       <td>{{ report.description }}</td>
+      <td style="word-break:break-all;">{{ report.pgn }}</td>
       <td>{{ report.creationDate | date:'medium' }}</td>
     </tr>
   </tbody>

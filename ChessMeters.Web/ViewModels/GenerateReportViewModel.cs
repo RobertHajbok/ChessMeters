@@ -8,5 +8,8 @@ namespace ChessMeters.Web.ViewModels
         [Required]
         [MaxLength(100)]
         public string Description { get; set; }
+
+        [Required]
+        public string PGN { get; set; }
     }
 }

@@ -32,6 +32,7 @@ namespace ChessMeters.Web.Controllers
                 .OrderBy(x => x.Id).Select(x => new ReportViewModel
                 {
                     Description = x.Description,
+                    PGN = x.PGN,
                     CreationDate = x.CreationDate
                 }).ToListAsync();
         }
@@ -47,6 +48,7 @@ namespace ChessMeters.Web.Controllers
             var report = new Report
             {
                 Description = generateReport.Description,
+                PGN = generateReport.PGN,
                 UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
                 CreationDate = DateTime.Now
             };
