@@ -8,15 +8,17 @@
 <table class="table table-responsive table-body table-striped" aria-labelledby="tableLabel" *ngIf="reports">
   <thead>
     <tr>
+      <th>Actions</th>
       <th>Description</th>
-      <th>PGN</th>
       <th>Creation date</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let report of reports">
+      <td>
+        <button class="btn btn-primary" (click)="openEditor(report.id)">Edit</button>
+      </td>
       <td>{{ report.description }}</td>
-      <td style="word-break:break-all;">{{ report.pgn }}</td>
       <td>{{ report.creationDate | date:'medium' }}</td>
     </tr>
   </tbody>

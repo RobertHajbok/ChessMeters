@@ -7,7 +7,8 @@ import { ReportsService } from './reports.service';
 
 @Component({
   selector: 'app-reports',
-  templateUrl: './reports.component.html'
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
   public reports: Report[];
@@ -25,5 +26,9 @@ export class ReportsComponent implements OnInit {
 
   public openReportGenerator(): void {
     this.router.navigateByUrl('/reports/generate');
+  }
+
+  public openEditor(id: number): void {
+    this.router.navigateByUrl(`/reports/${id}`);
   }
 }

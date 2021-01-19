@@ -1,0 +1,9 @@
+<h1 id="tableLabel">Edit report</h1>
+
+<form (ngSubmit)="save()">
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" id="description" name="description" class="form-control" [(ngModel)]="report.description" required maxlength="100">
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

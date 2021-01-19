@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { GenerateReport, Report } from './reports.models';
+import { EditReport, GenerateReport, Report } from './reports.models';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,22 @@ export class ReportsService {
   }
 
   public getAll(): Observable<Report[]> {
-    return this.http.get<Report[]>(`${this.baseUrl}api/reports`);
+    return this.http.get<Report[]>(`${this.baseUrl}api/reports/getAll`);
   }
 
   public generate(report: GenerateReport): Observable<any> {
     const headerPost: HttpHeaders = new HttpHeaders();
     headerPost.set('Content-type', 'application/json');
     return this.http.post(`${this.baseUrl}api/reports`, report, { headers: headerPost });
+  }
+
+  public edit(report: EditReport): Observable<any> {
+    const headerPut: HttpHeaders = new HttpHeaders();
+    headerPut.set('Content-type', 'application/json');
+    return this.http.put(`${this.baseUrl}api/reports`, report, { headers: headerPut });
+  }
+
+  public getForEdt(id: number): Observable<EditReport> {
+    return this.http.get<Report>(`${this.baseUrl}api/reports/getForEdit/${id}`);
   }
 }
