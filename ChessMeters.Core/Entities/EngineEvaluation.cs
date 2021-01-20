@@ -7,7 +7,7 @@ namespace ChessMeters.Core.Entities
     {
         public long Id { get; set; }
 
-        public long? TreeMoveId { get; set; }
+        public long TreeMoveId { get; set; }
 
         public virtual TreeMove TreeMove { get; set; }
 

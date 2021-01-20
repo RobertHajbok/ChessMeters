@@ -55,6 +55,7 @@ namespace ChessMeters.Core
                 parentTreeMove = treeMove;
             }
 
+            game.LastTreeMoveId = fullPathIds.LastOrDefault();
             await chessMetersContext.Games.AddAsync(game);
             await chessMetersContext.SaveChangesAsync();
 

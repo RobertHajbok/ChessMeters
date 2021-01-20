@@ -14,11 +14,14 @@ namespace ChessMeters.Core.Entities
         [MaxLength(7)]
         public string Result { get; set; }
 
-        [Required]
         public int ReportId { get; set; }
 
         [ForeignKey(nameof(ReportId))]
         public virtual Report Report { get; set; }
 
+        public long? LastTreeMoveId { get; set; }
+
+        [ForeignKey(nameof(LastTreeMoveId))]
+        public virtual TreeMove LastTreeMove { get; set; }
     }
 }

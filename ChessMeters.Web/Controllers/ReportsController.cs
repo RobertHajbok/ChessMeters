@@ -58,8 +58,6 @@ namespace ChessMeters.Web.Controllers
                 CreationDate = DateTime.Now
             };
 
-            await chessMetersContext.Reports.AddAsync(report);
-            await chessMetersContext.SaveChangesAsync();
             await reportGenerator.Schedule(report, 10);
             return Ok();
         }

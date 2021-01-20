@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChessMeters.Core.Entities
@@ -25,5 +26,7 @@ namespace ChessMeters.Core.Entities
         public virtual TreeMove ParentTreeMove { get; set; }
 
         public string FullPath { get; set; }
+
+        public virtual ICollection<EngineEvaluation> EngineEvaluations { get; set; }
     }
 }

@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210120205141_AddedGameLastMoveId")]
+    partial class AddedGameLastMoveId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +61,7 @@ namespace ChessMeters.Core.Migrations
                     b.Property<short>("EvaluationCentipawns")
                         .HasColumnType("smallint");
 
-                    b.Property<long>("TreeMoveId")
+                    b.Property<long?>("TreeMoveId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -469,10 +471,8 @@ namespace ChessMeters.Core.Migrations
                         .IsRequired();
 
                     b.HasOne("ChessMeters.Core.Entities.TreeMove", "TreeMove")
-                        .WithMany("EngineEvaluations")
-                        .HasForeignKey("TreeMoveId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("TreeMoveId");
 
                     b.Navigation("Engine");
 
@@ -576,11 +576,6 @@ namespace ChessMeters.Core.Migrations
             modelBuilder.Entity("ChessMeters.Core.Entities.Report", b =>
                 {
                     b.Navigation("Games");
-                });
-
-            modelBuilder.Entity("ChessMeters.Core.Entities.TreeMove", b =>
-                {
-                    b.Navigation("EngineEvaluations");
                 });
 #pragma warning restore 612, 618
         }
