@@ -15,7 +15,8 @@ import { AuthorizeGuard } from '../api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
 import { ReportsComponent } from './reports/reports.component';
 import { ReportGeneratorComponent } from './reports/report-generator/report-generator.component';
-import { ReportEditor } from './reports/report-editor/report-editor.component';
+import { ReportEditorComponent } from './reports/report-editor/report-editor.component';
+import { ReportDetailsComponent } from './reports/report-details/report-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReportEditor } from './reports/report-editor/report-editor.component';
     HomeComponent,
     ReportsComponent,
     ReportGeneratorComponent,
-    ReportEditor
+    ReportEditorComponent,
+    ReportDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,7 +42,8 @@ import { ReportEditor } from './reports/report-editor/report-editor.component';
         path: 'reports', canActivate: [AuthorizeGuard], children:
           [
             { path: 'generate', component: ReportGeneratorComponent },
-            { path: ':id', component: ReportEditor },
+            { path: 'edit/:id', component: ReportEditorComponent },
+            { path: ':id', component: ReportDetailsComponent },
             { path: '', component: ReportsComponent }
           ]
       }

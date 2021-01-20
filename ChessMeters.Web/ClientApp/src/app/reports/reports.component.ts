@@ -25,7 +25,7 @@ export class ReportsComponent implements OnInit {
   }
 
   public openEditor(id: number): void {
-    this.router.navigateByUrl(`/reports/${id}`);
+    this.router.navigateByUrl(`/reports/edit/${id}`);
   }
 
   public delete(report: Report): void {
@@ -38,6 +38,9 @@ export class ReportsComponent implements OnInit {
     });
   }
 
+  public view(id: number): void {
+    this.router.navigateByUrl(`/reports/${id}`);
+  }
 
   private getAllReports(): void {
     this.reportsService.getAll().subscribe(result => {

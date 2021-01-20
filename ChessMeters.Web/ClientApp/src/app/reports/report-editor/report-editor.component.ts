@@ -9,7 +9,7 @@ import { ReportsService } from '../reports.service';
   selector: 'app-report-editor',
   templateUrl: './report-editor.component.html'
 })
-export class ReportEditor implements OnInit {
+export class ReportEditorComponent implements OnInit {
   public report: EditReport;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router,
@@ -18,7 +18,6 @@ export class ReportEditor implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.activatedRoute.params.subscribe(params => {
       this.reportsService.getForEdt(+params.id).subscribe(result => {
         this.report = result;

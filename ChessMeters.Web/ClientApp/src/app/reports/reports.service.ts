@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { EditReport, GenerateReport, Report } from './reports.models';
+import { EditReport, GenerateReport, Report, ReportDetails } from './reports.models';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +33,9 @@ export class ReportsService {
 
   public delete(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}api/reports/delete/${id}`);
+  }
+
+  public getDetails(id: number): Observable<ReportDetails> {
+    return this.http.get<ReportDetails>(`${this.baseUrl}api/reports/getDetails/${id}`);
   }
 }

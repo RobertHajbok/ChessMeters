@@ -16,7 +16,8 @@
   <tbody>
     <tr *ngFor="let report of reports">
       <td>
-        <button class="btn btn-primary" (click)="openEditor(report.id)">Edit</button>
+        <button class="btn btn-primary" (click)="view(report.id)">View</button>
+        <button class="btn btn-warning ml-1" (click)="openEditor(report.id)">Edit</button>
         <button class="btn btn-danger ml-1" (click)="delete(report)">Delete</button>
       </td>
       <td>{{ report.description }}</td>

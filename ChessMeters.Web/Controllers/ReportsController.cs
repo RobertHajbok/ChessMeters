@@ -103,5 +103,21 @@ namespace ChessMeters.Web.Controllers
             await chessMetersContext.SaveChangesAsync();
             return NoContent();
         }
+
+        [HttpGet]
+        [Route("GetDetails/{id:int}")]
+        public async Task<ReportDetailsViewModel> GetDetails(int id)
+        {
+            var report = await chessMetersContext.Reports.Include(x => x.Games).SingleAsync(x => x.Id == id);
+            return new ReportDetailsViewModel
+            {
+                Description = report.Description,
+                Games = report.Games.Select(x => new GameViewModel
+                {
+                    Moves = x.Moves,
+                    Result = x.Result
+                })
+            };
+        }
     }
 }
