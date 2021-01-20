@@ -10,6 +10,7 @@ import { GamesService } from '../games.service';
 })
 export class GameDetailsComponent implements OnInit {
   public game: GameDetails;
+  public chartData: any[];
 
   constructor(private gamesService: GamesService, private toastrService: ToastrService, private activatedRoute: ActivatedRoute) {
   }
@@ -18,6 +19,13 @@ export class GameDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.gamesService.getDetails(+params.id).subscribe(result => {
         this.game = result;
+        this.chartData = [{
+          name: 'Stockfish',
+          series: result.treeMoves.map((element, index) => ({
+            name: index + 1,
+            value: element.stockfishEvaluationCentipawns
+          }))
+        }];
       }, () => {
         this.toastrService.error('An error occurred while trying to fetch the game details, please try again later.');
       });

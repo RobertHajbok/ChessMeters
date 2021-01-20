@@ -5,4 +5,10 @@ export interface Game {
 }
 
 export interface GameDetails {
+  treeMoves: TreeMove[];
+}
+
+interface TreeMove {
+  stockfishEvaluationCentipawns: number;
+  move: string;
 }

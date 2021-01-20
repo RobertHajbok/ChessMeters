@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxChessBoardModule } from 'ngx-chess-board';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -39,6 +40,7 @@ import { GameDetailsComponent } from './games/game-details/game-details.componen
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
+    NgxChartsModule,
     NgxChessBoardModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },

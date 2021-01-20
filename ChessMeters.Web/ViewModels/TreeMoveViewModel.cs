@@ -2,7 +2,7 @@
 {
     public class TreeMoveViewModel
     {
-        public short EvaluationCentipawns { get; set; }
+        public short StockfishEvaluationCentipawns { get; set; }
 
         public string Move { get; set; }
     }
