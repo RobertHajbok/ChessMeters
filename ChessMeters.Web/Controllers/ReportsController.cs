@@ -114,6 +114,7 @@ namespace ChessMeters.Web.Controllers
                 Description = report.Description,
                 Games = report.Games.Select(x => new GameViewModel
                 {
+                    Id = x.Id,
                     Moves = x.Moves,
                     Result = x.Result
                 })

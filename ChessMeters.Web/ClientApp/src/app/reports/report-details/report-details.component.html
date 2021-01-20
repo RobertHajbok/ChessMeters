@@ -1,18 +1,7 @@
-<h1 id="tableLabel">{{ report ? report.description : 'Report' }}</h1>
+<h1>{{ report ? report.description : 'Report' }}</h1>
 
 <p *ngIf="!report"><em>Loading...</em></p>
 
-<table class="table table-responsive table-body table-striped mt-4" aria-labelledby="tableLabel" *ngIf="report?.games">
-  <thead>
-    <tr>
-      <th>Moves</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let game of report.games">
-      <td>{{ game.moves }}</td>
-      <td>{{ game.result }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="mt-4">
+  <app-games [games]="report?.games"></app-games>
+</div>
