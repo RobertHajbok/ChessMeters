@@ -79,6 +79,8 @@ namespace ChessMeters.Web
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseHttpsRedirection();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
