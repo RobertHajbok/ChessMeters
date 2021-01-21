@@ -51,7 +51,6 @@ namespace ChessMeters.Core.Engines
 
         public async Task SetPosition(params string[] moves)
         {
-            await StartNewGame();
             await Send($"position startpos moves {string.Join(" ", moves)}");
         }
 
@@ -80,12 +79,15 @@ namespace ChessMeters.Core.Engines
             }
         }
 
-        public async Task<short> GetEvaluationCentipawns()
+        public async Task<short> GetEvaluationCentipawns(bool color)
         {
             var data = await AnalyzePosition();
             var search = $"info depth {depth} ";
-            var currentDepthData = data[(data.IndexOf(search) + search.Length)..]; //"info depth 20 seldepth 24 multipv 1 score cp -25";
-            return short.Parse(currentDepthData[(currentDepthData.IndexOf(" cp ") + 4)..].Split(' ')[0]);
+            var currentDepthData = data[(data.IndexOf(search) + search.Length)..];
+            var evaluation = short.Parse(currentDepthData[(currentDepthData.IndexOf(" cp ") + 4)..].Split(' ')[0]);
+            if (!color)
+                evaluation *= -1;
+            return evaluation;
         }
 
         private async Task<bool> IsReady()

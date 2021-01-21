@@ -53,13 +53,7 @@ namespace ChessMeters.Core.Engines
 
         ~EngineProcess()
         {
-	    try
-	    {
-              process.Close();
-	    }
-	    catch (Exception e)
-	    {
-	    }
+            process?.Close();
         }
     }
 }

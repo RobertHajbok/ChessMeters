@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210121185902_FixTreeMoveColor")]
+    partial class FixTreeMoveColor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,7 +148,7 @@ namespace ChessMeters.Core.Migrations
                     b.Property<bool>("Color")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("tinyint(1)")
-                        .HasComputedColumnSql("IF(ISNULL(FullPath), 0, MOD(LENGTH(FullPath) - LENGTH(REPLACE(FullPath, ' ', '')), 2) = 0)");
+                        .HasComputedColumnSql("IF(ISNULL(FullPath), 0, (LENGTH(FullPath) - LENGTH(REPLACE(FullPath, ' ', '')))) % 2 <> 0");
 
                     b.Property<string>("FullPath")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

@@ -36,7 +36,7 @@ namespace ChessMeters.Core.Database
 
             builder.SeedEnumValues<Engine, EngineEnum>(e => e);
 
-            builder.Entity<TreeMove>().Property(p => p.Color).HasComputedColumnSql("IF(ISNULL(FullPath), 0, (LENGTH(FullPath) - LENGTH(REPLACE(FullPath, ' ', '')))) / 2 <> 0");
+            builder.Entity<TreeMove>().Property(p => p.Color).HasComputedColumnSql("IF(ISNULL(FullPath), 0, MOD(LENGTH(FullPath) - LENGTH(REPLACE(FullPath, ' ', '')), 2) = 0)");
         }
     }
 }

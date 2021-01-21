@@ -1,6 +1,6 @@
 <h1 id="tableLabel">Generate report</h1>
 
-<form (ngSubmit)="generate()">
+<form #generatorForm="ngForm" (ngSubmit)="generate()">
   <div class="form-group">
     <label for="description">Description</label>
     <input type="text" id="description" name="description" class="form-control" [(ngModel)]="report.description" required maxlength="100">
@@ -9,5 +9,5 @@
     <label for="pgn">PGN</label>
     <textarea id="pgn" name="pgn" class="form-control" [(ngModel)]="report.pgn" required rows="10"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary">Generate</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!generatorForm.form.valid">Generate</button>
 </form>

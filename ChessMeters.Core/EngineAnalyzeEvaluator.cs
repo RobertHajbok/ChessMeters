@@ -2,6 +2,7 @@
 using ChessMeters.Core.Engines;
 using ChessMeters.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChessMeters.Core
@@ -24,14 +25,14 @@ namespace ChessMeters.Core
             await engine.Initialize(engineDepth);
         }
 
-        public async Task<EngineEvaluation> BuildEngineEvaluations(TreeMove treeMove)
+        public async Task<EngineEvaluation> BuildEngineEvaluations(TreeMove treeMove, params string[] previousMoves)
         {
             var engineEvaluation = await chessMetersContext.EngineEvaluations.SingleOrDefaultAsync(x => x.TreeMoveId == treeMove.Id && x.EngineId == engine.EngineId);
             if (engineEvaluation?.Depth >= engineDepth)
                 return engineEvaluation;
 
-            await engine.SetPosition(treeMove.Move);
-            var evaluationCentipawns = await engine.GetEvaluationCentipawns();
+            await engine.SetPosition(previousMoves.Any() ? $"{string.Join(' ', previousMoves)} {treeMove.Move}" : treeMove.Move);
+            var evaluationCentipawns = await engine.GetEvaluationCentipawns(treeMove.Color);
 
             if (engineEvaluation != null)
             {

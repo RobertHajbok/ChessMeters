@@ -7,6 +7,6 @@ namespace ChessMeters.Core
     {
         Task StartNewGame(short engineDepth);
 
-        Task<EngineEvaluation> BuildEngineEvaluations(TreeMove treeMove);
+        Task<EngineEvaluation> BuildEngineEvaluations(TreeMove treeMove, params string[] previousMoves);
     }
 }

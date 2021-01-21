@@ -13,6 +13,6 @@ namespace ChessMeters.Core.Engines
 
         Task<string> AnalyzePosition();
 
-        Task<short> GetEvaluationCentipawns();
+        Task<short> GetEvaluationCentipawns(bool color);
     }
 }

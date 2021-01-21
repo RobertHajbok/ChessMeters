@@ -48,7 +48,7 @@ namespace ChessMeters.Core
                     await chessMetersContext.SaveChangesAsync();
                 }
 
-                await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMove);
+                await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMove, treeMoves.Select(x => x.Move).ToArray());
 
                 treeMoves.Add(treeMove);
                 fullPathIds.Add(treeMove.Id);

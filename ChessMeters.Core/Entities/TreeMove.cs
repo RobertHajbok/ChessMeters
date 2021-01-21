@@ -15,7 +15,7 @@ namespace ChessMeters.Core.Entities
         {
             get
             {
-                return (!string.IsNullOrEmpty(FullPath) ? FullPath.Split(' ').Length : 0) / 2 != 0;
+                return !string.IsNullOrEmpty(FullPath) ? FullPath.Split(' ').Length % 2 != 0 : false;
             }
             private set { }
         }
