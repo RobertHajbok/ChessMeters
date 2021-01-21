@@ -42,7 +42,7 @@ namespace ChessMeters.Web.Controllers
                 treeMoves.Add(new TreeMoveViewModel
                 {
                     Move = move.Move,
-                    EvaluationCentipawns = move.EngineEvaluations.Single(x => x.EngineId == EngineEnum.Stockfish12).EvaluationCentipawns
+                    StockfishEvaluationCentipawns = move.EngineEvaluations.Single(x => x.EngineId == EngineEnum.Stockfish12).EvaluationCentipawns
                 });
             }
             return new GameDetailsViewModel

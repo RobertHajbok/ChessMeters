@@ -1,5 +1,19 @@
 <h1>Game details</h1>
 <div class="mt-4">
-  <ngx-chess-board [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true">
-  </ngx-chess-board>
+
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <div class="center">
+      <ngx-chess-board [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true">
+      </ngx-chess-board>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <ngx-charts-line-chart [legend]="true" [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true"
+                           [showYAxisLabel]="true" [xAxisLabel]="'Ply'" [yAxisLabel]="'Evaluation'"
+                           [results]="chartData">
+    </ngx-charts-line-chart>
+  </div>
 </div>
