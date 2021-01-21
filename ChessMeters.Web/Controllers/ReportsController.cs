@@ -71,8 +71,13 @@ namespace ChessMeters.Web.Controllers
             }
 
             var report = await chessMetersContext.Reports.SingleAsync(x => x.Id == editReport.Id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (report.UserId != userId)
+            {
+                throw new Exception("User not authorized for this operation.");
+            }
+
             report.Description = editReport.Description;
-            report.LastUpdateUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             report.LastUpdated = DateTime.Now;
 
             chessMetersContext.Reports.Update(report);
@@ -84,11 +89,18 @@ namespace ChessMeters.Web.Controllers
         [Route("GetForEdit/{id:int}")]
         public async Task<EditReportViewModel> GetForEdit(int id)
         {
-            return await chessMetersContext.Reports.Select(x => new EditReportViewModel
+            var report = await chessMetersContext.Reports.SingleAsync(x => x.Id == id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (report.UserId != userId)
             {
-                Id = x.Id,
-                Description = x.Description
-            }).SingleAsync(x => x.Id == id);
+                throw new Exception("User not authorized for this operation.");
+            }
+
+            return new EditReportViewModel
+            {
+                Id = report.Id,
+                Description = report.Description
+            };
         }
 
         [HttpDelete]
@@ -96,6 +108,12 @@ namespace ChessMeters.Web.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var report = await chessMetersContext.Reports.Include(x => x.Games).SingleAsync(x => x.Id == id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (report.UserId != userId)
+            {
+                throw new Exception("User not authorized for this operation.");
+            }
+
             chessMetersContext.Games.RemoveRange(report.Games);
             chessMetersContext.Reports.Remove(report);
             await chessMetersContext.SaveChangesAsync();
@@ -107,6 +125,12 @@ namespace ChessMeters.Web.Controllers
         public async Task<ReportDetailsViewModel> GetDetails(int id)
         {
             var report = await chessMetersContext.Reports.Include(x => x.Games).SingleAsync(x => x.Id == id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (report.UserId != userId)
+            {
+                throw new Exception("User not authorized for this operation.");
+            }
+
             return new ReportDetailsViewModel
             {
                 Description = report.Description,

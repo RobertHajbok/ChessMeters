@@ -25,11 +25,6 @@ namespace ChessMeters.Core.Entities
 
         public DateTime? LastUpdated { get; set; }
 
-        public string LastUpdateUserId { get; set; }
-
-        [ForeignKey(nameof(LastUpdateUserId))]
-        public virtual User LastUpdateUser { get; set; }
-
         public virtual ICollection<Game> Games { get; set; }
     }
 }

@@ -4,8 +4,10 @@ using ChessMeters.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ChessMeters.Web.Controllers
@@ -26,9 +28,17 @@ namespace ChessMeters.Web.Controllers
         [Route("{id:int}")]
         public async Task<GameDetailsViewModel> GetDetails(int id)
         {
-            var game = await chessMetersContext.Games.Include(x => x.LastTreeMove).SingleAsync(x => x.Id == id);
+            var game = await chessMetersContext.Games.Include(x => x.LastTreeMove).Include(x => x.Report).SingleAsync(x => x.Id == id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (game.Report.UserId != userId)
+            {
+                throw new Exception("User not authorized for this operation.");
+            }
+
             if (!game.LastTreeMoveId.HasValue)
+            {
                 return new GameDetailsViewModel();
+            }
 
             var pathIds = game.LastTreeMove.FullPath.Split(' ');
             var moveIds = pathIds.Select(x => long.Parse(x)).ToList();
