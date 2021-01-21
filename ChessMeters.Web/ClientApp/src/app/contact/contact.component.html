@@ -1,0 +1,25 @@
+<h1>Contact</h1>
+
+<form #contactForm="ngForm" (ngSubmit)="send()">
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="contact.firstName" required maxlength="100">
+  </div>
+  <div class="form-group">
+    <label for="firstName">Last name</label>
+    <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="contact.lastName" required maxlength="100">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" class="form-control" [(ngModel)]="contact.email" required maxlength="100">
+  </div>
+  <div class="form-group">
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" name="subject" class="form-control" [(ngModel)]="contact.subject" required maxlength="100">
+  </div>
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" class="form-control" [(ngModel)]="contact.message" required maxlength="2000" rows="10"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!contactForm.form.valid">Send</button>
+</form>

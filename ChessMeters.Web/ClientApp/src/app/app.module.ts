@@ -20,6 +20,7 @@ import { ReportEditorComponent } from './reports/report-editor/report-editor.com
 import { ReportDetailsComponent } from './reports/report-details/report-details.component';
 import { GamesComponent } from './games/games.component';
 import { GameDetailsComponent } from './games/game-details/game-details.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GameDetailsComponent } from './games/game-details/game-details.componen
     ReportEditorComponent,
     ReportDetailsComponent,
     GamesComponent,
-    GameDetailsComponent
+    GameDetailsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,7 +55,8 @@ import { GameDetailsComponent } from './games/game-details/game-details.componen
             { path: '', component: ReportsComponent }
           ]
       },
-      { path: 'games/:id', component: GameDetailsComponent, canActivate: [AuthorizeGuard] }
+      { path: 'games/:id', component: GameDetailsComponent, canActivate: [AuthorizeGuard] },
+      { path: 'contact', component: ContactComponent }
     ])
   ],
   providers: [
