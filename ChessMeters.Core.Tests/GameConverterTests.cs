@@ -39,17 +39,17 @@ namespace ChessMeters.Core.Tests
         [Trait("Category", "Unit")]
         public async Task ConvertFromPGN_Should_SetGamePropertie()
         {
-            string pgn = @"[Event ""MyEvent""] [Site ""Chessmeters.com""] [Round ""Final""] [White ""User1""] [Black ""User2""] 1. e4 c5 2. f4 { B21 Sicilian Defense: McDonnell Attack } d5 3. e5 { Black resigns. } 0-1";
+            string pgn = @"[Event ""My Event""] [Site ""My Chessmeters.com""] [Round ""My Final""] [White ""User 1""] [Black ""User 2""] 1. e4 c5 2. f4 { B21 Sicilian Defense: McDonnell Attack } d5 3. e5 { Black resigns. } 0-1";
 
             var gameConverter = new GameConverter();
             var games = await gameConverter.ConvertFromPGN(pgn);
             var game = games.First();
 
-            Assert.Equal("MyEvent", game.Event);
-            Assert.Equal("Chessmeters.com", game.Site);
-            Assert.Equal("Final", game.Round);
-            Assert.Equal("User1", game.White);
-            Assert.Equal("User2", game.Black);
+            Assert.Equal("My Event", game.Event);
+            Assert.Equal("My Chessmeters.com", game.Site);
+            Assert.Equal("My Final", game.Round);
+            Assert.Equal("User 1", game.White);
+            Assert.Equal("User 2", game.Black);
         }
 
         [Fact]
