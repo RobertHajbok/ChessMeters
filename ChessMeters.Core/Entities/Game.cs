@@ -23,5 +23,19 @@ namespace ChessMeters.Core.Entities
 
         [ForeignKey(nameof(LastTreeMoveId))]
         public virtual TreeMove LastTreeMove { get; set; }
+
+        [MaxLength(100)]
+        public string Event { get; set; }
+
+        [MaxLength(100)]
+        public string Site { get; set; }
+
+        [MaxLength(50)]
+        public string Round { get; set; }
+
+        [MaxLength(100)]
+        public string White { get; set; }
+        [MaxLength(100)]
+        public string Black { get; set; }
     }
 }

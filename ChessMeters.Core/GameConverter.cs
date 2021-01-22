@@ -47,6 +47,7 @@ namespace ChessMeters.Core
             string output = string.Empty;
             string line;
 
+            var currentGame = new Game();
             while ((line = await process.StandardOutput.ReadLineAsync()) != null)
             {
                 if (line == endOfGamesDelimiterAsLAN)
@@ -56,15 +57,14 @@ namespace ChessMeters.Core
                 output += line;
                 if (line.EndsWith("1-0") || line.EndsWith("1/2-1/2") || line.EndsWith("0-1"))
                 {
-                    var game = new Game
-                    {
-                        Result = line.Split(' ').Last().Trim()
-                    };
-                    game.Moves = line.Remove(line.LastIndexOf(' ')).Trim();
-                    games.Add(game);
+                    currentGame.Result = line.Split(' ').Last().Trim();
+                    currentGame.Moves = line.Remove(line.LastIndexOf(' ')).Trim();
+                    games.Add(currentGame);
+                    currentGame = new Game();
                 }
                 else
                 {
+                    SetGamePropertyFromLine(currentGame, line);
                     output += Environment.NewLine;
                 }
             }
@@ -72,5 +72,45 @@ namespace ChessMeters.Core
 
             return games;
         }
+        public void SetGamePropertyFromLine(Game currentGame, string line)
+        {
+            if (line == "")
+            {
+                return;
+            }
+
+            var gamePropertyKey = line.Split(" ").First().Replace("[", "");
+            var gamePropertyValue = line.Split(" ").
+              ElementAt(1).
+              Replace("]", "").
+              Replace("\"", "");
+            
+            if (gamePropertyValue == "?")
+            {
+                return;
+            }
+            
+            switch (gamePropertyKey)
+            {
+                case "Event":
+                    currentGame.Event = gamePropertyValue;
+                    break;
+                case "Site":
+                    currentGame.Site = gamePropertyValue;
+                    break;
+                case "Round":
+                    currentGame.Round = gamePropertyValue;
+                    break;
+                case "White":
+                    currentGame.White = gamePropertyValue;
+                    break;
+                case "Black":
+                    currentGame.Black = gamePropertyValue;
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 }
