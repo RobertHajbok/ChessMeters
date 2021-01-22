@@ -57,7 +57,8 @@ namespace ChessMeters.Web.Controllers
             }
             return new GameDetailsViewModel
             {
-                TreeMoves = treeMoves
+                TreeMoves = treeMoves,
+                Event = game.Event
             };
         }
     }

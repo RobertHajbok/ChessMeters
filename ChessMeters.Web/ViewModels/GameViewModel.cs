@@ -7,5 +7,7 @@
         public string Moves { get; set; }
 
         public string Result { get; set; }
+
+        public string Event { get; set; }
     }
 }

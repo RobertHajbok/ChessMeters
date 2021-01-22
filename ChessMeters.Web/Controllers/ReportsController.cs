@@ -138,7 +138,8 @@ namespace ChessMeters.Web.Controllers
                 {
                     Id = x.Id,
                     Moves = x.Moves,
-                    Result = x.Result
+                    Result = x.Result,
+                    Event = x.Event
                 })
             };
         }
