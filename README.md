@@ -13,6 +13,10 @@ dotnet run
 
 // dotnet run --urls "http://chessmeters.gomiliare.com/"
 
+## Entitty Framework:
+/root/.dotnet/tools/dotnet-ef migrations add AddedGameProperties
+/root/.dotnet/tools/dotnet-ef migrations remove
+
 ## Database update:
 
 cd ChessMeters.Core
