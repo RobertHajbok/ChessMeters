@@ -1,19 +1,66 @@
 <h1>Game details</h1>
-<div class="mt-4">
 
-</div>
-
-<div class="row justify-content-center">
-  <div class="col-md-4">
-    <div class="center">
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div>
       <ngx-chess-board [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true">
       </ngx-chess-board>
     </div>
   </div>
-  <div class="col-md-8">
-    <ngx-charts-line-chart [legend]="true" [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true"
-                           [showYAxisLabel]="true" [xAxisLabel]="'Ply'" [yAxisLabel]="'Evaluation'"
-                           [results]="chartData">
-    </ngx-charts-line-chart>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <dl class="row">
+          <dt class="col">Event</dt>
+          <dd class="col">{{game?.event || '-'}}</dd>
+          <dt class="col">Site</dt>
+          <dd class="col">{{game?.site || '-'}}</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col">Date</dt>
+          <dd class="col">{{game?.date || '-'}}</dd>
+          <dt class="col">Round</dt>
+          <dd class="col">{{game?.round || '-'}}</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col">White</dt>
+          <dd class="col">{{game?.white || '-'}}</dd>
+          <dt class="col">Black</dt>
+          <dd class="col">{{game?.black || '-'}}</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col">Result</dt>
+          <dd class="col">{{game?.result || '-'}}</dd>
+          <dt class="col">White ELO</dt>
+          <dd class="col">{{game?.whiteElo || '-'}}</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col">Black ELO</dt>
+          <dd class="col">{{game?.blackElo || '-'}}</dd>
+          <dt class="col">ECO</dt>
+          <dd class="col">{{game?.eco || '-'}}</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col">Time control</dt>
+          <dd class="col">{{game?.timeControl || '-'}}</dd>
+          <dt class="col">Termination</dt>
+          <dd class="col">{{game?.termination || '-'}}</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col">End time</dt>
+          <dd class="col">{{game?.endTime || '-'}}</dd>
+          <dt class="col"></dt>
+          <dt class="col"></dt>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 mt-5">
+    <div class="chart-container">
+      <ngx-charts-line-chart [legend]="true" [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true"
+                             [showYAxisLabel]="true" [xAxisLabel]="'Ply'" [yAxisLabel]="'Evaluation'"
+                             [results]="chartData">
+      </ngx-charts-line-chart>
+    </div>
   </div>
 </div>

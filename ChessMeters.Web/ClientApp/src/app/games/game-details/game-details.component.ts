@@ -6,7 +6,8 @@ import { GamesService } from '../games.service';
 
 @Component({
   selector: 'app-game-details',
-  templateUrl: './game-details.component.html'
+  templateUrl: './game-details.component.html',
+  styleUrls: ['./game-details.component.css']
 })
 export class GameDetailsComponent implements OnInit {
   public game: GameDetails;
