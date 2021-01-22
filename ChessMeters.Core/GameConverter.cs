@@ -79,9 +79,14 @@ namespace ChessMeters.Core
                 return;
             }
 
-            var gamePropertyKey = line.Split(" ").First().Replace("[", "");
-            var gamePropertyValue = line.Split(" ").
-              ElementAt(1).
+            var lineSplitBySpace = line.Split(" ").ToList();
+
+            var gamePropertyKey = lineSplitBySpace.First().Replace("[", "");
+
+            lineSplitBySpace.RemoveAt(0);
+            var gamePropertyValueRaw = String.Join(" ", lineSplitBySpace);
+
+            var gamePropertyValue = gamePropertyValueRaw.
               Replace("]", "").
               Replace("\"", "");
             
@@ -89,7 +94,7 @@ namespace ChessMeters.Core
             {
                 return;
             }
-            
+
             switch (gamePropertyKey)
             {
                 case "Event":
