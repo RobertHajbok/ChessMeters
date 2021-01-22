@@ -3,11 +3,13 @@ export interface Game {
   moves: string;
   result: string;
   event: string;
+  site: string;
 }
 
 export interface GameDetails {
   treeMoves: TreeMove[];
   event: string;
+  site: string;
 }
 
 interface TreeMove {

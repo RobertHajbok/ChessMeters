@@ -9,5 +9,7 @@
         public string Result { get; set; }
 
         public string Event { get; set; }
+
+        public string Site { get; set; }
     }
 }

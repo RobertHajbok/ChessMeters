@@ -102,8 +102,4 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(Solution)taskkill /FI &quot;IMAGENAME eq iisexpress.exe&quot; /F" />
-  </Target>
-
 </Project>

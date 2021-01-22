@@ -7,5 +7,7 @@ namespace ChessMeters.Web.ViewModels
         public IEnumerable<TreeMoveViewModel> TreeMoves { get; set; } = new List<TreeMoveViewModel>();
 
         public string Event { get; set; }
+
+        public string Site { get; set; }
     }
 }
