@@ -11,6 +11,18 @@
     <div class="card">
       <div class="card-body">
         <dl class="row">
+          <dt class="col">White</dt>
+          <dd class="col">{{game?.white || '-'}}</dd>
+          <dt class="col">Black</dt>
+          <dd class="col">{{game?.black || '-'}}</dd>
+        </dl>
+        <dl class="row">
+          <dt class="col">White ELO</dt>
+          <dd class="col">{{game?.whiteElo || '-'}}</dd>
+          <dt class="col">Black ELO</dt>
+          <dd class="col">{{game?.blackElo || '-'}}</dd>
+        </dl>
+        <dl class="row">
           <dt class="col">Event</dt>
           <dd class="col">{{game?.event || '-'}}</dd>
           <dt class="col">Site</dt>
@@ -23,20 +35,8 @@
           <dd class="col">{{game?.round || '-'}}</dd>
         </dl>
         <dl class="row">
-          <dt class="col">White</dt>
-          <dd class="col">{{game?.white || '-'}}</dd>
-          <dt class="col">Black</dt>
-          <dd class="col">{{game?.black || '-'}}</dd>
-        </dl>
-        <dl class="row">
           <dt class="col">Result</dt>
           <dd class="col">{{game?.result || '-'}}</dd>
-          <dt class="col">White ELO</dt>
-          <dd class="col">{{game?.whiteElo || '-'}}</dd>
-        </dl>
-        <dl class="row">
-          <dt class="col">Black ELO</dt>
-          <dd class="col">{{game?.blackElo || '-'}}</dd>
           <dt class="col">ECO</dt>
           <dd class="col">{{game?.eco || '-'}}</dd>
         </dl>
