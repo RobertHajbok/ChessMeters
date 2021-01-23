@@ -10,5 +10,8 @@ namespace ChessMeters.Web.ViewModels
     public string Site { get; internal set; }
     
         public string Round { get; internal set; }
-    }
+        public string Result { get; internal set; }
+        public string Black { get; internal set; }
+        public string White { get; internal set; }
+      }
 }

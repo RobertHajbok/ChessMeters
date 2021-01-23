@@ -141,7 +141,9 @@ namespace ChessMeters.Web.Controllers
                     Result = x.Result,
                     Event = x.Event,
                     Site = x.Site,
-                    Round = x.Round
+                    Round = x.Round,
+                    White = x.White,
+                    Black = x.Black,
                 })
             };
         }

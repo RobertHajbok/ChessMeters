@@ -14,6 +14,9 @@
         public string Event { get; set; }
         public string Site { get; set; }
         public string Round { get; set; }
+        public string White { get; set; }
+        public string Black { get; set; }
 
     }
 }
+    

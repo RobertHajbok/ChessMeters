@@ -5,6 +5,8 @@ export interface Game {
   event: string;
   site: string;
   round: string;
+  white: string;
+  black: string;
 }
 
 export interface GameDetails {

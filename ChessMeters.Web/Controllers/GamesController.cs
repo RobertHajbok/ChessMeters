@@ -60,7 +60,10 @@ namespace ChessMeters.Web.Controllers
                 TreeMoves = treeMoves,
                 Event = game.Event,
                 Site = game.Site,
-                Round = game.Round
+                Round = game.Round,
+                White = game.White,
+                Black = game.Black,
+                Result = game.Result
             };
         }
     }
