@@ -63,7 +63,12 @@ namespace ChessMeters.Web.Controllers
                 Round = game.Round,
                 White = game.White,
                 Black = game.Black,
-                Result = game.Result
+                Result = game.Result,
+                WhiteElo = game.WhiteElo,
+                BlackElo = game.BlackElo,
+                Eco = game.Eco,
+                TimeControl = game.TimeControl,
+                Termination = game.Termination 
             };
         }
     }

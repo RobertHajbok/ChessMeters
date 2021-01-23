@@ -13,5 +13,10 @@ namespace ChessMeters.Web.ViewModels
         public string Result { get; internal set; }
         public string Black { get; internal set; }
         public string White { get; internal set; }
-      }
+        public object WhiteElo { get; set; }
+        public short BlackElo { get; set; }
+        public string Eco { get; set; }
+        public string TimeControl { get; set; }
+        public string Termination { get; set; }
+    }
 }

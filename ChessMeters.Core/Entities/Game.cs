@@ -37,5 +37,18 @@ namespace ChessMeters.Core.Entities
         public string White { get; set; }
         [MaxLength(100)]
         public string Black { get; set; }
+
+        public short WhiteElo { get; set; }
+
+        public short BlackElo { get; set; }
+
+        [MaxLength(3)]
+        public string Eco { get; set; }
+
+        [MaxLength(100)]
+        public string TimeControl { get; set; }
+
+        [MaxLength(100)]
+        public string Termination { get; set; }
     }
 }

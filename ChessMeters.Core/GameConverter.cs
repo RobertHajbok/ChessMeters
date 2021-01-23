@@ -112,6 +112,21 @@ namespace ChessMeters.Core
                 case "Black":
                     currentGame.Black = gamePropertyValue;
                     break;
+                case "WhiteElo":
+                    currentGame.WhiteElo = (short)Int32.Parse(gamePropertyValue);
+                    break;
+                case "BlackElo":
+                    currentGame.BlackElo = (short)Int32.Parse(gamePropertyValue);
+                    break;
+                case "ECO":
+                    currentGame.Eco = gamePropertyValue;
+                    break;
+                case "TimeControl":
+                    currentGame.TimeControl = gamePropertyValue;
+                    break;
+                case "Termination":
+                    currentGame.Termination = gamePropertyValue;
+                    break;
                 default:
                     break;
             }

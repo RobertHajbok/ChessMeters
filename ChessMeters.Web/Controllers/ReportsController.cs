@@ -153,6 +153,11 @@ namespace ChessMeters.Web.Controllers
                     Round = x.Round,
                     White = x.White,
                     Black = x.Black,
+                    WhiteElo = x.WhiteElo,
+                    BlackElo = x.BlackElo,
+                    Eco = x.Eco,
+                    TimeControl = x.TimeControl,
+                    Termination = x.Termination,
                 })
             };
         }

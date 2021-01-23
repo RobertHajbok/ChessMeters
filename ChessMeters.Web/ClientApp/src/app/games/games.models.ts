@@ -7,6 +7,11 @@ export interface Game {
   round: string;
   white: string;
   black: string;
+  whiteElo: number;
+  blackElo: number;
+  eco: string;
+  timeControl: string;
+  termination: string;
 }
 
 export interface GameDetails {
@@ -14,6 +19,13 @@ export interface GameDetails {
   event: string;
   site: string;
   round: string;
+  white: string;
+  black: string;
+  whiteElo: number;
+  blackElo: number;
+  eco: string;
+  timeControl: string;
+  termination: string;
 }
 
 interface TreeMove {

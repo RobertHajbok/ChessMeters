@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210123212858_AddedMoreGameProperties")]
+    partial class AddedMoreGameProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
