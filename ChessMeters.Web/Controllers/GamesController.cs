@@ -59,7 +59,8 @@ namespace ChessMeters.Web.Controllers
             {
                 TreeMoves = treeMoves,
                 Event = game.Event,
-                Site = game.Site
+                Site = game.Site,
+                Round = game.Round
             };
         }
     }

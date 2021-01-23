@@ -4,12 +4,14 @@ export interface Game {
   result: string;
   event: string;
   site: string;
+  round: string;
 }
 
 export interface GameDetails {
   treeMoves: TreeMove[];
   event: string;
   site: string;
+  round: string;
 }
 
 interface TreeMove {
