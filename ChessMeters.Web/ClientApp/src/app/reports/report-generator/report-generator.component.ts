@@ -18,7 +18,7 @@ export class ReportGeneratorComponent {
 
   public generate(): void {
     this.reportsService.generate(this.report).subscribe(() => {
-      this.toastrService.success('Report successfuly generated.');
+      this.toastrService.success('Report is generated in the background, we will notify you when it is ready.');
       this.router.navigateByUrl('/reports');
     }, () => {
       this.toastrService.error('An error occurred while trying to generate your report, please try again later.');

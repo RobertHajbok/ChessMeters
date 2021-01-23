@@ -1,10 +1,11 @@
-﻿using ChessMeters.Core;
-using ChessMeters.Core.Database;
+﻿using ChessMeters.Core.Database;
 using ChessMeters.Core.Entities;
+using ChessMeters.Core.Jobs;
 using ChessMeters.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace ChessMeters.Web.Controllers
     public class ReportsController : ControllerBase
     {
         private readonly ChessMetersContext chessMetersContext;
-        private readonly IReportGenerator reportGenerator;
+        private readonly ISchedulerFactory schedulerFactory;
 
-        public ReportsController(ChessMetersContext chessMetersContext, IReportGenerator reportGenerator)
+        public ReportsController(ChessMetersContext chessMetersContext, ISchedulerFactory schedulerFactory)
         {
             this.chessMetersContext = chessMetersContext;
-            this.reportGenerator = reportGenerator;
+            this.schedulerFactory = schedulerFactory;
         }
 
         [HttpGet]
@@ -57,8 +58,16 @@ namespace ChessMeters.Web.Controllers
                 UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
                 CreationDate = DateTime.Now
             };
+            await chessMetersContext.Reports.AddAsync(report);
+            await chessMetersContext.SaveChangesAsync();
 
-            await reportGenerator.Schedule(report, 10);
+            var data = new Dictionary<string, int>
+            {
+                { "id", report.Id }
+            };
+            var jobData = new JobDataMap(data);
+            var scheduler = await schedulerFactory.GetScheduler();
+            await scheduler.TriggerJob(new JobKey(typeof(ReportGeneratorJob).Name), jobData);
             return Ok();
         }
 

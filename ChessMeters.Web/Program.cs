@@ -1,5 +1,7 @@
+using ChessMeters.Core.Jobs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Quartz;
 
 namespace ChessMeters.Web
 {
@@ -15,6 +17,18 @@ namespace ChessMeters.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                }).ConfigureServices((hostContext, services) =>
+                {
+                    services.AddQuartz(q =>
+                    {
+                        q.UseMicrosoftDependencyInjectionScopedJobFactory();
+                        q.AddJob<ReportGeneratorJob>(opts =>
+                        {
+                            opts.WithIdentity(new JobKey(typeof(ReportGeneratorJob).Name)).StoreDurably();
+                        });
+                    });
+
+                    services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
                 });
     }
 }
