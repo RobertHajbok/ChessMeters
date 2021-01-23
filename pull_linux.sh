@@ -10,7 +10,9 @@ then
   exit 0
 fi
 
+# stop dontnet and free the port
 kill -9 $(ps ax | grep dotnet | grep urls | awk -F ' ' '{ print $1}')
+fuser -k 5000/tcp
 
 /root/ChessMeters/
 git pull
