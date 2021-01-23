@@ -34,7 +34,7 @@ namespace ChessMeters.Core
             return report.Id;
         }
 
-        public async Task<int> Schedule(int reportId, short engineDepth)
+        public async Task<Report> Schedule(int reportId, short engineDepth)
         {
             var report = await chessMetersContext.Reports.SingleAsync(x => x.Id == reportId);
             var games = await gameConverter.ConvertFromPGN(report.PGN);
@@ -45,7 +45,7 @@ namespace ChessMeters.Core
                 await treeMoveBuilder.BuildTree(engineDepth, game);
             }
 
-            return report.Id;
+            return report;
         }
     }
 }

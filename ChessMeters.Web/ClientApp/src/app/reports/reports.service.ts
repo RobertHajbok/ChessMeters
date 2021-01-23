@@ -1,5 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import * as signalR from '@aspnet/signalr';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 
 import { EditReport, GenerateReport, Report, ReportDetails } from './reports.models';
@@ -8,7 +11,15 @@ import { EditReport, GenerateReport, Report, ReportDetails } from './reports.mod
   providedIn: 'root'
 })
 export class ReportsService {
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+  private hubConnection: signalR.HubConnection;
+
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private router: Router,
+    private toastrService: ToastrService) {
+  }
+
+  public startSignalrConnection = () => {
+    this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.baseUrl}notification`).build();
+    this.hubConnection.start();
   }
 
   public getAll(): Observable<Report[]> {
@@ -37,5 +48,13 @@ export class ReportsService {
 
   public getDetails(id: number): Observable<ReportDetails> {
     return this.http.get<ReportDetails>(`${this.baseUrl}api/reports/getDetails/${id}`);
+  }
+
+  public addReportGeneratedListener(): void {
+    this.hubConnection.on('reportGenerated', (reportId) => {
+      this.toastrService.success('Report successfully generated, you can click here to view it').onTap.subscribe(() => {
+        this.router.navigateByUrl(`/reports/${reportId}`);
+      });
+    });
   }
 }

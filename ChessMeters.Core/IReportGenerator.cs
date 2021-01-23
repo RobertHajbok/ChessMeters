@@ -7,6 +7,6 @@ namespace ChessMeters.Core
     {
         Task<int> Schedule(Report report, short engineDepth);
 
-        Task<int> Schedule(int reportId, short engineDepth);
+        Task<Report> Schedule(int reportId, short engineDepth);
     }
 }

@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "11.0.8",
     "@angular/platform-server": "11.0.8",
     "@angular/router": "11.0.8",
+    "@aspnet/signalr": "^1.1.4",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@swimlane/ngx-charts": "^17.0.0",
     "aspnet-prerendering": "^3.0.1",

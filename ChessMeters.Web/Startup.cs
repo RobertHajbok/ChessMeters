@@ -2,6 +2,7 @@ using ChessMeters.Core;
 using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
 using ChessMeters.Core.Entities;
+using ChessMeters.Core.Jobs;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,7 @@ namespace ChessMeters.Web
                 facebookOptions.AccessDeniedPath = "/AccessDeniedPathInfo";
             });
 
+            services.AddSignalR();
             services.AddControllersWithViews();
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
@@ -100,7 +102,7 @@ namespace ChessMeters.Web
             {
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
-            
+
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
@@ -110,6 +112,7 @@ namespace ChessMeters.Web
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<NotificationHub>("/notification");
             });
 
             app.UseSpa(spa =>
