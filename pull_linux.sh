@@ -12,6 +12,7 @@ fi
 
 kill -9 $(ps ax | grep dotnet | grep urls | awk -F ' ' '{ print $1}')
 
+/root/ChessMeters/
 git pull
 
 # database
