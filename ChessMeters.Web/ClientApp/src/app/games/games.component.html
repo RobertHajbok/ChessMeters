@@ -2,8 +2,10 @@
   <thead>
     <tr>
       <th>Actions</th>
-      <th>Moves</th>
+      <th>White</th>
+      <th>Black</th>
       <th>Result</th>
+      <th>Moves</th>
       <th>Event</th>
     </tr>
   </thead>
@@ -12,8 +14,10 @@
       <td>
         <button class="btn btn-primary" (click)="view(game.id)">View</button>
       </td>
-      <td>{{ game.moves }}</td>
+      <td>{{ game.white }}</td>
+      <td>{{ game.black }}</td>
       <td>{{ game.result }}</td>
+      <td>{{ game.moves }}</td>
       <td>{{ game.event }}</td>
     </tr>
   </tbody>

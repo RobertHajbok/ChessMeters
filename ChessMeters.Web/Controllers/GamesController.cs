@@ -58,7 +58,12 @@ namespace ChessMeters.Web.Controllers
             return new GameDetailsViewModel
             {
                 TreeMoves = treeMoves,
-                Event = game.Event
+                Event = game.Event,
+                Site = game.Site,
+                Round = game.Round,
+                White = game.White,
+                Black = game.Black,
+                Result = game.Result
             };
         }
     }
