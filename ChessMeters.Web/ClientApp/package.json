@@ -30,6 +30,7 @@
     "core-js": "^3.3.3",
     "jquery": "^3.5.1",
     "ngx-chess-board": "^2.0.6",
+    "ngx-google-analytics": "^11.1.0",
     "ngx-toastr": "^13.2.0",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",

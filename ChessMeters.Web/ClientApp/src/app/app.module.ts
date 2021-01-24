@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxChessBoardModule } from 'ngx-chess-board';
 import { ToastrModule } from 'ngx-toastr';
@@ -21,6 +22,7 @@ import { ReportDetailsComponent } from './reports/report-details/report-details.
 import { GamesComponent } from './games/games.component';
 import { GameDetailsComponent } from './games/game-details/game-details.component';
 import { ContactComponent } from './contact/contact.component';
+import { environment } from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { ContactComponent } from './contact/contact.component';
     ApiAuthorizationModule,
     NgxChartsModule,
     NgxChessBoardModule.forRoot(),
+    NgxGoogleAnalyticsModule.forRoot(environment.googleAnalytics),
+    NgxGoogleAnalyticsRouterModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
