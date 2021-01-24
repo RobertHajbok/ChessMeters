@@ -20,8 +20,7 @@ namespace ChessMeters.Core.Jobs
             var dataMap = context.MergedJobDataMap;
             var reportId = dataMap.GetIntValue("id");
             var report = await reportGenerator.Schedule(reportId, 10);
-            //await hubContext.Clients.User(report.UserId).SendAsync("reportGenerated", reportId);
-            await hubContext.Clients.All.SendAsync("reportGenerated", reportId);
+            await hubContext.Clients.User(report.UserId).SendAsync("reportGenerated", reportId);
         }
     }
 }

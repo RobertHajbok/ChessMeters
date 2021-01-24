@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as signalR from '@aspnet/signalr';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { AuthorizeService } from '../../api-authorization/authorize.service';
 
 import { EditReport, GenerateReport, Report, ReportDetails } from './reports.models';
 
@@ -14,12 +15,8 @@ export class ReportsService {
   private hubConnection: signalR.HubConnection;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private router: Router,
-    private toastrService: ToastrService) {
-  }
-
-  public startSignalrConnection = () => {
-    this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.baseUrl}notification`).build();
-    this.hubConnection.start();
+    private toastrService: ToastrService, private authorizeService: AuthorizeService) {
+    this.startSignalrConnection();
   }
 
   public getAll(): Observable<Report[]> {
@@ -50,9 +47,17 @@ export class ReportsService {
     return this.http.get<ReportDetails>(`${this.baseUrl}api/reports/getDetails/${id}`);
   }
 
-  public addReportGeneratedListener(): void {
+  private startSignalrConnection = () => {
+    this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.baseUrl}notification`, {
+      accessTokenFactory: () => this.authorizeService.getAccessToken().toPromise()
+    }).build();
+    this.hubConnection.start();
+    this.addReportGeneratedListener();
+  }
+
+  private addReportGeneratedListener(): void {
     this.hubConnection.on('reportGenerated', (reportId) => {
-      this.toastrService.success('Report successfully generated, you can click here to view it').onTap.subscribe(() => {
+      this.toastrService.success('Report successfully generated, you can click here to view it.').onTap.subscribe(() => {
         this.router.navigateByUrl(`/reports/${reportId}`);
       });
     });
