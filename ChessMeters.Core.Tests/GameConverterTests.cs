@@ -40,7 +40,7 @@ namespace ChessMeters.Core.Tests
         [Trait("Category", "Unit")]
         public async Task ConvertFromPGN_Should_SetGamePropertie()
         {
-            string pgn = @"[Event ""My Event""] [Site ""My Chessmeters.com""] [Date ""2020-07-04""] [Round ""My Final""] [White ""User 1""] [Black ""User 2""] [WhiteElo ""1138""] [BlackElo ""1196""] [ECO ""B23""] [TimeControl ""1800""] [Termination ""claudiuoprea won by checkmate""] 1. e4 c5 2. f4 { B21 Sicilian Defense: McDonnell Attack } d5 3. e5 { Black resigns. } 0-1";
+            string pgn = @"[Event ""My Event""] [Site ""My Chessmeters.com""] [Date ""2020-07-04""] [Round ""My Final""] [White ""User 1""] [Black ""User 2""] [WhiteElo ""1138""] [BlackElo ""1196""] [ECO ""B23""] [TimeControl ""1800""] [EndTime ""13:38:38 PDT""] [Termination ""claudiuoprea won by checkmate""] 1. e4 c5 2. f4 { B21 Sicilian Defense: McDonnell Attack } d5 3. e5 { Black resigns. } 0-1";
 
             var gameConverter = new GameConverter();
             var games = await gameConverter.ConvertFromPGN(pgn);
@@ -56,6 +56,7 @@ namespace ChessMeters.Core.Tests
             Assert.Equal(1196, game.BlackElo);
             Assert.Equal("B23", game.Eco);
             Assert.Equal("1800", game.TimeControl);
+            Assert.Equal("13:38:38", game.EndTime.ToString());
             Assert.Equal("claudiuoprea won by checkmate", game.Termination);
         }
 
