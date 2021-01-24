@@ -68,7 +68,9 @@ namespace ChessMeters.Web.Controllers
                 BlackElo = game.BlackElo,
                 Eco = game.Eco,
                 TimeControl = game.TimeControl,
-                Termination = game.Termination 
+                Termination = game.Termination,
+                Date = game.Date,
+                EndTime = game.EndTime
             };
         }
     }

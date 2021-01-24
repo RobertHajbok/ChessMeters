@@ -64,7 +64,14 @@ namespace ChessMeters.Core
                 }
                 else
                 {
-                    SetGamePropertyFromLine(currentGame, line);
+                    // try
+                    // {
+                        SetGamePropertyFromLine(currentGame, line);
+                    // }
+                    // catch (Exception e)
+                    // {
+
+                    // }
                     output += Environment.NewLine;
                 }
             }
@@ -126,6 +133,20 @@ namespace ChessMeters.Core
                     break;
                 case "Termination":
                     currentGame.Termination = gamePropertyValue;
+                    break;
+                case "Date":
+                    DateTime dateValue;
+                    if (DateTime.TryParse(gamePropertyValue, out dateValue))
+                    {
+                        currentGame.Date = dateValue;
+                    }
+                    break;
+                case "EndTime":
+                    TimeSpan endTimeValue;
+                    if (TimeSpan.TryParse(gamePropertyValue.Split(" ").First(), out endTimeValue))
+                    {
+                        currentGame.EndTime = endTimeValue;
+                    }
                     break;
                 default:
                     break;

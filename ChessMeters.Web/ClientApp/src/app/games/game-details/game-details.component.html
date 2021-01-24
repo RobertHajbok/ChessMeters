@@ -30,7 +30,9 @@
         </dl>
         <dl class="row">
           <dt class="col">Date</dt>
-          <dd class="col">{{game?.date || '-'}}</dd>
+          <dd class="col">
+            <span *ngIf=game?.date>{{game.date | date:'dd/MM/YYYY'}}</span>
+            <span *ngIf=!game?.date>-</span>
           <dt class="col">Round</dt>
           <dd class="col">{{game?.round || '-'}}</dd>
         </dl>
@@ -48,7 +50,10 @@
         </dl>
         <dl class="row">
           <dt class="col">End time</dt>
-          <dd class="col">{{game?.endTime || '-'}}</dd>
+          <dd class="col">
+            <span *ngIf=game?.endTime>{{game.endTime.hours + ':' + game.endTime.minutes}}</span>
+            <span *ngIf=!game?.endTime>-</span>
+          </dd>
           <dt class="col"></dt>
           <dt class="col"></dt>
         </dl>

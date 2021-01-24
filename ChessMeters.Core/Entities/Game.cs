@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChessMeters.Core.Entities
@@ -50,5 +51,8 @@ namespace ChessMeters.Core.Entities
 
         [MaxLength(100)]
         public string Termination { get; set; }
+
+        public DateTime Date {get; set; }
+        public TimeSpan EndTime {get; set; }
     }
 }

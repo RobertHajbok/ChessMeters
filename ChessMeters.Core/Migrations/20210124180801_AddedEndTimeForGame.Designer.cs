@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210124180801_AddedEndTimeForGame")]
+    partial class AddedEndTimeForGame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,8 +93,8 @@ namespace ChessMeters.Core.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("varchar(3) CHARACTER SET utf8mb4");
 
-                    b.Property<TimeSpan>("EndTime")
-                        .HasColumnType("time(6)");
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Event")
                         .HasMaxLength(100)
