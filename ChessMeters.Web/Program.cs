@@ -2,6 +2,7 @@ using ChessMeters.Core.Jobs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Quartz;
+using System.Net;
 
 namespace ChessMeters.Web
 {
@@ -16,6 +17,13 @@ namespace ChessMeters.Web
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureKestrel(options =>
+                    {
+                        options.Listen(IPAddress.Loopback, 443, listenOptions =>
+                        {
+                            listenOptions.UseHttps("certificate.pfx", "abc123$ABC");
+                        });
+                    });
                     webBuilder.UseStartup<Startup>();
                 }).ConfigureServices((hostContext, services) =>
                 {
