@@ -3,7 +3,6 @@ using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
 using ChessMeters.Core.Entities;
 using ChessMeters.Core.Jobs;
-using ChessMeters.Web.Middlewares;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

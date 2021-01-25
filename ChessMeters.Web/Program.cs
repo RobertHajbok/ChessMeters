@@ -19,7 +19,7 @@ namespace ChessMeters.Web
                 {
                     webBuilder.ConfigureKestrel(options =>
                     {
-                        options.Listen(IPAddress.Loopback, 443, listenOptions =>
+		        options.ListenAnyIP(443, listenOptions =>
                         {
                             listenOptions.UseHttps("certificate.pfx", "abc123$ABC");
                         });
