@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ChessMeters.Web
 {
@@ -72,6 +73,17 @@ namespace ChessMeters.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.Use(async (context, next) =>
+            {
+                var request = context.Request;
+                if (request.Path.StartsWithSegments("/notification", StringComparison.OrdinalIgnoreCase) &&
+                    request.Query.TryGetValue("access_token", out var accessToken))
+                {
+                    request.Headers.Add("Authorization", $"Bearer {accessToken}");
+                }
+                await next.Invoke();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -103,7 +115,7 @@ namespace ChessMeters.Web
             {
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
-            app.UseMiddleware<WebSocketsMiddleware>();
+
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
