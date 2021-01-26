@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import * as signalR from '@aspnet/signalr';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { AuthorizeService } from '../../api-authorization/authorize.service';
 
+import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { EditReport, GenerateReport, Report, ReportDetails } from './reports.models';
 
 @Injectable({
@@ -30,9 +30,9 @@ export class ReportsService {
   }
 
   public edit(report: EditReport): Observable<any> {
-    const headerPut: HttpHeaders = new HttpHeaders();
-    headerPut.set('Content-type', 'application/json');
-    return this.http.put(`${this.baseUrl}api/reports`, report, { headers: headerPut });
+    const headers: HttpHeaders = new HttpHeaders();
+    headers.set('Content-type', 'application/json');
+    return this.http.put(`${this.baseUrl}api/reports`, report, { headers: headers });
   }
 
   public getForEdt(id: number): Observable<EditReport> {
@@ -45,6 +45,10 @@ export class ReportsService {
 
   public getDetails(id: number): Observable<ReportDetails> {
     return this.http.get<ReportDetails>(`${this.baseUrl}api/reports/getDetails/${id}`);
+  }
+
+  public getLichessGames(username: string): Observable<any> {
+    return this.http.get(`https://lichess.org/api/games/user/${username}?max=20`, { responseType: 'text' });
   }
 
   private startSignalrConnection = () => {

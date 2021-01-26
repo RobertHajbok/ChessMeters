@@ -13,7 +13,7 @@ export class ReportGeneratorComponent {
   public report: GenerateReport;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
-    this.report = { description: '', pgn: '' };
+    this.report = { description: '', pgn: '', lichessUsername: '' };
   }
 
   public generate(): void {
@@ -22,6 +22,16 @@ export class ReportGeneratorComponent {
       this.router.navigateByUrl('/reports');
     }, () => {
       this.toastrService.error('An error occurred while trying to generate your report, please try again later.');
+    });
+  }
+
+  public getLichessPGN(): void {
+    this.reportsService.getLichessGames(this.report.lichessUsername).subscribe((pgn) => {
+      this.report.pgn = pgn;
+      this.toastrService.success('Lichess games successfully downloaded, PGN field populated with the games.');
+    }, (error) => {
+        console.error(error);
+      this.toastrService.error('An error occurred while trying to get your Lichess games, please try again later.');
     });
   }
 }

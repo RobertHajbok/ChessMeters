@@ -6,6 +6,11 @@
     <input type="text" id="description" name="description" class="form-control" [(ngModel)]="report.description" required maxlength="100">
   </div>
   <div class="form-group">
+    <label for="lichessUsername">Lichess username</label>
+    <input type="text" id="lichessUsername" name="lichessUsername" class="form-control" [(ngModel)]="report.lichessUsername" maxlength="100">
+  </div>
+  <button type="button" class="btn btn-primary" (click)="getLichessPGN()" [disabled]="!report.lichessUsername">Get Lichess last 20 games</button>
+  <div class="form-group mt-2">
     <label for="pgn">PGN</label>
     <textarea id="pgn" name="pgn" class="form-control" [(ngModel)]="report.pgn" required rows="10"></textarea>
   </div>

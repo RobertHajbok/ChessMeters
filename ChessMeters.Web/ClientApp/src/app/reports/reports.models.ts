@@ -10,6 +10,7 @@ export interface Report {
 export interface GenerateReport {
   description: string;
   pgn: string;
+  lichessUsername: string;
 }
 
 export interface EditReport {
