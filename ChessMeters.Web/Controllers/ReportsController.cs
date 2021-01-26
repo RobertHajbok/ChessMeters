@@ -33,13 +33,13 @@ namespace ChessMeters.Web.Controllers
         public async Task<IEnumerable<ReportViewModel>> GetAll()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return await chessMetersContext.Reports.Where(x => x.UserId == userId)
+            return await chessMetersContext.Reports.Include(x => x.Games).Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.CreationDate).Select(x => new ReportViewModel
                 {
                     Id = x.Id,
                     Description = x.Description,
-                    PGN = x.PGN,
-                    CreationDate = x.CreationDate
+                    CreationDate = x.CreationDate,
+                    NumberOfGames = x.Games.Count
                 }).ToListAsync();
         }
 

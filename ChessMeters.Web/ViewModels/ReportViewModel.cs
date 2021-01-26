@@ -10,6 +10,6 @@ namespace ChessMeters.Web.ViewModels
 
         public DateTime CreationDate { get; set; }
 
-        public string PGN { get; set; }
+        public int NumberOfGames { get; set; }
     }
 }

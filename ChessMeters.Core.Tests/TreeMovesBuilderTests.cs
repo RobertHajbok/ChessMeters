@@ -18,7 +18,7 @@ namespace ChessMeters.Core.Tests
         public TreeMovesBuilderTests()
         {
             var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-            string mySqlConnectionString = configuration.GetConnectionString("DefaultConnection");
+            string mySqlConnectionString = configuration.GetConnectionString("ChessMeters");
             var optionsBuilder = new DbContextOptionsBuilder<ChessMetersContext>();
             options = optionsBuilder.UseMySql(mySqlConnectionString, ServerVersion.AutoDetect(mySqlConnectionString)).UseLazyLoadingProxies().Options;
         }

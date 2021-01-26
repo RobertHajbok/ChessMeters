@@ -28,7 +28,7 @@ namespace ChessMeters.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string mySqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            string mySqlConnectionString = Configuration.GetConnectionString("ChessMeters");
             services.AddDbContext<ChessMetersContext>(options => options.UseMySql(mySqlConnectionString,
                 ServerVersion.AutoDetect(mySqlConnectionString)));
 

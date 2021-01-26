@@ -4,7 +4,7 @@ export interface Report {
   id: number;
   description: string;
   creationTime: Date;
-  pgn: string;
+  numberOfGames: number;
 }
 
 export interface GenerateReport {
