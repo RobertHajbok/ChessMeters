@@ -93,7 +93,7 @@ namespace ChessMeters.Web
                 app.UseExceptionHandler("/Error");
             }
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseSwagger();
 
