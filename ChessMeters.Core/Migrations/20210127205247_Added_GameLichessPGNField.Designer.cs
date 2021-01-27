@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210127205247_Added_GameLichessPGNField")]
+    partial class Added_GameLichessPGNField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,8 +138,8 @@ namespace ChessMeters.Core.Migrations
                     b.Property<DateTime?>("UTCDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<TimeSpan?>("UTCTime")
-                        .HasColumnType("time(6)");
+                    b.Property<DateTime?>("UTCTime")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Variant")
                         .HasMaxLength(30)

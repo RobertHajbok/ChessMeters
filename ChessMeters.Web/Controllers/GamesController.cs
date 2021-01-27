@@ -70,7 +70,12 @@ namespace ChessMeters.Web.Controllers
                 TimeControl = game.TimeControl,
                 Termination = game.Termination,
                 Date = game.Date,
-                EndTime = game.EndTime
+                EndTime = game.EndTime,
+                UTCDate = game.UTCDate,
+                UTCTime = game.UTCTime,
+                WhiteRatingDiff = game.WhiteRatingDiff,
+                BlackRatingDiff = game.BlackRatingDiff,
+                Variant = game.Variant
             };
         }
     }

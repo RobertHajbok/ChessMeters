@@ -1,5 +1,3 @@
-import { Time } from "@angular/common";
-
 export interface Game {
   id: number;
   moves: string;
@@ -24,6 +22,11 @@ export interface GameDetails {
   termination: string;
   date: Date;
   endTime: Date;
+  utcDate: Date;
+  utcTime: Date;
+  whiteRatingDiff: string;
+  blackRatingDiff: string;
+  variant: string;
 }
 
 interface TreeMove {

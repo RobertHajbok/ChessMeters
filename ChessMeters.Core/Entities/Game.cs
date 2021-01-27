@@ -39,9 +39,9 @@ namespace ChessMeters.Core.Entities
         [MaxLength(100)]
         public string Black { get; set; }
 
-        public short WhiteElo { get; set; }
+        public short? WhiteElo { get; set; }
 
-        public short BlackElo { get; set; }
+        public short? BlackElo { get; set; }
 
         [MaxLength(3)]
         public string Eco { get; set; }
@@ -52,7 +52,21 @@ namespace ChessMeters.Core.Entities
         [MaxLength(100)]
         public string Termination { get; set; }
 
-        public DateTime Date {get; set; }
-        public TimeSpan EndTime {get; set; }
+        public DateTime? Date { get; set; }
+
+        public TimeSpan? EndTime { get; set; }
+
+        public DateTime? UTCDate { get; set; }
+
+        public TimeSpan? UTCTime { get; set; }
+
+        [MaxLength(5)]
+        public string WhiteRatingDiff { get; set; }
+
+        [MaxLength(5)]
+        public string BlackRatingDiff { get; set; }
+
+        [MaxLength(30)]
+        public string Variant { get; set; }
     }
 }

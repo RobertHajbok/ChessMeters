@@ -67,8 +67,8 @@ namespace ChessMeters.Core.Tests
             Assert.Equal("My Final", game.Round);
             Assert.Equal("User 1", game.White);
             Assert.Equal("User 2", game.Black);
-            Assert.Equal(1138, game.WhiteElo);
-            Assert.Equal(1196, game.BlackElo);
+            Assert.Equal<short?>(1138, game.WhiteElo);
+            Assert.Equal<short?>(1196, game.BlackElo);
             Assert.Equal("B23", game.Eco);
             Assert.Equal("1800", game.TimeControl);
             Assert.Equal("13:38:38", game.EndTime.ToString());

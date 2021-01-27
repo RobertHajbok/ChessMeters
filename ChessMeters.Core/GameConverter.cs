@@ -66,7 +66,7 @@ namespace ChessMeters.Core
                 {
                     // try
                     // {
-                        SetGamePropertyFromLine(currentGame, line);
+                    SetGamePropertyFromLine(currentGame, line);
                     // }
                     // catch (Exception e)
                     // {
@@ -96,7 +96,7 @@ namespace ChessMeters.Core
             var gamePropertyValue = gamePropertyValueRaw.
               Replace("]", "").
               Replace("\"", "");
-            
+
             if (gamePropertyValue == "?")
             {
                 return;
@@ -120,10 +120,10 @@ namespace ChessMeters.Core
                     currentGame.Black = gamePropertyValue;
                     break;
                 case "WhiteElo":
-                    currentGame.WhiteElo = (short)Int32.Parse(gamePropertyValue);
+                    currentGame.WhiteElo = short.Parse(gamePropertyValue);
                     break;
                 case "BlackElo":
-                    currentGame.BlackElo = (short)Int32.Parse(gamePropertyValue);
+                    currentGame.BlackElo = short.Parse(gamePropertyValue);
                     break;
                 case "ECO":
                     currentGame.Eco = gamePropertyValue;
@@ -148,10 +148,30 @@ namespace ChessMeters.Core
                         currentGame.EndTime = endTimeValue;
                     }
                     break;
-                default:
+                case "UTCDate":
+                    DateTime utcDateValue;
+                    if (DateTime.TryParse(gamePropertyValue, out utcDateValue))
+                    {
+                        currentGame.UTCDate = utcDateValue;
+                    }
+                    break;
+                case "UTCTime":
+                    TimeSpan utcTimeValue;
+                    if (TimeSpan.TryParse(gamePropertyValue.Split(" ").First(), out utcTimeValue))
+                    {
+                        currentGame.UTCTime = utcTimeValue;
+                    }
+                    break;
+                case "WhiteRatingDiff":
+                    currentGame.WhiteRatingDiff = gamePropertyValue;
+                    break;
+                case "BlackRatingDiff":
+                    currentGame.BlackRatingDiff = gamePropertyValue;
+                    break;
+                case "Variant":
+                    currentGame.Variant = gamePropertyValue;
                     break;
             }
         }
-
     }
 }

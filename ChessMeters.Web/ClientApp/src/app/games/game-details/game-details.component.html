@@ -23,6 +23,12 @@
           <dd class="col">{{game?.blackElo || '-'}}</dd>
         </dl>
         <dl class="row">
+          <dt class="col">White rating diff</dt>
+          <dd class="col">{{game?.whiteRatingDiff || '-'}}</dd>
+          <dt class="col">Black rating diff</dt>
+          <dd class="col">{{game?.blackRatingDiff || '-'}}</dd>
+        </dl>
+        <dl class="row">
           <dt class="col">Event</dt>
           <dd class="col">{{game?.event || '-'}}</dd>
           <dt class="col">Site</dt>
@@ -54,8 +60,19 @@
             <span *ngIf=game?.endTime>{{game.endTime.hours + ':' + game.endTime.minutes}}</span>
             <span *ngIf=!game?.endTime>-</span>
           </dd>
-          <dt class="col"></dt>
-          <dt class="col"></dt>
+          <dt class="col">UTC date</dt>
+          <dd class="col">
+            <span *ngIf=game?.utcDate>{{game.utcDate | date:'dd/MM/YYYY'}}</span>
+            <span *ngIf=!game?.utcDate>-</span>
+        </dl>
+        <dl class="row">
+          <dt class="col">UTC time</dt>
+          <dd class="col">
+            <span *ngIf=game?.utcTime>{{game.utcTime.hours + ':' + game.utcTime.minutes}}</span>
+            <span *ngIf=!game?.utcTime>-</span>
+          </dd>
+          <dt class="col">Variant</dt>
+          <dd class="col">{{game?.variant || '-'}}</dd>
         </dl>
       </div>
     </div>
