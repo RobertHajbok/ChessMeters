@@ -49,6 +49,9 @@
     <None Remove="ClientApp\src\app\contact\contact.model.ts" />
     <None Remove="ClientApp\src\app\games\games.models.ts" />
     <None Remove="ClientApp\src\app\reports\reports.models.ts" />
+    <None Remove="ClientApp\src\app\shared\file-input-value-accessor.directive.ts" />
+    <None Remove="ClientApp\src\app\shared\shared.module.ts" />
+    <None Remove="ClientApp\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -59,6 +62,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\contact\contact.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\games\games.models.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\reports\reports.models.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\file-input-value-accessor.directive.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\shared.module.ts" />
+    <TypeScriptCompile Include="ClientApp\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>

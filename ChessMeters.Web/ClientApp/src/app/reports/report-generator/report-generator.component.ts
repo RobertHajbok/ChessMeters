@@ -11,6 +11,7 @@ import { ReportsService } from '../reports.service';
 })
 export class ReportGeneratorComponent {
   public report: GenerateReport;
+  public uploadedPGN: File;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
     this.report = { description: '', pgn: '', lichessUsername: '' };
@@ -30,8 +31,20 @@ export class ReportGeneratorComponent {
       this.report.pgn = pgn;
       this.toastrService.success('Lichess games successfully downloaded, PGN field populated with the games.');
     }, (error) => {
-        console.error(error);
+      console.error(error);
       this.toastrService.error('An error occurred while trying to get your Lichess games, please try again later.');
     });
+  }
+
+  public fileChanged(e: File[]): void {
+    this.uploadedPGN = e[0];
+  }
+
+  public loadPGNFromFile(): void {
+    let fileReader = new FileReader();
+    fileReader.onload = () => {
+      this.report.pgn = <string>fileReader.result;
+    }
+    fileReader.readAsText(this.uploadedPGN);
   }
 }

@@ -61,7 +61,6 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 - Add statuses for games and show on reports grid
 - PROD environments for swap
 - Notation for games on UI
-- Upload PGN from file to analyze
 - Chessboard game to PGN and analyze
 - CI/CD fail to commit if unit tests are not passing
 - Admin UI to change flags
