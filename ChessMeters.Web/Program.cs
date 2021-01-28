@@ -18,7 +18,7 @@ namespace ChessMeters.Web
                 {
                     webBuilder.ConfigureKestrel(options =>
                     {
-                        options.ListenAnyIP(443, listenOptions =>
+                        options.ListenAnyIP(6000, listenOptions =>
                         {
                             listenOptions.UseHttps("certificate.pfx", "abc123$ABC");
                         });
