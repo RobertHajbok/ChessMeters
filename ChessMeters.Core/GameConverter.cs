@@ -43,8 +43,6 @@ namespace ChessMeters.Core
             await process.StandardInput.FlushAsync();
 
             var games = new List<Game>();
-
-            string output = string.Empty;
             string line;
 
             var currentGame = new Game();
@@ -54,7 +52,6 @@ namespace ChessMeters.Core
                 {
                     break;
                 }
-                output += line;
                 if (line.EndsWith("1-0") || line.EndsWith("1/2-1/2") || line.EndsWith("0-1"))
                 {
                     currentGame.Result = line.Split(' ').Last().Trim();
@@ -64,21 +61,14 @@ namespace ChessMeters.Core
                 }
                 else
                 {
-                    // try
-                    // {
                     SetGamePropertyFromLine(currentGame, line);
-                    // }
-                    // catch (Exception e)
-                    // {
-
-                    // }
-                    output += Environment.NewLine;
                 }
             }
             process.WaitForExit(1000);
 
             return games;
         }
+
         public void SetGamePropertyFromLine(Game currentGame, string line)
         {
             if (line == "")
@@ -91,11 +81,9 @@ namespace ChessMeters.Core
             var gamePropertyKey = lineSplitBySpace.First().Replace("[", "");
 
             lineSplitBySpace.RemoveAt(0);
-            var gamePropertyValueRaw = String.Join(" ", lineSplitBySpace);
+            var gamePropertyValueRaw = string.Join(" ", lineSplitBySpace);
 
-            var gamePropertyValue = gamePropertyValueRaw.
-              Replace("]", "").
-              Replace("\"", "");
+            var gamePropertyValue = gamePropertyValueRaw.Replace("]", "").Replace("\"", "");
 
             if (gamePropertyValue == "?")
             {
