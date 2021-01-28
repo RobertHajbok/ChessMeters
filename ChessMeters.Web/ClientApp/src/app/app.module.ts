@@ -23,6 +23,7 @@ import { GamesComponent } from './games/games.component';
 import { GameDetailsComponent } from './games/game-details/game-details.component';
 import { ContactComponent } from './contact/contact.component';
 import { environment } from '../environments/environment.prod';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { environment } from '../environments/environment.prod';
     ContactComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),

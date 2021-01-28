@@ -84,6 +84,8 @@ namespace ChessMeters.Core.Engines
             var data = await AnalyzePosition();
             var search = $"info depth {depth} ";
             var currentDepthData = data[(data.IndexOf(search) + search.Length)..];
+            if (currentDepthData.Contains(" mate "))
+                return (short)(15300 * (color ? 1 : -1));
             var evaluation = short.Parse(currentDepthData[(currentDepthData.IndexOf(" cp ") + 4)..].Split(' ')[0]);
             if (!color)
                 evaluation *= -1;
