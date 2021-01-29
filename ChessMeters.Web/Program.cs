@@ -21,7 +21,7 @@ namespace ChessMeters.Web
                     {
                         options.ListenAnyIP(6000, listenOptions =>
                         {
-                            listenOptions.UseHttps("certificate.pfx", Environment.GetEnvironmentVariable("Identity__Key__Password"));
+                            listenOptions.UseHttps("certificate.pfx", Environment.GetEnvironmentVariable("IdentityServer__Key__Password"));
                         });
                     });
                     webBuilder.UseStartup<Startup>();
