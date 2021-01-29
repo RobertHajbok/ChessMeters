@@ -53,9 +53,7 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 - Configure email for contact, error notifications and user registrations
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations
 - Add possibility to fetch games from chess.com
-- Remove pfx certificate passwords from code
 - Configure lichess api with more parameters
-- Check and fix why pgn-extract doesn't work with 20 games
 - Add first flag for castling
 - Show first flag on game details page if applicable
 - Add statuses for games and show on reports grid

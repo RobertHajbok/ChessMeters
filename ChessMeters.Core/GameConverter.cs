@@ -12,17 +12,13 @@ namespace ChessMeters.Core
 {
     public class GameConverter : IGameConverter
     {
-        private const string endOfGamesDelimiterAsPGN = "1. Nc3 Nc6 2. Nb1 Nb8 1-0";
-        private const string endOfGamesDelimiterAsLAN = "b1c3 b8c6 c3b1 c6b8 1-0";
+        private List<Game> games;
+        private Game currentGame;
 
         public async Task<IEnumerable<Game>> ConvertFromPGN(string pgn)
         {
-            // HACK: required to identify last line from output
-            // produced by pgn-extract while reading with ReadLineAsync.
-            //
-            // TODO: Find a better way to support multiple games insite
-            // same pgn.
-            pgn = $"{pgn}{endOfGamesDelimiterAsPGN}";
+            games = new List<Game>();
+            currentGame = new Game();
 
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 throw new NotImplementedException("Conversion not supported.");
@@ -39,34 +35,27 @@ namespace ChessMeters.Core
             };
             using var process = new Process { StartInfo = processStartInfo };
             process.Start();
+            process.OutputDataReceived += new DataReceivedEventHandler(ParsePGN);
+            process.BeginOutputReadLine();
             await process.StandardInput.WriteLineAsync(pgn);
-            await process.StandardInput.FlushAsync();
-
-            var games = new List<Game>();
-            string line;
-
-            var currentGame = new Game();
-            while ((line = await process.StandardOutput.ReadLineAsync()) != null)
-            {
-                if (line == endOfGamesDelimiterAsLAN)
-                {
-                    break;
-                }
-                if (line.EndsWith("1-0") || line.EndsWith("1/2-1/2") || line.EndsWith("0-1"))
-                {
-                    currentGame.Result = line.Split(' ').Last().Trim();
-                    currentGame.Moves = line.Remove(line.LastIndexOf(' ')).Trim();
-                    games.Add(currentGame);
-                    currentGame = new Game();
-                }
-                else
-                {
-                    SetGamePropertyFromLine(currentGame, line);
-                }
-            }
             process.WaitForExit(1000);
 
             return games;
+        }
+
+        private void ParsePGN(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data.EndsWith("1-0") || e.Data.EndsWith("1/2-1/2") || e.Data.EndsWith("0-1"))
+            {
+                currentGame.Result = e.Data.Split(' ').Last().Trim();
+                currentGame.Moves = e.Data.Remove(e.Data.LastIndexOf(' ')).Trim();
+                games.Add(currentGame);
+                currentGame = new Game();
+            }
+            else
+            {
+                SetGamePropertyFromLine(currentGame, e.Data);
+            }
         }
 
         public void SetGamePropertyFromLine(Game currentGame, string line)
