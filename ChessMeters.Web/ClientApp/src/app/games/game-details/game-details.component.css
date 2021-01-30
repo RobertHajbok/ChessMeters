@@ -2,3 +2,8 @@
   min-height: 500px;
   width: 100%;
 }
+
+.board-control {
+  width: 5rem;
+  height: 5rem;
+}
