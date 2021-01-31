@@ -5,6 +5,7 @@ export interface Game {
   event: string;
   white: string;
   black: string;
+  status: string;
 }
 
 export interface GameDetails {

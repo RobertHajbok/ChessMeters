@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Actions</th>
+      <th>Status</th>
       <th>White</th>
       <th>Black</th>
       <th>Result</th>
@@ -14,6 +15,7 @@
       <td>
         <button class="btn btn-primary" (click)="view(game.id)">View</button>
       </td>
+      <td>{{ game.status }}</td>
       <td>{{ game.white }}</td>
       <td>{{ game.black }}</td>
       <td>{{ game.result }}</td>

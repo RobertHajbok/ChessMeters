@@ -68,5 +68,8 @@ namespace ChessMeters.Core.Entities
 
         [MaxLength(30)]
         public string Variant { get; set; }
+
+        [MaxLength(2000)]
+        public string AnalyzeExceptionStackTrace { get; set; }
     }
 }

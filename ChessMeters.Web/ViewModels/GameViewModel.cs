@@ -15,6 +15,7 @@ namespace ChessMeters.Web.ViewModels
         public string White { get; set; }
 
         public string Black { get; set; }
+        public string Status { get; internal set; }
     }
 }
     

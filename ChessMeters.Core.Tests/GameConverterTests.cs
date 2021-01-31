@@ -43,7 +43,6 @@ namespace ChessMeters.Core.Tests
             string pgn = @"
             [Event ""My Event""]
             [Site ""My Chessmeters.com""]
-            [Date ""2020-07-04""]
             [Round ""My Final""]
             [White ""User 1""]
             [Black ""User 2""]
@@ -63,7 +62,6 @@ namespace ChessMeters.Core.Tests
 
             Assert.Equal("My Event", game.Event);
             Assert.Equal("My Chessmeters.com", game.Site);
-            Assert.Equal("07/04/2020 00:00:00", game.Date.ToString());
             Assert.Equal("My Final", game.Round);
             Assert.Equal("User 1", game.White);
             Assert.Equal("User 2", game.Black);
