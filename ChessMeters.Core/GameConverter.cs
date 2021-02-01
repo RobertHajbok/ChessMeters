@@ -105,6 +105,9 @@ namespace ChessMeters.Core
                 case "ECO":
                     currentGame.Eco = gamePropertyValue;
                     break;
+                case "ECOUrl":
+                    currentGame.EcoUrl = gamePropertyValue;
+                    break;
                 case "TimeControl":
                     currentGame.TimeControl = gamePropertyValue;
                     break;
@@ -147,6 +150,29 @@ namespace ChessMeters.Core
                     break;
                 case "Variant":
                     currentGame.Variant = gamePropertyValue;
+                    break;
+                case "CurrentPosition":
+                    currentGame.CurrentPosition = gamePropertyValue;
+                    break;
+                case "Timezone":
+                    currentGame.Timezone = gamePropertyValue;
+                    break;
+                case "UtartTime":
+                    TimeSpan startTimeValue;
+                    if (TimeSpan.TryParse(gamePropertyValue.Split(" ").First(), out startTimeValue))
+                    {
+                        currentGame.StartTime = startTimeValue;
+                    }
+                    break;
+                case "EndDate":
+                    DateTime endDateValue;
+                    if (DateTime.TryParse(gamePropertyValue, out endDateValue))
+                    {
+                        currentGame.EndDate = endDateValue;
+                    }
+                    break;
+                case "Link":
+                    currentGame.Link = gamePropertyValue;
                     break;
             }
         }

@@ -9,9 +9,16 @@
     <div class="col">
       <div class="form-group">
         <label for="lichessUsername">Lichess username</label>
-        <input type="text" id="lichessUsername" name="lichessUsername" class="form-control" [(ngModel)]="report.lichessUsername" maxlength="100">
+        <input type="text" id="lichessUsername" name="lichessUsername" class="form-control" [(ngModel)]="lichessUsername" maxlength="100">
       </div>
-      <button type="button" class="btn btn-primary" (click)="getLichessPGN()" [disabled]="!report.lichessUsername">Get Lichess last 20 games</button>
+      <button type="button" class="btn btn-primary" (click)="getLichessPGN()" [disabled]="!lichessUsername">Get Lichess last 20 games</button>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="chessComUsername">Chess.com username</label>
+        <input type="text" id="chessComUsername" name="chessComUsername" class="form-control" [(ngModel)]="chessComUsername" maxlength="100">
+      </div>
+      <button type="button" class="btn btn-primary" (click)="getChessComPGN()" [disabled]="!chessComUsername">Get chess.com current month games</button>
     </div>
     <div class="col">
       <div class="form-group">

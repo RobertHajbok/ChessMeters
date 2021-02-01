@@ -51,6 +51,11 @@ export class ReportsService {
     return this.http.get(`https://lichess.org/api/games/user/${username}?max=20`, { responseType: 'text' });
   }
 
+  public getChessComGames(username: string): Observable<any> {
+    const date = new Date();
+    return this.http.get(`https://api.chess.com/pub/player/${username}/games/${date.getUTCFullYear()}/${date.getUTCMonth()}/pgn`, { responseType: 'text' });
+  }
+
   private startSignalrConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.baseUrl}notification`, {
       accessTokenFactory: () => this.authorizeService.getAccessToken().toPromise()

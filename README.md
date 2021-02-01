@@ -50,9 +50,10 @@ dotnet user-secrets set "Authentication:Facebook:AppId" "&lt;app-id&gt;"
 dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
+- Remove not needed games from UI after getting PGN with a lot of games
+- Show total rows on grids, add pagination and sorting (reports and games)
 - Configure email for contact, error notifications and user registrations
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations
-- Add possibility to fetch games from chess.com
 - Configure lichess api with more parameters
 - Add first flag for castling
 - Show first flag on game details page if applicable
