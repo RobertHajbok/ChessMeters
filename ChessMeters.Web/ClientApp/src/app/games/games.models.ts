@@ -34,3 +34,11 @@ interface TreeMove {
   stockfishEvaluationCentipawns: number;
   move: string;
 }
+
+export interface GamePreview {
+  moves: string;
+  result: string;
+  event: string;
+  white: string;
+  black: string;
+}

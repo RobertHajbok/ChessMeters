@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 
 import { AuthorizeService } from '../../api-authorization/authorize.service';
+import { GamePreview } from '../games/games.models';
 import { EditReport, GenerateReport, Report, ReportDetails } from './reports.models';
 
 @Injectable({
@@ -56,6 +57,30 @@ export class ReportsService {
     return this.http.get(`https://api.chess.com/pub/player/${username}/games/${date.getUTCFullYear()}/${date.getUTCMonth()}/pgn`, { responseType: 'text' });
   }
 
+  public parsePGNForPreview(pgn: string): GamePreview[] {
+    var games = [];
+    let currentGame: GamePreview;
+    currentGame = this.getInitializedGamePreview();
+    pgn.split('\n').forEach((line) => {
+      if (line.startsWith('[Event "')) {
+        let event = line.substring('[Event "'.length);
+        currentGame.event = event.substring(0, event.length - 2);
+      } else if (line.startsWith('[White "')) {
+        let white = line.substring('[White "'.length);
+        currentGame.white = white.substring(0, white.length - 2);
+      } else if (line.startsWith('[Black "')) {
+        let black = line.substring('[Black "'.length);
+        currentGame.black = black.substring(0, black.length - 2);
+      } else if (line.endsWith('1-0') || line.endsWith('1/2-1/2') || line.endsWith('0-1')) {
+        currentGame.result = line.split(' ').pop();
+        currentGame.moves = line.substring(0, line.lastIndexOf(' '));
+        games.push(currentGame);
+        currentGame = this.getInitializedGamePreview();
+      }
+    });
+    return games;
+  }
+
   private startSignalrConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.baseUrl}notification`, {
       accessTokenFactory: () => this.authorizeService.getAccessToken().toPromise()
@@ -70,5 +95,15 @@ export class ReportsService {
         this.router.navigateByUrl(`/reports/${reportId}`);
       });
     });
+  }
+
+  private getInitializedGamePreview(): GamePreview {
+    return {
+      white: '',
+      black: '',
+      moves: '',
+      event: '',
+      result: ''
+    };
   }
 }
