@@ -6,14 +6,17 @@ import { Report } from './reports.models';
 import { ReportsService } from './reports.service';
 
 @Component({
-  selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
   public reports: Report[];
+  public page: number;
+  public pageSize: number;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
+    this.page = 1;
+    this.pageSize = 10;
   }
 
   ngOnInit(): void {

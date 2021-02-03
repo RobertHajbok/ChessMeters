@@ -17,9 +17,13 @@ export class ReportGeneratorComponent {
   public chessComUsername: string;
   public games: GamePreview[];
   public faTrashAlt = faTrashAlt;
+  public page: number;
+  public pageSize: number;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
     this.report = { description: '', pgn: '' };
+    this.page = 1;
+    this.pageSize = 5;
   }
 
   public generate(): void {

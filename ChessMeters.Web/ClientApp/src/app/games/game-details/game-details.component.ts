@@ -29,12 +29,23 @@ export class GameDetailsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.gamesService.getDetails(+params.id).subscribe(result => {
         this.game = result;
+        let stockfishEvaluations = result.treeMoves.map(x => x.stockfishEvaluationCentipawns);
+        var minNoMateStockfishEvaluation = Math.min(...stockfishEvaluations.filter(x => x > -15300));
+        var maxNoMateStockfishEvaluation = Math.max(...stockfishEvaluations.filter(x => x < 15300));
         this.chartData = [{
           name: 'Stockfish',
-          series: result.treeMoves.map((element, index) => ({
-            name: index + 1,
-            value: element.stockfishEvaluationCentipawns
-          }))
+          series: result.treeMoves.map((element, index) => {
+            var evaluation = element.stockfishEvaluationCentipawns;
+            if (evaluation < minNoMateStockfishEvaluation) {
+              evaluation = minNoMateStockfishEvaluation;
+            } else if (evaluation > maxNoMateStockfishEvaluation) {
+              evaluation = maxNoMateStockfishEvaluation;
+            }
+            return ({
+              name: index + 1,
+              value: evaluation / 100
+            })
+          })
         }];
       }, () => {
         this.toastrService.error('An error occurred while trying to fetch the game details, please try again later.');

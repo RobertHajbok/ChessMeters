@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let game of games">
+    <tr *ngFor="let game of games | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize; trackBy: game?.id">
       <td>
         <button class="btn btn-primary" (click)="view(game.id)">View</button>
       </td>
@@ -24,3 +24,6 @@
     </tr>
   </tbody>
 </table>
+<pagination class="float-right" [boundaryLinks]="true" [totalItems]="games.length" [(ngModel)]="page" [itemsPerPage]="pageSize" [maxSize]="5"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+</pagination>

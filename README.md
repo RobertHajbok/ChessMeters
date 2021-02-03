@@ -51,7 +51,6 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
 - Add possibility to choose color for games on generator UI
-- Show total rows on grids, add pagination and sorting (reports and games)
 - Configure email for contact, error notifications and user registrations
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations
 - Configure lichess api with more parameters
@@ -65,5 +64,5 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 - Admin UI to change flags
 - Light/dark themes (maybe from Bootstrap)
 - Docker images for Linux and Windows
-
+- Add sorting to whatever columns we need to sort by in grids
 

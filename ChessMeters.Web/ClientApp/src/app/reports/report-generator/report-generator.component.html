@@ -54,7 +54,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let game of games; let i = index">
+      <tr *ngFor="let game of games | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize; let i = index; trackBy: report?.id">
         <td>
           <a class="btn btn-default" (click)="removeGameFromPreview(i)" title="Remove">
             <fa-icon [icon]="faTrashAlt"></fa-icon>
@@ -68,4 +68,7 @@
       </tr>
     </tbody>
   </table>
+  <pagination class="float-right" [boundaryLinks]="true" [totalItems]="games.length" [(ngModel)]="page" [itemsPerPage]="pageSize" [maxSize]="5"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
 </div>

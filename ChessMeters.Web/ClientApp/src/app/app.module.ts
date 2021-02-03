@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxChessBoardModule } from 'ngx-chess-board';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -51,6 +52,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgxChessBoardModule.forRoot(),
     NgxGoogleAnalyticsModule.forRoot(environment.googleAnalytics),
     NgxGoogleAnalyticsRouterModule,
+    PaginationModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
