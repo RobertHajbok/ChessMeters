@@ -68,7 +68,8 @@ export class ReportGeneratorComponent {
     this.games = this.reportsService.parsePGNForPreview(this.report.pgn);
   }
 
-  public removeGameFromPreview(): void {
-    this.toastrService.error('Not implemented yet.');
+  public removeGameFromPreview(index: number): void {
+    this.report.pgn = this.reportsService.removeGameFromPGN(this.report.pgn, this.games, index);
+    //this.games.splice(index, 1);this.games.splice(index, 1);
   }
 }

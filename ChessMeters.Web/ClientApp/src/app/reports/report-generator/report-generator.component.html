@@ -54,9 +54,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let game of games">
+      <tr *ngFor="let game of games; let i = index">
         <td>
-          <a class="btn btn-default" (click)="removeGameFromPreview()" title="Remove">
+          <a class="btn btn-default" (click)="removeGameFromPreview(i)" title="Remove">
             <fa-icon [icon]="faTrashAlt"></fa-icon>
           </a>
         </td>

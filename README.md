@@ -50,7 +50,7 @@ dotnet user-secrets set "Authentication:Facebook:AppId" "&lt;app-id&gt;"
 dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
-- Remove not needed games from UI after getting PGN with a lot of games
+- Add possibility to choose color for games on generator UI
 - Show total rows on grids, add pagination and sorting (reports and games)
 - Configure email for contact, error notifications and user registrations
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations

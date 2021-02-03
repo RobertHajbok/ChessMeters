@@ -81,6 +81,20 @@ export class ReportsService {
     return games;
   }
 
+  public removeGameFromPGN(pgn: string, games: GamePreview[], index: number): string {
+    let gamesSplit = pgn.split('1-0\n').join('%$!').split('1/2-1/2\n').join('%$!').split('0-1\n').join('%$!').split('%$!');
+    gamesSplit.splice(index, 1);
+    games.splice(index, 1);
+    for (let i = 0; i < games.length; i++) {
+      gamesSplit[i] += games[i].result;
+    }
+    let newPGN = gamesSplit.join('\n');
+    while (newPGN.startsWith('\n')) {
+      newPGN = newPGN.substr(1);
+    }
+    return newPGN
+  }
+
   private startSignalrConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.baseUrl}notification`, {
       accessTokenFactory: () => this.authorizeService.getAccessToken().toPromise()
