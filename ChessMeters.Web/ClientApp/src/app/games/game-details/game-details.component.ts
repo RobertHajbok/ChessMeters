@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faAngleDoubleLeft, faAngleDoubleRight, faArrowLeft, faArrowRight, faSync } from '@fortawesome/free-solid-svg-icons';
-import { NgxChessBoardView } from 'ngx-chess-board';
+import { NgxChessBoardView, PieceIconInput } from 'ngx-chess-board';
 import { ToastrService } from 'ngx-toastr';
 
 import { GameDetails } from '../games.models';
@@ -20,9 +20,24 @@ export class GameDetailsComponent implements OnInit {
   public faAngleDoubleLeft = faAngleDoubleLeft;
   public faAngleDoubleRight = faAngleDoubleRight;
   public moveIndex: number;
+  public pieceIcons: PieceIconInput;
 
   constructor(private gamesService: GamesService, private toastrService: ToastrService, private activatedRoute: ActivatedRoute) {
     this.moveIndex = 0;
+    this.pieceIcons = {
+      blackBishopUrl: 'assets/blackBishop.svg',
+      blackKingUrl: 'assets/blackKing.svg',
+      blackKnightUrl: 'assets/blackKnight.svg',
+      blackPawnUrl: 'assets/blackPawn.svg',
+      blackQueenUrl: 'assets/blackQueen.svg',
+      blackRookUrl: 'assets/blackRook.svg',
+      whiteBishopUrl: 'assets/whiteBishop.svg',
+      whiteKingUrl: 'assets/whiteKing.svg',
+      whiteKnightUrl: 'assets/whiteKnight.svg',
+      whitePawnUrl: 'assets/whitePawn.svg',
+      whiteQueenUrl: 'assets/whiteQueen.svg',
+      whiteRookUrl: 'assets/whiteRook.svg'
+    };
   }
 
   ngOnInit(): void {

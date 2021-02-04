@@ -3,7 +3,7 @@
 <div class="row mt-4">
   <div class="col-md-6">
     <div>
-      <ngx-chess-board #chessBoard [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true">
+      <ngx-chess-board #chessBoard [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true" [pieceIcons]="pieceIcons">
       </ngx-chess-board>
       <div class="col-12 mt-1">
         <a class="btn btn-default board-control" (click)="chessBoard.reverse()" title="Flip board">
