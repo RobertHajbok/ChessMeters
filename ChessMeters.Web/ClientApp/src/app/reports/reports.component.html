@@ -18,9 +18,15 @@
     <tbody>
       <tr *ngFor="let report of reports | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize; trackBy: report?.id">
         <td>
-          <button class="btn btn-primary" (click)="view(report.id)">View</button>
-          <button class="btn btn-warning ml-1" (click)="openEditor(report.id)">Edit</button>
-          <button class="btn btn-danger ml-1" (click)="delete(report)">Delete</button>
+          <a class="btn btn-default" (click)="view(report.id)" title="View">
+            <fa-icon [icon]="faEye"></fa-icon>
+          </a>
+          <a class="btn btn-default" (click)="openEditor(report.id)" title="Edit">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </a>
+          <a class="btn btn-default" (click)="delete(report)" title="Delete">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </a>
         </td>
         <td>{{ report.description }}</td>
         <td>{{ report.numberOfGames }}</td>

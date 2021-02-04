@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faAngleDoubleLeft, faAngleDoubleRight, faArrowLeft, faArrowRight, faSync } from '@fortawesome/free-solid-svg-icons';
 import { NgxChessBoardView, PieceIconInput } from 'ngx-chess-board';
@@ -12,6 +12,7 @@ import { GamesService } from '../games.service';
   styleUrls: ['./game-details.component.css']
 })
 export class GameDetailsComponent implements OnInit {
+  @ViewChild('chessBoard', { static: false }) chessBoard: NgxChessBoardView;
   public game: GameDetails;
   public chartData: any[];
   public faSync = faSync;
@@ -68,25 +69,34 @@ export class GameDetailsComponent implements OnInit {
     });
   }
 
-  public move(chessBoard: NgxChessBoardView): void {
-    chessBoard.move(this.game.treeMoves[this.moveIndex].move);
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key == 'ArrowRight') {
+      this.move();
+    } else if (event.key == 'ArrowLeft') {
+      this.undo();
+    }
+  }
+
+  public move(): void {
+    this.chessBoard.move(this.game.treeMoves[this.moveIndex].move);
     this.moveIndex++;
   }
 
-  public reset(chessBoard: NgxChessBoardView): void {
-    chessBoard.reset();
+  public reset(): void {
+    this.chessBoard.reset();
     this.moveIndex = 0;
   }
 
-  public undo(chessBoard: NgxChessBoardView): void {
-    chessBoard.undo();
+  public undo(): void {
+    this.chessBoard.undo();
     if (this.moveIndex > 0)
       this.moveIndex--;
   }
 
-  public goToEnd(chessBoard: NgxChessBoardView): void {
+  public goToEnd(): void {
     for (var i = this.moveIndex; i < this.game.treeMoves.length; i++) {
-      this.move(chessBoard);
+      this.move();
     }
   }
 }

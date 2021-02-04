@@ -19,3 +19,8 @@ code {
 .ng-invalid.ng-touched:not(form) {
   border-left: 5px solid #a94442;
 }
+
+.board-control {
+  width: 5rem;
+  height: 5rem;
+}

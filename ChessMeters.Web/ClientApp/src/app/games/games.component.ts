@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 import { Game } from './games.models';
 
@@ -11,6 +12,7 @@ export class GamesComponent {
   @Input() games: Game[];
   public page: number;
   public pageSize: number;
+  public faEye = faEye;
 
   constructor(private router: Router) {
     this.page = 1;
