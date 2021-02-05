@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210131185348_Added_GameAnalyzeExceptionStackTrace")]
+    partial class Added_GameAnalyzeExceptionStackTrace
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,23 +94,12 @@ namespace ChessMeters.Core.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("varchar(5) CHARACTER SET utf8mb4");
 
-                    b.Property<string>("CurrentPosition")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4");
-
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Eco")
                         .HasMaxLength(3)
                         .HasColumnType("varchar(3) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("EcoUrl")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<TimeSpan?>("EndTime")
                         .HasColumnType("time(6)");
@@ -119,10 +110,6 @@ namespace ChessMeters.Core.Migrations
 
                     b.Property<long?>("LastTreeMoveId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Link")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Moves")
                         .IsRequired()
@@ -144,9 +131,6 @@ namespace ChessMeters.Core.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4");
 
-                    b.Property<TimeSpan?>("StartTime")
-                        .HasColumnType("time(6)");
-
                     b.Property<string>("Termination")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4");
@@ -154,10 +138,6 @@ namespace ChessMeters.Core.Migrations
                     b.Property<string>("TimeControl")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Timezone")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
 
                     b.Property<DateTime?>("UTCDate")
                         .HasColumnType("datetime(6)");

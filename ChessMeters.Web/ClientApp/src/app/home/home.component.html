@@ -1,12 +1,18 @@
 <div class="row justify-content-center">
   <div class="center">
     <div class="col-12">
-      <ngx-chess-board #chessBoard></ngx-chess-board>
+      <ngx-chess-board #chessBoard [pieceIcons]="pieceIcons" [size]="boardSize"></ngx-chess-board>
     </div>
     <div class="col-12 mt-4">
-      <button class="btn btn-primary" (click)="chessBoard.reverse()">Reverse</button>
-      <button class="btn btn-warning ml-2" (click)="chessBoard.undo()">Undo</button>
-      <button class="btn btn-danger ml-2" (click)="chessBoard.reset()">Reset</button>
+      <a class="btn btn-default board-control" (click)="chessBoard.reverse()" title="Flip board">
+        <fa-icon [icon]="faSync" size="2x"></fa-icon>
+      </a>
+      <a class="btn btn-default board-control" (click)="chessBoard.reset()" title="Reset">
+        <fa-icon [icon]="faAngleDoubleLeft" size="2x"></fa-icon>
+      </a>
+      <a class="btn btn-default board-control" (click)="chessBoard.undo()" title="Previous">
+        <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+      </a>
       <button class="btn btn-success float-right" (click)="analyzeGame()">Analyze</button>
     </div>
   </div>

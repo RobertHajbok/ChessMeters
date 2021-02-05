@@ -86,6 +86,8 @@ namespace ChessMeters.Core.Engines
             var currentDepthData = data[(data.IndexOf(search) + search.Length)..];
             if (currentDepthData.Contains(" mate "))
                 return (short)(15300 * (color ? 1 : -1));
+            else if (currentDepthData.EndsWith("bestmove (none)"))
+                return 0;
             var evaluation = short.Parse(currentDepthData[(currentDepthData.IndexOf(" cp ") + 4)..].Split(' ')[0]);
             if (!color)
                 evaluation *= -1;

@@ -2,6 +2,7 @@ using ChessMeters.Core.Jobs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Quartz;
+using System;
 
 namespace ChessMeters.Web
 {
@@ -20,7 +21,7 @@ namespace ChessMeters.Web
                     {
                         options.ListenAnyIP(6000, listenOptions =>
                         {
-                            listenOptions.UseHttps("certificate.pfx", "abc123$ABC");
+                            listenOptions.UseHttps("certificate.pfx", Environment.GetEnvironmentVariable("IdentityServer__Key__Password"));
                         });
                     });
                     webBuilder.UseStartup<Startup>();

@@ -150,7 +150,8 @@ namespace ChessMeters.Web.Controllers
                     Event = x.Event,
                     White = x.White,
                     Black = x.Black,
-                    Result = x.Result
+                    Result = x.Result,
+                    Status = !string.IsNullOrWhiteSpace(x.AnalyzeExceptionStackTrace) ? "Analyze error" : "Ready"
                 })
             };
         }

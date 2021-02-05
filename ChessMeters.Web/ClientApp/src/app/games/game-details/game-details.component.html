@@ -3,8 +3,25 @@
 <div class="row mt-4">
   <div class="col-md-6">
     <div>
-      <ngx-chess-board [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true">
+      <ngx-chess-board #chessBoard [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true" [pieceIcons]="pieceIcons">
       </ngx-chess-board>
+      <div class="col-12 mt-1">
+        <a class="btn btn-default board-control" (click)="chessBoard.reverse()" title="Flip board">
+          <fa-icon [icon]="faSync" size="2x"></fa-icon>
+        </a>
+        <a class="btn btn-default board-control" (click)="reset()" title="Reset">
+          <fa-icon [icon]="faAngleDoubleLeft" size="2x"></fa-icon>
+        </a>
+        <a class="btn btn-default board-control" (click)="undo()" title="Previous">
+          <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
+        </a>
+        <a class="btn btn-default board-control" (click)="move()" title="Next">
+          <fa-icon [icon]="faArrowRight" size="2x"></fa-icon>
+        </a>
+        <a class="btn btn-default board-control" (click)="goToEnd()" title="End">
+          <fa-icon [icon]="faAngleDoubleRight" size="2x"></fa-icon>
+        </a>
+      </div>
     </div>
   </div>
   <div class="col-md-6">

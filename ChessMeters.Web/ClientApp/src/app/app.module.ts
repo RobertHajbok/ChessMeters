@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxChessBoardModule } from 'ngx-chess-board';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -24,6 +25,7 @@ import { GameDetailsComponent } from './games/game-details/game-details.componen
 import { ContactComponent } from './contact/contact.component';
 import { environment } from '../environments/environment.prod';
 import { SharedModule } from './shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { SharedModule } from './shared/shared.module';
     NgxChessBoardModule.forRoot(),
     NgxGoogleAnalyticsModule.forRoot(environment.googleAnalytics),
     NgxGoogleAnalyticsRouterModule,
+    PaginationModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
@@ -63,7 +66,8 @@ import { SharedModule } from './shared/shared.module';
       },
       { path: 'games/:id', component: GameDetailsComponent, canActivate: [AuthorizeGuard] },
       { path: 'contact', component: ContactComponent }
-    ])
+    ]),
+    FontAwesomeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

@@ -31,11 +31,15 @@ namespace ChessMeters.Core.Entities
         [MaxLength(100)]
         public string Site { get; set; }
 
+        [MaxLength(100)]
+        public string Link { get; set; }
+
         [MaxLength(50)]
         public string Round { get; set; }
 
         [MaxLength(100)]
         public string White { get; set; }
+
         [MaxLength(100)]
         public string Black { get; set; }
 
@@ -47,12 +51,17 @@ namespace ChessMeters.Core.Entities
         public string Eco { get; set; }
 
         [MaxLength(100)]
+        public string EcoUrl { get; set; }
+
+        [MaxLength(100)]
         public string TimeControl { get; set; }
 
         [MaxLength(100)]
         public string Termination { get; set; }
 
         public DateTime? Date { get; set; }
+
+        public DateTime? EndDate { get; set; }
 
         public TimeSpan? EndTime { get; set; }
 
@@ -68,5 +77,16 @@ namespace ChessMeters.Core.Entities
 
         [MaxLength(30)]
         public string Variant { get; set; }
+
+        [MaxLength(2000)]
+        public string AnalyzeExceptionStackTrace { get; set; }
+
+        [MaxLength(100)]
+        public string CurrentPosition { get; set; }
+
+        [MaxLength(50)]
+        public string Timezone { get; set; }
+
+        public TimeSpan? StartTime { get; set; }
     }
 }

@@ -1,24 +1,33 @@
-<table *ngIf="games" class="table table-responsive table-body table-striped">
-  <thead>
-    <tr>
-      <th>Actions</th>
-      <th>White</th>
-      <th>Black</th>
-      <th>Result</th>
-      <th>Moves</th>
-      <th>Event</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let game of games">
-      <td>
-        <button class="btn btn-primary" (click)="view(game.id)">View</button>
-      </td>
-      <td>{{ game.white }}</td>
-      <td>{{ game.black }}</td>
-      <td>{{ game.result }}</td>
-      <td>{{ game.moves }}</td>
-      <td>{{ game.event }}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="games">
+  <table class="table table-responsive table-body table-striped">
+    <thead>
+      <tr>
+        <th>Actions</th>
+        <th>Status</th>
+        <th>White</th>
+        <th>Black</th>
+        <th>Result</th>
+        <th>Moves</th>
+        <th>Event</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of games | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize; trackBy: game?.id">
+        <td>
+          <a class="btn btn-default" (click)="view(game.id)" title="View">
+            <fa-icon [icon]="faEye"></fa-icon>
+          </a>
+        </td>
+        <td>{{ game.status }}</td>
+        <td>{{ game.white }}</td>
+        <td>{{ game.black }}</td>
+        <td>{{ game.result }}</td>
+        <td>{{ game.moves }}</td>
+        <td>{{ game.event }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination class="float-right" [boundaryLinks]="true" [totalItems]="games.length" [(ngModel)]="page" [itemsPerPage]="pageSize" [maxSize]="5"
+              previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
+</div>

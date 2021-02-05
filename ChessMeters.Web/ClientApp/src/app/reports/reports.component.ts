@@ -1,19 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
 import { Report } from './reports.models';
 import { ReportsService } from './reports.service';
 
 @Component({
-  selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
   public reports: Report[];
+  public page: number;
+  public pageSize: number;
+  public faTrashAlt = faTrashAlt;
+  public faEdit = faEdit;
+  public faEye = faEye;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
+    this.page = 1;
+    this.pageSize = 10;
   }
 
   ngOnInit(): void {
