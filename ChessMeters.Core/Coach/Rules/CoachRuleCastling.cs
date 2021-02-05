@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-
 namespace ChessMeters.Core.Coach
 {
     public class CoachRuleCastling : ICoachRule
     {
-        public ICoachFlag? Evaluate(ICoachBoard board)
+        public ICoachFlag Evaluate(ICoachBoard board)
         {
             // This rule applies only after move 10;
             if (board.GetCurrentMoveNumber() < 10)
@@ -13,7 +11,7 @@ namespace ChessMeters.Core.Coach
             }
 
             // This rule applies only if player did not castle yet.
-            var didAlreadyCastle = board.isCurrentPlyWhite()
+            var didAlreadyCastle = board.IsCurrentPlyWhite()
                 ? board.DidWhiteAlreadyCastle()
                 : board.DidBlackAlreadyCastle();
             if (didAlreadyCastle)
@@ -22,11 +20,11 @@ namespace ChessMeters.Core.Coach
             }
 
             // This rule applies only if player is still not castling.
-            if (board.isCurrentPlyWhite() && board.isWhiteCastling())
+            if (board.IsCurrentPlyWhite() && board.IsWhiteCastling())
             {
                 return null;
             }
-            if (board.isCurrentPlyBlack() && board.isBlackCastling())
+            if (board.IsCurrentPlyBlack() && board.IsBlackCastling())
             {
                 return null;
             }

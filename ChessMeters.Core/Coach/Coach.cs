@@ -21,14 +21,17 @@ namespace ChessMeters.Core.Coach
                 AnalizeCurrentPosition();
                 board.NextPly();
             }
-            return this.flags;
+            return flags;
         }
+
         private void AnalizeCurrentPosition()
         {
-            foreach(var rule in rules) {
+            foreach (var rule in rules)
+            {
                 var flag = rule.Evaluate(this.board);
-                if (flag != null) {
-                    this.flags.Add(flag);
+                if (flag != null)
+                {
+                    flags.Add(flag);
                 }
             }
         }
