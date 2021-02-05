@@ -192,6 +192,16 @@ namespace ChessMeters.Core.Coach
             return this.blackUndevelopedMinorPieces.Count == 0;
         }
 
+        public int GetWhiteDevelopedMinorPiecesCount()
+        {
+            return this.whiteDevelopedMinorPieces.Count;
+        }
+
+        public int GetBlackDevelopedMinorPiecesCount()
+        {
+            return this.blackDevelopedMinorPieces.Count;
+        }
+
         // Developing pieces / White / minor pieces.
         private bool IsWhiteDevelopingMinorPiece()
         {

@@ -19,6 +19,8 @@ namespace ChessMeters.Core.Coach
         // Develop pieces.
         public bool DidWhiteAlreadyDevelopAllMinorPieces();
         public bool DidBlackAlreadyDevelopAllMinorPieces();
+        public int GetWhiteDevelopedMinorPiecesCount();
+        public int GetBlackDevelopedMinorPiecesCount();
 
     }
 }
