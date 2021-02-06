@@ -49,19 +49,28 @@
         <th>White</th>
         <th>Black</th>
         <th>Result</th>
-        <th>Moves</th>
+        <th class="w-50">Moves</th>
         <th>Event</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let game of games | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize; let i = index; trackBy: report?.id">
         <td>
+          <a class="btn btn-default" (click)="changeUserColorForGamePreview(i)" title="Change user color">
+            <fa-icon [icon]="faExchangeAlt"></fa-icon>
+          </a>
           <a class="btn btn-default" (click)="removeGameFromPreview(i)" title="Remove">
             <fa-icon [icon]="faTrashAlt"></fa-icon>
           </a>
         </td>
-        <td>{{ game.white }}</td>
-        <td>{{ game.black }}</td>
+        <td>
+          <span *ngIf="game.userColor == color.White"><strong>{{ game.white }}</strong></span>
+          <span *ngIf="game.userColor != color.White">{{ game.white }}</span>
+        </td>
+        <td>
+          <span *ngIf="game.userColor == color.Black"><strong>{{ game.black }}</strong></span>
+          <span *ngIf="game.userColor != color.Black">{{ game.black }}</span>
+        </td>
         <td>{{ game.result }}</td>
         <td>{{ game.moves }}</td>
         <td>{{ game.event }}</td>

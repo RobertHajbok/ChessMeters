@@ -41,4 +41,10 @@ export interface GamePreview {
   event: string;
   white: string;
   black: string;
+  userColor: Color;
+}
+
+export enum Color {
+  White = 1,
+  Black
 }
