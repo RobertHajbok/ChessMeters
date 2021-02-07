@@ -8,7 +8,7 @@ namespace ChessMeters.Core.Coach
         private List<ICoachRule> rules;
         private List<ICoachFlag> flags = new List<ICoachFlag>();
 
-        public Coach(string pgn, ICoachBoard board, List<ICoachRule> rules)
+        public Coach(ICoachBoard board, List<ICoachRule> rules)
         {
             this.board = board;
             this.rules = rules;

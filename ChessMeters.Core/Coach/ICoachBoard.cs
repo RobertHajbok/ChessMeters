@@ -10,6 +10,9 @@ namespace ChessMeters.Core.Coach
         public bool isCurrentPlyWhite();
         public bool isCurrentPlyBlack();
 
+        // Evaluations.
+        public ICoachBoardEngineEvaluations GetStockfishCentipawns();
+
         // Castle.
         public bool isWhiteCastling();
         public bool isBlackCastling();

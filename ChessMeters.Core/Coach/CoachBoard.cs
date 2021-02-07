@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ChessMeters.Core.Entities;
 
 namespace ChessMeters.Core.Coach
 {
@@ -18,10 +19,18 @@ namespace ChessMeters.Core.Coach
         private List<string> blackUndevelopedMinorPieces = new List<string> { "Nb", "Bc", "Bf", "Ng" };
         private List<int> openFiles;
 
-        public CoachBoard(string algebraic)
+        private ICoachBoardEngineEvaluations stockfishCentipawns;
+
+        public CoachBoard(Game game, ICoachBoardEngineEvaluations stockfishCentipawns)
         {
-            this.algebraic = algebraic;
+            this.algebraic = game.Moves;
             this.plys = new List<string>(algebraic.Split(" "));
+            this.stockfishCentipawns = stockfishCentipawns;
+        }
+
+        public ICoachBoardEngineEvaluations GetStockfishCentipawns()
+        {
+            return this.stockfishCentipawns;
         }
 
         public int GetCurrentPlyNumber()
