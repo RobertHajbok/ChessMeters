@@ -8,7 +8,7 @@ namespace ChessMeters.Core.Coach
 
         public CoachFlagBlunder(ICoachBoard board)
         {
-            this.playerColor = board.isCurrentPlyWhite() ? 0 : 1;
+            this.playerColor = board.IsCurrentPlyWhite() ? 0 : 1;
             this.plyNumber = board.GetCurrentPlyNumber();
             this.moveNumber = board.GetCurrentMoveNumber();
         }
