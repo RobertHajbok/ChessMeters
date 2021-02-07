@@ -1,4 +1,4 @@
-import { Game } from '../games/games.models';
+import { Color, Game } from '../games/games.models';
 
 export interface Report {
   id: number;
@@ -10,6 +10,7 @@ export interface Report {
 export interface GenerateReport {
   description: string;
   pgn: string;
+  userColors: Color[];
 }
 
 export interface EditReport {

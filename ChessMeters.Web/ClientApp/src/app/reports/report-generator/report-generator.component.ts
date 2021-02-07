@@ -23,12 +23,13 @@ export class ReportGeneratorComponent {
   public color = Color;
 
   constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
-    this.report = { description: '', pgn: '' };
+    this.report = { description: '', pgn: '', userColors: [] };
     this.page = 1;
     this.pageSize = 5;
   }
 
   public generate(): void {
+    this.report.userColors = this.games.map(x => x.userColor);
     this.reportsService.generate(this.report).subscribe(() => {
       this.toastrService.success('Report is generated in the background, we will notify you when it is ready.');
       this.router.navigateByUrl('/reports');

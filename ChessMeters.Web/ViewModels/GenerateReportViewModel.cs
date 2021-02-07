@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using ChessMeters.Core;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ChessMeters.Web.ViewModels
@@ -11,5 +13,7 @@ namespace ChessMeters.Web.ViewModels
 
         [Required]
         public string PGN { get; set; }
+
+        public IEnumerable<ColorEnum> UserColors { get; set; }
     }
 }
