@@ -3,14 +3,16 @@ using System;
 using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ChessMeters.Core.Migrations
 {
     [DbContext(typeof(ChessMetersContext))]
-    partial class ChessMetersContextModelSnapshot : ModelSnapshot
+    [Migration("20210207014700_AddedColors")]
+    partial class AddedColors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,9 +198,6 @@ namespace ChessMeters.Core.Migrations
                     b.Property<TimeSpan?>("UTCTime")
                         .HasColumnType("time(6)");
 
-                    b.Property<short?>("UserColorId")
-                        .HasColumnType("smallint");
-
                     b.Property<string>("Variant")
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30) CHARACTER SET utf8mb4");
@@ -219,8 +218,6 @@ namespace ChessMeters.Core.Migrations
                     b.HasIndex("LastTreeMoveId");
 
                     b.HasIndex("ReportId");
-
-                    b.HasIndex("UserColorId");
 
                     b.ToTable("Games");
                 });
@@ -610,15 +607,9 @@ namespace ChessMeters.Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ChessMeters.Core.Entities.Color", "UserColor")
-                        .WithMany()
-                        .HasForeignKey("UserColorId");
-
                     b.Navigation("LastTreeMove");
 
                     b.Navigation("Report");
-
-                    b.Navigation("UserColor");
                 });
 
             modelBuilder.Entity("ChessMeters.Core.Entities.Report", b =>

@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 
 import { AuthorizeService } from '../../api-authorization/authorize.service';
-import { GamePreview } from '../games/games.models';
+import { Color, GamePreview } from '../games/games.models';
 import { EditReport, GenerateReport, Report, ReportDetails } from './reports.models';
 
 @Injectable({
@@ -117,7 +117,8 @@ export class ReportsService {
       black: '',
       moves: '',
       event: '',
-      result: ''
+      result: '',
+      userColor: Color.White
     };
   }
 }

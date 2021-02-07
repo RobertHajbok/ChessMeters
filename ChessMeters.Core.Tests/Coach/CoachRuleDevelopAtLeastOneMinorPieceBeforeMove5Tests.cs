@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 
 using ChessMeters.Core.Coach;
@@ -11,6 +11,7 @@ using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 namespace ChessMeters.Core.Coach.Tests
 {
@@ -26,7 +27,6 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         [Fact]
-        [Trait("Category", "Integration")]
         public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Develop_At_Least_1_Minor_Before_M5_1()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
@@ -51,6 +51,7 @@ namespace ChessMeters.Core.Coach.Tests
             AssertFlagsContain(flags, typeof(CoachFlagDidNotDevelopAtLeastOneMinorPieceBeforeMove5), 1);
         }
 
+        [Fact]
         public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Develop_At_Least_1_Minor_Before_M5_2()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
@@ -109,25 +110,20 @@ namespace ChessMeters.Core.Coach.Tests
             return games.First();
         }
 
-        private void AssertFlagsContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private void AssertFlagsContain(List<ICoachFlag> flags, Type expectedFlagType, int playerColor)
+        {
+            Assert.True(FlagExistsForColor(flags, expectedFlagType, playerColor));
+        }
+
+        private void AssertFlagsNotContain(List<ICoachFlag> flags, Type expectedFlagType, int playerColor)
         {
             Assert.True(
-                FlagExistsForColor(flags, expected_flag_type, player_color)
+                !FlagExistsForColor(flags, expectedFlagType, playerColor)
             );
         }
 
-        private void AssertFlagsNotContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
-        {
-            Assert.True(
-                !FlagExistsForColor(flags, expected_flag_type, player_color)
-            );
-        }
-
-        private bool FlagExistsForColor(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
-        {
-            return flags.Exists(
-                flag => (flag.GetType() == expected_flag_type) && (flag.GetPlayerColor() == player_color)
-            );
-        }
+        private bool FlagExistsForColor(List<ICoachFlag> flags, Type expectedFlagType, int playerColor) => flags.Exists(
+            flag => (flag.GetType() == expectedFlagType) && (flag.GetPlayerColor() == playerColor)
+        );
     }
 }

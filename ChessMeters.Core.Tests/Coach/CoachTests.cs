@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -27,8 +28,7 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         [Fact]
-        [Trait("Category", "Integration")]
-        public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_1()
+        public void AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_1()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
 
@@ -54,7 +54,8 @@ namespace ChessMeters.Core.Coach.Tests
             AssertFlagsContain(flags, typeof(CoachFlagDidNotCastle), 1);
         }
 
-        public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_2()
+        [Fact]
+        public void AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_2()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
 
@@ -80,14 +81,14 @@ namespace ChessMeters.Core.Coach.Tests
             AssertFlagsContain(flags, typeof(CoachFlagDidNotCastle), 1);
         }
 
-        public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_3()
+        [Fact]
+        public void AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_3()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
 
             // white did not castle
             // black did not castle                                                                                                                                                      
             var algebraic = "e2e4 e7e5 f1c4 g8f6 d2d3 h7h6 f2f4 d7d6 g1f3 c8g4 h2h3 g4h5 g2g4 h5g6 g4g5 f6d7 f4f5 g6h7 g5g6 f7g6 f5g6 h7g6 h1f1 g6h5 d1d2 b8c6 b1c3 d8f6 c3d5 f6d8 b2b4 h5f3 f1f3 c6d4 f3f2 c7c6 d5e3 d8h4 c4f7 e8d8 d2d1 h4h3 e3f5 h3h1 e1d2 h1d1 d2d1 d7f6 c1b2 f6g4 f2d2 d4f5 e4f5 g4e3 d1e2 e3f5 e2f3 f8e7 f7e6 f5d4 b2d4 e5d4 f3e4 e7g5 d2f2 d8e7 f2f7 e7e6 a1f1 d6d5";
-
             var game = await CreateGame(context, algebraic);
 
             var stockfishCentipawns = new CoachBoardStockfish(context, game);
@@ -107,6 +108,7 @@ namespace ChessMeters.Core.Coach.Tests
             AssertFlagsContain(flags, typeof(CoachFlagDidNotCastle), 1);
         }
 
+<<<<<<< HEAD
         // TODO: remove duplication.
         private async Task<Game> CreateGame(ChessMetersContext context, string algebraic_moves)
         {
@@ -141,24 +143,24 @@ namespace ChessMeters.Core.Coach.Tests
             return games.First();
         }
 
-        private void AssertFlagsContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private void AssertFlagsContain(List<ICoachFlag> flags, System.Type expectedFlagType, int playerColor)
         {
             Assert.True(
-                FlagExistsForColor(flags, expected_flag_type, player_color)
+                FlagExistsForColor(flags, expectedFlagType, playerColor)
             );
         }
 
-        private void AssertFlagsNotContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private void AssertFlagsNotContain(List<ICoachFlag> flags, Type expectedFlagType, int playerColor)
         {
             Assert.True(
-                !FlagExistsForColor(flags, expected_flag_type, player_color)
+                !FlagExistsForColor(flags, expectedFlagType, playerColor)
             );
         }
 
-        private bool FlagExistsForColor(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private bool FlagExistsForColor(List<ICoachFlag> flags, Type expectedFlagType, int playerColor)
         {
             return flags.Exists(
-                flag => (flag.GetType() == expected_flag_type) && (flag.GetPlayerColor() == player_color)
+                flag => (flag.GetType() == expectedFlagType) && (flag.GetPlayerColor() == playerColor)
             );
         }
     }

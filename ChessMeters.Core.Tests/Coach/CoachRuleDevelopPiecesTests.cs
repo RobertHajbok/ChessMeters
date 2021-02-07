@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 
 using ChessMeters.Core.Coach;
@@ -11,6 +11,7 @@ using ChessMeters.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace ChessMeters.Core.Coach.Tests
 {
@@ -27,7 +28,6 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         [Fact]
-        [Trait("Category", "Integration")]
         public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Develop_Pieces_Case_1()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
@@ -49,9 +49,10 @@ namespace ChessMeters.Core.Coach.Tests
             var flags = coach.AnalizeGame();
 
             AssertFlagsNotContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 0);
-            AssertFlagsContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 1); 
+            AssertFlagsContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 1);
         }
 
+        [Fact]
         public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Develop_Pieces_Case_2()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
@@ -73,8 +74,10 @@ namespace ChessMeters.Core.Coach.Tests
             var flags = coach.AnalizeGame();
 
             AssertFlagsContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 0);
-            AssertFlagsNotContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 1); 
+            AssertFlagsNotContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 1);
         }
+
+        [Fact]
         public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Develop_Pieces_Case_3()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
@@ -96,7 +99,7 @@ namespace ChessMeters.Core.Coach.Tests
             var flags = coach.AnalizeGame(); 
 
             AssertFlagsNotContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 0);
-            AssertFlagsContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 1); 
+            AssertFlagsContain(flags, typeof(CoachFlagDidNotDevelopAllPieces), 1);
         }
                 // TODO: remove duplication.
         private async Task<Game> CreateGame(ChessMetersContext context, string algebraic_moves)
@@ -133,24 +136,24 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         // Assert (TODO: remove duplication)
-        private void AssertFlagsContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private void AssertFlagsContain(List<ICoachFlag> flags, System.Type expectedFlagType, int playerColor)
         {
             Assert.True(
-                FlagExistsForColor(flags, expected_flag_type, player_color)
+                FlagExistsForColor(flags, expectedFlagType, playerColor)
             );
         }
 
-        private void AssertFlagsNotContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private void AssertFlagsNotContain(List<ICoachFlag> flags, Type expectedFlagType, int playerColor)
         {
             Assert.True(
-                !FlagExistsForColor(flags, expected_flag_type, player_color)
+                !FlagExistsForColor(flags, expectedFlagType, playerColor)
             );
         }
 
-        private bool FlagExistsForColor(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private bool FlagExistsForColor(List<ICoachFlag> flags, Type expectedFlagType, int playerColor)
         {
             return flags.Exists(
-                flag => (flag.GetType() == expected_flag_type) && (flag.GetPlayerColor() == player_color)
+                flag => (flag.GetType() == expectedFlagType) && (flag.GetPlayerColor() == playerColor)
             );
         }
     }

@@ -4,7 +4,7 @@ namespace ChessMeters.Core.Coach
 {
     public class CoachRuleBlunder : ICoachRule
     {
-        public ICoachFlag? Evaluate(ICoachBoard board)
+        public ICoachFlag Evaluate(ICoachBoard board)
         {
             // Cannot blunder on ply number 1 of the game.
             if (board.GetCurrentPlyNumber() <= 1)
