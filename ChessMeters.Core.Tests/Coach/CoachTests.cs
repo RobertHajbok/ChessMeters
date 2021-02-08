@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-
-using ChessMeters.Core.Coach;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ChessMeters.Core.Database;
@@ -11,7 +9,6 @@ using System.IO;
 using ChessMeters.Core.Entities;
 using ChessMeters.Core.Engines;
 using System.Linq;
-using System;
 
 namespace ChessMeters.Core.Coach.Tests
 {
@@ -28,7 +25,7 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         [Fact]
-        public void AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_1()
+        public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_1()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
 
@@ -55,7 +52,7 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         [Fact]
-        public void AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_2()
+        public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_2()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
 
@@ -82,7 +79,7 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         [Fact]
-        public void AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_3()
+        public async Task AnalyzeGame_Should_Analyze_A_Basic_Game_Castle_Case_3()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
 
@@ -108,7 +105,6 @@ namespace ChessMeters.Core.Coach.Tests
             AssertFlagsContain(flags, typeof(CoachFlagDidNotCastle), 1);
         }
 
-<<<<<<< HEAD
         // TODO: remove duplication.
         private async Task<Game> CreateGame(ChessMetersContext context, string algebraic_moves)
         {
@@ -143,7 +139,7 @@ namespace ChessMeters.Core.Coach.Tests
             return games.First();
         }
 
-        private void AssertFlagsContain(List<ICoachFlag> flags, System.Type expectedFlagType, int playerColor)
+        private void AssertFlagsContain(List<ICoachFlag> flags, Type expectedFlagType, int playerColor)
         {
             Assert.True(
                 FlagExistsForColor(flags, expectedFlagType, playerColor)

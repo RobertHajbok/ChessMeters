@@ -28,5 +28,7 @@ namespace ChessMeters.Core.Entities
         public string FullPath { get; set; }
 
         public virtual ICollection<EngineEvaluation> EngineEvaluations { get; set; }
+
+        public virtual ICollection<TreeMoveFlag> TreeMoveFlags { get; set; }
     }
 }

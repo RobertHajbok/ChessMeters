@@ -10,6 +10,12 @@ namespace ChessMeters.Core.Database
 {
     public class ChessMetersContext : ApiAuthorizationDbContext<User>
     {
+        public DbSet<Flag> Flags { get; set; }
+
+        public DbSet<GameFlag> GameFlags { get; set; }
+
+        public DbSet<TreeMoveFlag> TreeMoveFlags { get; set; }
+
         public DbSet<Color> Colors { get; set; }
 
         public DbSet<Report> Reports { get; set; }
@@ -39,6 +45,8 @@ namespace ChessMeters.Core.Database
             builder.SeedEnumValues<Engine, EngineEnum>(e => e);
 
             builder.SeedEnumValues<Color, ColorEnum>(e => e);
+
+            builder.SeedEnumValues<Flag, FlagEnum>(e => e);
 
             builder.Entity<TreeMove>().Property(p => p.Color).HasComputedColumnSql("IF(ISNULL(FullPath), 0, MOD(LENGTH(FullPath) - LENGTH(REPLACE(FullPath, ' ', '')), 2) = 0)");
         }
