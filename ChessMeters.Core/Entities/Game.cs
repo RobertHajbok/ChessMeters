@@ -93,6 +93,8 @@ namespace ChessMeters.Core.Entities
         // TODO: Make this not nullable after linking from UI
         public ColorEnum? UserColorId { get; set; }
 
+        public bool Analyzed { get; set; }
+
         [ForeignKey(nameof(UserColorId))]
         public virtual Color UserColor { get; set; }
 
