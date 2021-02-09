@@ -38,7 +38,7 @@ namespace ChessMeters.Core.Tests
 
             var gameConverter = new GameConverter();
 
-            var reportGenerator = new ReportGenerator(gameConverter, gameAnalyzer, context);
+            var reportGenerator = new ReportGenerator(gameAnalyzer, context);
             var user = await context.Users.FirstAsync();
             var report = new Report
             {
@@ -47,9 +47,10 @@ namespace ChessMeters.Core.Tests
                 UserId = user.Id
             };
 
-            var reportId = await reportGenerator.Schedule(report, 10);
+            Assert.True(1 == 0);
+            //var reportId = await reportGenerator.Schedule(report, 10);
 
-            Assert.True(reportId > 1);
+            //Assert.True(reportId > 1);
         }
     }
 }

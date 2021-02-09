@@ -1,10 +1,12 @@
 namespace ChessMeters.Core.Coach
 {
-    public class CoachRuleDevelopMinorPiecesWhite : ICoachRule
+    public class CoachRuleDevelopMinorPieces : ICoachRule
     {
         private bool isDisabled = false;
 
-        public ICoachFlag Evaluate(ICoachBoard board)
+        public bool IsGameRule { get { return true; } }
+
+        public FlagEnum? Evaluate(ICoachBoard board)
         {
             if (isDisabled)
             {
@@ -12,15 +14,15 @@ namespace ChessMeters.Core.Coach
             }
 
             // This rule applies only after move 12;
-            if (board.GetCurrentMoveNumber() < 12)
+            if (board.CurrentTreeMove.MoveNumber < 12)
             {
                 return null;
             }
 
-            if (board.IsCurrentPlyBlack() && !board.DidBlackAlreadyDevelopAllMinorPieces())
+            if (!board.DidWhiteAlreadyDevelopAllMinorPieces())
             {
                 isDisabled = true;
-                return new CoachFlagDidNotDevelopAllPieces(board);
+                return FlagEnum.DidNotDevelopAllPieces;
             }
 
             return null;

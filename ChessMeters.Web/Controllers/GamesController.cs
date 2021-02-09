@@ -1,5 +1,5 @@
-﻿using ChessMeters.Core.Database;
-using ChessMeters.Core.Engines.Enums;
+﻿using ChessMeters.Core;
+using ChessMeters.Core.Database;
 using ChessMeters.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

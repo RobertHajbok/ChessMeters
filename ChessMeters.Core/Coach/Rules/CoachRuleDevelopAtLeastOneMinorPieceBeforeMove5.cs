@@ -1,10 +1,12 @@
 namespace ChessMeters.Core.Coach
 {
-    public class CoachRuleDevelopAtLeaastOneMinorPieceBeforeMove5White : ICoachRule
+    public class CoachRuleDevelopAtLeastOneMinorPieceBeforeMove5 : ICoachRule
     {
         private bool isDisabled = false;
 
-        public ICoachFlag Evaluate(ICoachBoard board)
+        public bool IsGameRule { get { return true; } }
+
+        public FlagEnum? Evaluate(ICoachBoard board)
         {
             if (isDisabled)
             {
@@ -12,15 +14,15 @@ namespace ChessMeters.Core.Coach
             }
 
             // This rule applies only after move 12;
-            if (board.GetCurrentMoveNumber() < 5)
+            if (board.CurrentTreeMove.MoveNumber < 5)
             {
                 return null;
             }
 
-            if (board.IsCurrentPlyWhite() && board.GetWhiteDevelopedMinorPiecesCount() == 0)
+            if (board.GetBlackDevelopedMinorPiecesCount() == 0)
             {
                 isDisabled = true;
-                return new CoachFlagDidNotDevelopAtLeastOneMinorPieceBeforeMove5(board);
+                return FlagEnum.DidNotDevelopAtLeastOneMinorPieceBeforeMove5;
             }
 
             return null;

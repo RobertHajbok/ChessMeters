@@ -32,7 +32,7 @@ namespace ChessMeters.Core
                 return engineEvaluation;
 
             await engine.SetPosition(previousMoves.Any() ? $"{string.Join(' ', previousMoves)} {treeMove.Move}" : treeMove.Move);
-            var evaluationCentipawns = await engine.GetEvaluationCentipawns(treeMove.Color);
+            var evaluationCentipawns = await engine.GetEvaluationCentipawns(treeMove.ColorId);
 
             if (engineEvaluation != null)
             {

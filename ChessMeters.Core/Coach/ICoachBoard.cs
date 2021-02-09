@@ -1,40 +1,36 @@
+using ChessMeters.Core.Entities;
+using System.Collections.Generic;
+
 namespace ChessMeters.Core.Coach
 {
     public interface ICoachBoard
     {
-        public int GetCurrentPlyNumber();
+        IEnumerable<TreeMove> Moves { get; }
 
-        public int GetCurrentMoveNumber();
+        TreeMove PreviousTreeMove { get; }
 
-        public string GetCurrentPly();
+        TreeMove CurrentTreeMove { get; }
 
-        public void NextPly();
-
-        public bool HasNextPly();
-
-        public bool IsCurrentPlyWhite();
-
-        public bool IsCurrentPlyBlack();
-
-        // Evaluations.
-        public ICoachBoardEngineEvaluations GetStockfishCentipawns();
+        void NextPly();
 
         // Castle.
-        public bool IsWhiteCastling();
+        bool IsWhiteCastling();
 
-        public bool IsBlackCastling();
+        bool IsBlackCastling();
 
-        public bool DidWhiteAlreadyCastle();
+        bool DidWhiteAlreadyCastle();
 
-        public bool DidBlackAlreadyCastle();
+        bool DidBlackAlreadyCastle();
 
         // Develop pieces.
-        public bool DidWhiteAlreadyDevelopAllMinorPieces();
+        bool DidWhiteAlreadyDevelopAllMinorPieces();
 
-        public bool DidBlackAlreadyDevelopAllMinorPieces();
+        bool DidBlackAlreadyDevelopAllMinorPieces();
 
-        public int GetWhiteDevelopedMinorPiecesCount();
+        int GetWhiteDevelopedMinorPiecesCount();
 
-        public int GetBlackDevelopedMinorPiecesCount();
+        int GetBlackDevelopedMinorPiecesCount();
+
+        void Initialize(IEnumerable<TreeMove> moves);
     }
 }

@@ -45,7 +45,8 @@ namespace ChessMeters.Core
                             Move = move,
                             FullPath = fullPathIds.Any() ? string.Join(" ", fullPathIds) : null,
                             ParentTreeMoveId = parentTreeMoveId,
-                            ParentTreeMove = parentTreeMove
+                            ParentTreeMove = parentTreeMove,
+                            ColorId = fullPathIds.Count % 2 == 0 ? ColorEnum.White : ColorEnum.Black
                         };
                         await chessMetersContext.TreeMoves.AddAsync(treeMove);
                         await chessMetersContext.SaveChangesAsync();
@@ -59,7 +60,7 @@ namespace ChessMeters.Core
                 }
 
                 game.LastTreeMoveId = fullPathIds.LastOrDefault();
-                await chessMetersContext.Games.AddAsync(game);
+                chessMetersContext.Games.Update(game);
                 await chessMetersContext.SaveChangesAsync();
             }
             catch (Exception ex)

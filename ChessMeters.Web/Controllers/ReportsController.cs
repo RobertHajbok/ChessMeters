@@ -1,4 +1,5 @@
-﻿using ChessMeters.Core.Database;
+﻿using ChessMeters.Core;
+using ChessMeters.Core.Database;
 using ChessMeters.Core.Entities;
 using ChessMeters.Core.Jobs;
 using ChessMeters.Web.ViewModels;
@@ -20,11 +21,13 @@ namespace ChessMeters.Web.Controllers
     public class ReportsController : ControllerBase
     {
         private readonly ChessMetersContext chessMetersContext;
+        private readonly IGameConverter gameConverter;
         private readonly ISchedulerFactory schedulerFactory;
 
-        public ReportsController(ChessMetersContext chessMetersContext, ISchedulerFactory schedulerFactory)
+        public ReportsController(ChessMetersContext chessMetersContext, IGameConverter gameConverter, ISchedulerFactory schedulerFactory)
         {
             this.chessMetersContext = chessMetersContext;
+            this.gameConverter = gameConverter;
             this.schedulerFactory = schedulerFactory;
         }
 
@@ -51,12 +54,14 @@ namespace ChessMeters.Web.Controllers
                 return BadRequest(ModelState);
             }
 
+            var pgn = await gameConverter.ConvertFromPGN(generateReport.PGN);
             var report = new Report
             {
                 Description = generateReport.Description,
                 PGN = generateReport.PGN,
                 UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Now,
+                Games = pgn.ToList()
             };
             await chessMetersContext.Reports.AddAsync(report);
             await chessMetersContext.SaveChangesAsync();

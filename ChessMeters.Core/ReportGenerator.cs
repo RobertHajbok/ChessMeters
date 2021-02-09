@@ -1,48 +1,45 @@
+using ChessMeters.Core.Coach;
 using ChessMeters.Core.Database;
 using ChessMeters.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChessMeters.Core
 {
     public class ReportGenerator : IReportGenerator
     {
-        private readonly IGameConverter gameConverter;
         private readonly ITreeMovesBuilder treeMoveBuilder;
         private readonly ChessMetersContext chessMetersContext;
 
-        public ReportGenerator(IGameConverter gameConverter, ITreeMovesBuilder treeMoveBuilder,
-            ChessMetersContext chessMetersContext)
+        public ReportGenerator(ITreeMovesBuilder treeMoveBuilder, ChessMetersContext chessMetersContext)
         {
             this.treeMoveBuilder = treeMoveBuilder;
             this.chessMetersContext = chessMetersContext;
-            this.gameConverter = gameConverter;
-        }
-
-        public async Task<int> Schedule(Report report, short engineDepth)
-        {
-            var games = await gameConverter.ConvertFromPGN(report.PGN);
-            await chessMetersContext.Reports.AddAsync(report);
-            await chessMetersContext.SaveChangesAsync();
-
-            foreach (var game in games)
-            {
-                game.ReportId = report.Id;
-                await treeMoveBuilder.BuildTree(engineDepth, game);
-            }
-
-            return report.Id;
         }
 
         public async Task<Report> Schedule(int reportId, short engineDepth)
         {
-            var report = await chessMetersContext.Reports.SingleAsync(x => x.Id == reportId);
-            var games = await gameConverter.ConvertFromPGN(report.PGN);
+            var report = await chessMetersContext.Reports.Include(x => x.Games).SingleAsync(x => x.Id == reportId);
 
-            foreach (var game in games)
+            foreach (var game in report.Games)
             {
-                game.ReportId = report.Id;
-                await treeMoveBuilder.BuildTree(engineDepth, game);
+                try
+                {
+                    var treeMoves = await treeMoveBuilder.BuildTree(engineDepth, game);
+                    game.LastTreeMoveId = treeMoves.LastOrDefault()?.Id;
+                    game.Analyzed = true;
+                    chessMetersContext.Games.Update(game);
+                }
+                catch (Exception ex)
+                {
+                    game.AnalyzeExceptionStackTrace = ex.ToString();
+                }
+                finally
+                {
+                    await chessMetersContext.SaveChangesAsync();
+                }
             }
 
             return report;

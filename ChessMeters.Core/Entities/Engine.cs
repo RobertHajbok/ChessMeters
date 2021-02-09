@@ -1,5 +1,4 @@
-﻿using ChessMeters.Core.Engines.Enums;
-using ChessMeters.Core.Extensions;
+﻿using ChessMeters.Core.Extensions;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

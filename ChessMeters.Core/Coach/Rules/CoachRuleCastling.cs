@@ -2,16 +2,18 @@ namespace ChessMeters.Core.Coach
 {
     public class CoachRuleCastling : ICoachRule
     {
-        public ICoachFlag Evaluate(ICoachBoard board)
+        public bool IsGameRule { get { return true; } }
+
+        public FlagEnum? Evaluate(ICoachBoard board)
         {
             // This rule applies only after move 10;
-            if (board.GetCurrentMoveNumber() < 10)
+            if (board.CurrentTreeMove.MoveNumber < 10)
             {
                 return null;
             }
 
             // This rule applies only if player did not castle yet.
-            var didAlreadyCastle = board.IsCurrentPlyWhite()
+            var didAlreadyCastle = board.CurrentTreeMove.ColorId == ColorEnum.White
                 ? board.DidWhiteAlreadyCastle()
                 : board.DidBlackAlreadyCastle();
             if (didAlreadyCastle)
@@ -20,17 +22,16 @@ namespace ChessMeters.Core.Coach
             }
 
             // This rule applies only if player is still not castling.
-            if (board.IsCurrentPlyWhite() && board.IsWhiteCastling())
+            if (board.CurrentTreeMove.ColorId == ColorEnum.White && board.IsWhiteCastling())
             {
                 return null;
             }
-            if (board.IsCurrentPlyBlack() && board.IsBlackCastling())
+            if (board.CurrentTreeMove.ColorId == ColorEnum.Black && board.IsBlackCastling())
             {
                 return null;
             }
 
-            // Player did not castle, this is a flag.
-            return new CoachFlagDidNotCastle(board);
+            return FlagEnum.DidNotCastle;
         }
     }
 }

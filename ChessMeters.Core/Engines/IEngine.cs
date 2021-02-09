@@ -1,5 +1,4 @@
-﻿using ChessMeters.Core.Engines.Enums;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ChessMeters.Core.Engines
 {
@@ -13,6 +12,6 @@ namespace ChessMeters.Core.Engines
 
         Task<string> AnalyzePosition();
 
-        Task<short> GetEvaluationCentipawns(bool color);
+        Task<short> GetEvaluationCentipawns(ColorEnum color);
     }
 }

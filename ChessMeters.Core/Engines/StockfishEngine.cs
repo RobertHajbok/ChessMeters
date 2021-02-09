@@ -1,5 +1,4 @@
-﻿using ChessMeters.Core.Engines.Enums;
-using System;
+﻿using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -79,17 +78,17 @@ namespace ChessMeters.Core.Engines
             }
         }
 
-        public async Task<short> GetEvaluationCentipawns(bool color)
+        public async Task<short> GetEvaluationCentipawns(ColorEnum color)
         {
             var data = await AnalyzePosition();
             var search = $"info depth {depth} ";
             var currentDepthData = data[(data.IndexOf(search) + search.Length)..];
             if (currentDepthData.Contains(" mate "))
-                return (short)(15300 * (color ? 1 : -1));
+                return (short)(15300 * (color == ColorEnum.White ? 1 : -1));
             else if (currentDepthData.EndsWith("bestmove (none)"))
                 return 0;
             var evaluation = short.Parse(currentDepthData[(currentDepthData.IndexOf(" cp ") + 4)..].Split(' ')[0]);
-            if (!color)
+            if (color == ColorEnum.Black)
                 evaluation *= -1;
             return evaluation;
         }

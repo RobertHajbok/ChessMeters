@@ -33,18 +33,18 @@ namespace ChessMeters.Core.Coach.Tests
             // White blundered the bishop.
             var game = await CreateGame(context, "e2e4 e7e5 f1c4 b7b5 d2d3 b5c4 d3c4");
 
-            var stockfishCentipawns = new CoachBoardStockfish(context, game);
-            var coachBoard = new CoachBoard(game, stockfishCentipawns);
-            var rules = new List<ICoachRule>()
-            {
-                new CoachRuleBlunder(),
-            };
+            //var coachBoard = new CoachBoard(game);
+            //var rules = new List<ICoachRule>()
+            //{
+            //    new CoachRuleBlunder(),
+            //};
 
-            var coach = new Coach(coachBoard, rules);
-            var flags = coach.AnalizeGame();
+            //var coach = new Coach(coachBoard, rules);
+            //var flags = coach.AnalizeGame();
 
-            AssertFlagsContain(flags, typeof(CoachFlagBlunder), 0);
-            AssertFlagsNotContain(flags, typeof(CoachFlagBlunder), 1);
+            //AssertFlagsContain(flags, FlagEnum.Blunder, 0);
+            //AssertFlagsNotContain(flags, typeof(CoachFlagBlunder), 1);
+            Assert.True(0 == 1);
         }
 
         private async Task<Game> CreateGame(ChessMetersContext context, string algebraic_moves)
@@ -81,25 +81,23 @@ namespace ChessMeters.Core.Coach.Tests
         }
 
         // Asserts.
-        private void AssertFlagsContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private void AssertFlagsContain(IEnumerable<FlagEnum> flags, FlagEnum expectedFlag)
         {
             Assert.True(
-                FlagExistsForColor(flags, expected_flag_type, player_color)
+                FlagExistsForColor(flags, expectedFlag)
             );
         }
 
-        private void AssertFlagsNotContain(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private void AssertFlagsNotContain(IEnumerable<FlagEnum> flags, FlagEnum expectedFlag)
         {
             Assert.True(
-                !FlagExistsForColor(flags, expected_flag_type, player_color)
+                !FlagExistsForColor(flags, expectedFlag)
             );
         }
 
-        private bool FlagExistsForColor(List<ICoachFlag> flags, System.Type expected_flag_type, int player_color)
+        private bool FlagExistsForColor(IEnumerable<FlagEnum> flags, FlagEnum expectedFlag)
         {
-            return flags.Exists(
-                flag => (flag.GetType() == expected_flag_type) && (flag.GetPlayerColor() == player_color)
-            );
+            return flags.Any(flag => flag == expectedFlag);
         }
 
     }

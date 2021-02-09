@@ -1,56 +1,33 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ChessMeters.Core.Entities;
 
 namespace ChessMeters.Core.Coach
 {
     public class CoachBoard : ICoachBoard
     {
-        private string algebraic;
-        private List<string> plys;
-        private int currentPlyNumber = 1;
+        private int currentPlyNumber;
         private bool whiteCastledShort = false;
         private bool whiteCastledLong = false;
         private bool blackCastledShort = false;
         private bool blackCastledLong = false;
-        private List<string> whiteDevelopedMinorPieces = new List<string>();
-        private List<string> whiteUndevelopedMinorPieces = new List<string> { "Nb", "Bc", "Bf", "Ng" };
-        private List<string> blackDevelopedMinorPieces = new List<string>();
-        private List<string> blackUndevelopedMinorPieces = new List<string> { "Nb", "Bc", "Bf", "Ng" };
-        private List<int> openFiles;
+        private readonly List<string> whiteDevelopedMinorPieces = new List<string>();
+        private readonly List<string> whiteUndevelopedMinorPieces = new List<string> { "Nb", "Bc", "Bf", "Ng" };
+        private readonly List<string> blackDevelopedMinorPieces = new List<string>();
+        private readonly List<string> blackUndevelopedMinorPieces = new List<string> { "Nb", "Bc", "Bf", "Ng" };
 
-        private ICoachBoardEngineEvaluations stockfishCentipawns;
+        public IEnumerable<TreeMove> Moves { get; private set; }
 
-        public CoachBoard(Game game, ICoachBoardEngineEvaluations stockfishCentipawns)
+        public TreeMove PreviousTreeMove { get { return Moves.ElementAt(currentPlyNumber - 1); } }
+
+        public TreeMove CurrentTreeMove { get { return Moves.ElementAt(currentPlyNumber); } }
+
+        public void Initialize(IEnumerable<TreeMove> moves)
         {
-            this.algebraic = game.Moves;
-            this.plys = new List<string>(algebraic.Split(" "));
-            this.stockfishCentipawns = stockfishCentipawns;
+            Moves = moves;
         }
 
-        public ICoachBoardEngineEvaluations GetStockfishCentipawns()
-        {
-            return this.stockfishCentipawns;
-        }
-
-        public int GetCurrentPlyNumber()
-        {
-            return currentPlyNumber;
-        }
-
-        public int GetCurrentMoveNumber()
-        {
-            //    m1      m2      m3     m4
-            // {p1 p2} {p3 p4} {p5 p6} {p7 p8}
-            return currentPlyNumber / 2 + currentPlyNumber % 2;
-        }
-
-        public string GetCurrentPly()
-        {
-            // list[0] = ply1
-            // list[1] = ply2
-            return plys[currentPlyNumber - 1];
-        }
         public void NextPly()
         {
             UpdateInternalFlagsForCastingInternalFlags();
@@ -82,7 +59,7 @@ namespace ChessMeters.Core.Coach
         {
             if (IsWhiteDevelopingMinorPiece())
             {
-                var position = GetCurrentPly().Substring(0, 1);
+                var position = CurrentTreeMove.Move.Substring(0, 1);
                 var piece = GetPieceFromInitialPosition(position);
                 whiteDevelopedMinorPieces.Add(piece);
                 whiteUndevelopedMinorPieces.Remove(piece);
@@ -90,7 +67,7 @@ namespace ChessMeters.Core.Coach
 
             if (IsBlackDevelopingMinorPiece())
             {
-                var position = GetCurrentPly().Substring(0, 1);
+                var position = CurrentTreeMove.Move.Substring(0, 1);
                 var piece = GetPieceFromInitialPosition(position);
                 blackDevelopedMinorPieces.Add(piece);
                 blackUndevelopedMinorPieces.Remove(piece);
@@ -99,51 +76,33 @@ namespace ChessMeters.Core.Coach
 
         private string GetPieceFromInitialPosition(string position)
         {
-            switch (position)
+            return position switch
             {
-                case "b":
-                    return "Nb";
-                case "g":
-                    return "Ng";
-                case "c":
-                    return "Bc";
-                case "f":
-                    return "Bf";
-                default:
-                    throw new Exception("Must be a minor piece.");
-            }
+                "b" => "Nb",
+                "g" => "Ng",
+                "c" => "Bc",
+                "f" => "Bf",
+                _ => throw new Exception("Must be a minor piece."),
+            };
         }
 
-        public bool HasNextPly()
-        {
-            return currentPlyNumber < plys.Count - 1;
-        }
-        public bool IsCurrentPlyWhite()
-        {
-            // p1, p3, p5, ...
-            return (currentPlyNumber % 2) == 1;
-        }
-
-        public bool IsCurrentPlyBlack()
-        {
-            // p2, p4, p6, ...
-            return (currentPlyNumber % 2) == 0;
-        }
 
         // Castling / White.
         public bool IsWhiteCastling()
         {
             return isWhiteCastlingShort() || isWhiteCastlingLong();
         }
+
         private bool isWhiteCastlingShort()
         {
-            return GetCurrentPly() == "e1g1";
+            return CurrentTreeMove.Move == "e1g1";
         }
 
         private bool isWhiteCastlingLong()
         {
-            return GetCurrentPly() == "e1c1";
+            return CurrentTreeMove.Move == "e1c1";
         }
+
         public bool DidWhiteAlreadyCastle()
         {
             return DidWhiteAlreadyCastleShort() || DidWhiteAlreadyCastleLong();
@@ -164,14 +123,15 @@ namespace ChessMeters.Core.Coach
         {
             return isBlackCastlingShort() || isBlackCastlingLong();
         }
+
         private bool isBlackCastlingShort()
         {
-            return GetCurrentPly() == "e8g8";
+            return CurrentTreeMove.Move == "e8g8";
         }
 
         private bool isBlackCastlingLong()
         {
-            return GetCurrentPly() == "e8c8";
+            return CurrentTreeMove.Move == "e8c8";
         }
 
         public bool DidBlackAlreadyCastle()
@@ -229,22 +189,22 @@ namespace ChessMeters.Core.Coach
 
         private bool IsWhiteDevelopingKnightB()
         {
-            return GetCurrentPly().Contains("b1") && whiteUndevelopedMinorPieces.Contains("Nb");
+            return CurrentTreeMove.Move.Contains("b1") && whiteUndevelopedMinorPieces.Contains("Nb");
         }
 
         private bool IsWhiteDevelopingKnightG()
         {
-            return GetCurrentPly().Contains("g1") && whiteUndevelopedMinorPieces.Contains("Ng");
+            return CurrentTreeMove.Move.Contains("g1") && whiteUndevelopedMinorPieces.Contains("Ng");
         }
 
         private bool IsWhiteDevelopingBishopC()
         {
-            return GetCurrentPly().Contains("c1") && whiteUndevelopedMinorPieces.Contains("Bc");
+            return CurrentTreeMove.Move.Contains("c1") && whiteUndevelopedMinorPieces.Contains("Bc");
         }
 
         private bool IsWhiteDevelopingBishopF()
         {
-            return GetCurrentPly().Contains("f1") && whiteUndevelopedMinorPieces.Contains("Bf");
+            return CurrentTreeMove.Move.Contains("f1") && whiteUndevelopedMinorPieces.Contains("Bf");
         }
 
         // Developing pieces / Black / minor pieces.
@@ -265,22 +225,22 @@ namespace ChessMeters.Core.Coach
 
         private bool IsBlackDevelopingKnightB()
         {
-            return GetCurrentPly().Contains("b8") && whiteUndevelopedMinorPieces.Contains("Nb");
+            return CurrentTreeMove.Move.Contains("b8") && whiteUndevelopedMinorPieces.Contains("Nb");
         }
 
         private bool IsBlackDevelopingKnightG()
         {
-            return GetCurrentPly().Contains("g8") && whiteUndevelopedMinorPieces.Contains("Ng");
+            return CurrentTreeMove.Move.Contains("g8") && whiteUndevelopedMinorPieces.Contains("Ng");
         }
 
         private bool IsBlackDevelopingBishopC()
         {
-            return GetCurrentPly().Contains("c8") && whiteUndevelopedMinorPieces.Contains("Bc");
+            return CurrentTreeMove.Move.Contains("c8") && whiteUndevelopedMinorPieces.Contains("Bc");
         }
 
         private bool IsBlackDevelopingBishopF()
         {
-            return GetCurrentPly().Contains("f8") && whiteUndevelopedMinorPieces.Contains("Bf");
+            return CurrentTreeMove.Move.Contains("f8") && whiteUndevelopedMinorPieces.Contains("Bf");
         }
     }
 }

@@ -1,34 +1,31 @@
+using ChessMeters.Core.Entities;
 using System;
+using System.Linq;
 
 namespace ChessMeters.Core.Coach
 {
     public class CoachRuleBlunder : ICoachRule
     {
-        public ICoachFlag Evaluate(ICoachBoard board)
+        public bool IsGameRule { get { return false; } }
+
+        public FlagEnum? Evaluate(ICoachBoard board)
         {
             // Cannot blunder on ply number 1 of the game.
-            if (board.GetCurrentPlyNumber() <= 1)
+            if (board.CurrentTreeMove.MoveNumber <= 1)
             {
                 return null;
             }
 
             // Check any sensitive differences on evals.
-            var current_eval = GetEvalForPly(board, board.GetCurrentPlyNumber());
-            var previous_eval = GetEvalForPly(board, board.GetCurrentPlyNumber() - 1);
+            var currentEvaluation = GetEvalForPly(board.CurrentTreeMove);
+            var previousEvaluation = GetEvalForPly(board.PreviousTreeMove);
 
-            if (Math.Abs(current_eval - previous_eval) > 250)
-            {
-                return new CoachFlagBlunder(board);
-            }
-             
-            return null;
+            return Math.Abs(currentEvaluation - previousEvaluation) > 250 ? FlagEnum.Blunder : null;
         }
 
-        private int GetEvalForPly(ICoachBoard board, int ply_number)
+        private int GetEvalForPly(TreeMove treeMove)
         {
-            return board.GetStockfishCentipawns().
-                GetCentipawnsForPlyNumber(ply_number);
-
+            return treeMove.EngineEvaluations.Single(x => x.EngineId == EngineEnum.Stockfish12).EvaluationCentipawns;
         }
     }
 }

@@ -11,14 +11,7 @@ namespace ChessMeters.Core.Entities
         [MaxLength(5)]
         public string Move { get; set; }
 
-        public bool Color
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(FullPath) ? FullPath.Split(' ').Length % 2 != 0 : false;
-            }
-            private set { }
-        }
+        public ColorEnum ColorId { get; set; }
 
         public long? ParentTreeMoveId { get; set; }
 
@@ -26,6 +19,12 @@ namespace ChessMeters.Core.Entities
         public virtual TreeMove ParentTreeMove { get; set; }
 
         public string FullPath { get; set; }
+
+        [NotMapped]
+        public int MoveNumber
+        {
+            get { return FullPath?.Split(' ').Length ?? 0; }
+        }
 
         public virtual ICollection<EngineEvaluation> EngineEvaluations { get; set; }
 
