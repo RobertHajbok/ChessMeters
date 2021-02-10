@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Converters
 {
     public class GameConverter : IGameConverter
     {

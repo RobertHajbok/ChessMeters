@@ -1,17 +1,16 @@
-using System;
-using System.Collections.Generic;
-using Xunit;
-
-using ChessMeters.Core.Coach;
-using ChessMeters.Core.Entities;
-using Microsoft.Extensions.Configuration;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
 using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
-using System.Linq;
+using ChessMeters.Core.Entities;
+using ChessMeters.Core.Enums;
+using ChessMeters.Core.Reports;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace ChessMeters.Core.Coach.Tests
 {
@@ -82,7 +81,7 @@ namespace ChessMeters.Core.Coach.Tests
 
             var engineProcess = new EngineProcess();
             var stockfishEngine = new StockfishEngine(engineProcess);
-            var engineAnalyzeEvaluator = new EngineAnalyzeEvaluator(stockfishEngine, context);
+            var engineAnalyzeEvaluator = new EngineEvaluationBuilder(stockfishEngine, context);
             var gameAnalyzer = new TreeMovesBuilder(context, engineAnalyzeEvaluator);
 
             var user = await context.Users.FirstAsync();

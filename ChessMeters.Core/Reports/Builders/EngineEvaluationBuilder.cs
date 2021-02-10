@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Reports
 {
-    public class EngineAnalyzeEvaluator : IEngineAnalyzeEvaluator
+    public class EngineEvaluationBuilder : IEngineEvaluationBuilder
     {
         private readonly IEngine engine;
         private readonly ChessMetersContext chessMetersContext;
         private short engineDepth;
 
-        public EngineAnalyzeEvaluator(IEngine engine, ChessMetersContext chessMetersContext)
+        public EngineEvaluationBuilder(IEngine engine, ChessMetersContext chessMetersContext)
         {
             this.engine = engine;
             this.chessMetersContext = chessMetersContext;

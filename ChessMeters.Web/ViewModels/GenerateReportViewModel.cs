@@ -1,4 +1,4 @@
-﻿using ChessMeters.Core;
+﻿using ChessMeters.Core.Enums;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,12 +1,14 @@
-namespace ChessMeters.Core.Coach
+using ChessMeters.Core.Enums;
+
+namespace ChessMeters.Core.Reports
 {
-    public class CoachRuleDevelopMinorPieces : ICoachRule
+    public class DevelopMinorPiecesRule : IRule
     {
         private bool isDisabled = false;
 
         public bool IsGameRule { get { return true; } }
 
-        public FlagEnum? Evaluate(ICoachBoard board)
+        public FlagEnum? Evaluate(IBoardState board)
         {
             if (isDisabled)
             {
@@ -19,7 +21,8 @@ namespace ChessMeters.Core.Coach
                 return null;
             }
 
-            if (!board.DidWhiteAlreadyDevelopAllMinorPieces())
+            if ((board.CurrentTreeMove.ColorId == ColorEnum.White && !board.DidWhiteAlreadyDevelopAllMinorPieces) ||
+                (board.CurrentTreeMove.ColorId == ColorEnum.Black && !board.DidBlackAlreadyDevelopAllMinorPieces))
             {
                 isDisabled = true;
                 return FlagEnum.DidNotDevelopAllPieces;

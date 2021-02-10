@@ -1,4 +1,4 @@
-﻿namespace ChessMeters.Core
+﻿namespace ChessMeters.Core.Enums
 {
     public enum ColorEnum : short
     {

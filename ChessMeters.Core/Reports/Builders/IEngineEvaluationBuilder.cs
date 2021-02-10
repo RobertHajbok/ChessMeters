@@ -1,9 +1,9 @@
 ﻿using ChessMeters.Core.Entities;
 using System.Threading.Tasks;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Reports
 {
-    public interface IEngineAnalyzeEvaluator
+    public interface IEngineEvaluationBuilder
     {
         Task StartNewGame(short engineDepth);
 

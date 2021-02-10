@@ -1,19 +1,20 @@
 ﻿using ChessMeters.Core.Database;
 using ChessMeters.Core.Entities;
+using ChessMeters.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Reports
 {
     public class TreeMovesBuilder : ITreeMovesBuilder
     {
         private readonly ChessMetersContext chessMetersContext;
-        private readonly IEngineAnalyzeEvaluator engineAnalyzeEvaluator;
+        private readonly IEngineEvaluationBuilder engineAnalyzeEvaluator;
 
-        public TreeMovesBuilder(ChessMetersContext chessMetersContext, IEngineAnalyzeEvaluator engineAnalyzeEvaluator)
+        public TreeMovesBuilder(ChessMetersContext chessMetersContext, IEngineEvaluationBuilder engineAnalyzeEvaluator)
         {
             this.chessMetersContext = chessMetersContext;
             this.engineAnalyzeEvaluator = engineAnalyzeEvaluator;

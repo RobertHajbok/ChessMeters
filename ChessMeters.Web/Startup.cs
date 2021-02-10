@@ -1,8 +1,10 @@
-using ChessMeters.Core;
+using ChessMeters.Core.Converters;
 using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
 using ChessMeters.Core.Entities;
+using ChessMeters.Core.Helpers;
 using ChessMeters.Core.Jobs;
+using ChessMeters.Core.Reports;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -62,11 +64,14 @@ namespace ChessMeters.Web
 
             services.AddSwaggerGen();
             services.AddTransient<IReportGenerator, ReportGenerator>();
-            services.AddTransient<IEngineAnalyzeEvaluator, EngineAnalyzeEvaluator>();
+            services.AddTransient<IEngineEvaluationBuilder, EngineEvaluationBuilder>();
             services.AddTransient<ITreeMovesBuilder, TreeMovesBuilder>();
             services.AddTransient<IEngineProcess, EngineProcess>();
             services.AddTransient<IEngine, StockfishEngine>();
             services.AddTransient<IGameConverter, GameConverter>();
+            services.AddTransient<IFlagBuilder, FlagBuilder>();
+            services.AddTransient<IBoardState, BoardState>();
+            services.AddTransient<IAssemblyLoader, AssemblyLoader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

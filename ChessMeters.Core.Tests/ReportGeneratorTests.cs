@@ -1,12 +1,14 @@
+using ChessMeters.Core.Converters;
 using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
 using ChessMeters.Core.Entities;
+using ChessMeters.Core.Reports;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using System.IO;
-using Xunit;
 using System;
+using System.IO;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace ChessMeters.Core.Tests
 {
@@ -33,12 +35,12 @@ namespace ChessMeters.Core.Tests
 
             var engineProcess = new EngineProcess();
             var stockfishEngine = new StockfishEngine(engineProcess);
-            var engineAnalyzeEvaluator = new EngineAnalyzeEvaluator(stockfishEngine, context);
+            var engineAnalyzeEvaluator = new EngineEvaluationBuilder(stockfishEngine, context);
             var gameAnalyzer = new TreeMovesBuilder(context, engineAnalyzeEvaluator);
 
             var gameConverter = new GameConverter();
 
-            var reportGenerator = new ReportGenerator(gameAnalyzer, context);
+            var reportGenerator = new ReportGenerator(gameAnalyzer, null, context);
             var user = await context.Users.FirstAsync();
             var report = new Report
             {

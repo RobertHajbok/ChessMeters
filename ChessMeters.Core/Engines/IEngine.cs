@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using ChessMeters.Core.Enums;
+using System.Threading.Tasks;
 
 namespace ChessMeters.Core.Engines
 {

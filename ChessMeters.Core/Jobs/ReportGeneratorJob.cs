@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using ChessMeters.Core.Reports;
+using Microsoft.AspNetCore.SignalR;
 using Quartz;
 using System.Threading.Tasks;
 

@@ -1,4 +1,5 @@
 ﻿using ChessMeters.Core.Entities;
+using ChessMeters.Core.Enums;
 using ChessMeters.Core.Extensions;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;

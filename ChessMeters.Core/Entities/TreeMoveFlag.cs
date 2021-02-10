@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ChessMeters.Core.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChessMeters.Core.Entities
 {

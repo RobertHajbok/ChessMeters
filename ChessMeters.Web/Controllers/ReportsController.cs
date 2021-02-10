@@ -1,4 +1,4 @@
-﻿using ChessMeters.Core;
+﻿using ChessMeters.Core.Converters;
 using ChessMeters.Core.Database;
 using ChessMeters.Core.Entities;
 using ChessMeters.Core.Jobs;

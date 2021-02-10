@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ChessMeters.Core.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ChessMeters.Core.Entities
 {
@@ -9,7 +10,7 @@ namespace ChessMeters.Core.Entities
         public int GameId { get; set; }
 
         [ForeignKey(nameof(GameId))]
-        public virtual Game Report { get; set; }
+        public virtual Game Game { get; set; }
 
         public FlagEnum FlagId { get; set; }
 

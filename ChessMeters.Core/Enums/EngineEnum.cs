@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Enums
 {
     public enum EngineEnum : short
     {

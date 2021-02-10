@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ChessMeters.Core
+namespace ChessMeters.Core.Converters
 {
     public interface IGameConverter
     {
