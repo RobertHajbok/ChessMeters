@@ -28,7 +28,8 @@ namespace ChessMeters.Core.Reports
             var pathIds = game.LastTreeMove.FullPath.Split(' ');
             var moveIds = pathIds.Select(x => long.Parse(x)).ToList();
             moveIds.Add(game.LastTreeMoveId.Value);
-            var moves = await chessMetersContext.TreeMoves.Include(x => x.EngineEvaluations).Where(x => moveIds.Contains(x.Id)).ToListAsync();
+            var moves = await chessMetersContext.TreeMoves.Include(x => x.EngineEvaluations).Include(x => x.TreeMoveFlags)
+                .Where(x => moveIds.Contains(x.Id)).ToListAsync();
 
             var treeMoves = new List<TreeMove>();
             foreach (var moveId in moveIds)
@@ -42,7 +43,7 @@ namespace ChessMeters.Core.Reports
 
             foreach (var treeMove in treeMoves)
             {
-                chessMetersContext.TreeMoveFlags.RemoveRange();
+                var treeMoveFlags = new HashSet<FlagEnum>();
                 foreach (var rule in rules)
                 {
                     var flag = rule.Evaluate(coachBoard);
@@ -52,14 +53,15 @@ namespace ChessMeters.Core.Reports
                     if (rule.IsGameRule)
                         gameFlags.Add(flag.Value);
                     else
-                    {
-                        await chessMetersContext.TreeMoveFlags.AddAsync(new TreeMoveFlag
-                        {
-                            TreeMoveId = treeMove.Id,
-                            FlagId = flag.Value
-                        });
-                    }
+                        treeMoveFlags.Add(flag.Value);
                 }
+
+                chessMetersContext.TreeMoveFlags.RemoveRange(treeMove.TreeMoveFlags.Where(x => !treeMoveFlags.Contains(x.FlagId)));
+                await chessMetersContext.TreeMoveFlags.AddRangeAsync(treeMoveFlags.Where(x => !treeMove.TreeMoveFlags.Any(tmf => tmf.FlagId == x)).Select(x => new TreeMoveFlag
+                {
+                    TreeMoveId = treeMove.Id,
+                    FlagId = x
+                }));
 
                 coachBoard.SetNextTreeMove();
             }

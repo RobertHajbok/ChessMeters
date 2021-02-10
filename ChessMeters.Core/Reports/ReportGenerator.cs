@@ -22,7 +22,8 @@ namespace ChessMeters.Core.Reports
 
         public async Task<Report> Schedule(int reportId, short engineDepth)
         {
-            var report = await chessMetersContext.Reports.Include(x => x.Games).SingleAsync(x => x.Id == reportId);
+            var report = await chessMetersContext.Reports.Include(x => x.Games).ThenInclude(x => x.GameFlags)
+                .SingleAsync(x => x.Id == reportId);
 
             foreach (var game in report.Games)
             {
@@ -30,8 +31,8 @@ namespace ChessMeters.Core.Reports
                 {
                     var treeMoves = await treeMoveBuilder.BuildTree(engineDepth, game);
                     game.LastTreeMoveId = treeMoves.LastOrDefault()?.Id;
-                    game.Analyzed = true;
                     await coach.AnalizeGame(game);
+                    game.Analyzed = true;
                     chessMetersContext.Games.Update(game);
                 }
                 catch (Exception ex)
