@@ -1,5 +1,6 @@
 ﻿using ChessMeters.Core.Database;
 using ChessMeters.Core.Enums;
+using ChessMeters.Core.Extensions;
 using ChessMeters.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,8 @@ namespace ChessMeters.Web.Controllers
         [Route("{id:int}")]
         public async Task<GameDetailsViewModel> GetDetails(int id)
         {
-            var game = await chessMetersContext.Games.Include(x => x.LastTreeMove).Include(x => x.Report).SingleAsync(x => x.Id == id);
+            var game = await chessMetersContext.Games.Include(x => x.LastTreeMove).Include(x => x.Report)
+                .Include(x => x.GameFlags).SingleAsync(x => x.Id == id);
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             if (game.Report.UserId != userId)
             {
@@ -43,7 +45,8 @@ namespace ChessMeters.Web.Controllers
             var pathIds = game.LastTreeMove.FullPath.Split(' ');
             var moveIds = pathIds.Select(x => long.Parse(x)).ToList();
             moveIds.Add(game.LastTreeMoveId.Value);
-            var moves = await chessMetersContext.TreeMoves.Include(x => x.EngineEvaluations).Where(x => moveIds.Contains(x.Id)).ToListAsync();
+            var moves = await chessMetersContext.TreeMoves.Include(x => x.EngineEvaluations)
+                .Include(x => x.TreeMoveFlags).Where(x => moveIds.Contains(x.Id)).ToListAsync();
 
             var treeMoves = new List<TreeMoveViewModel>();
             foreach (var move in moves)
@@ -52,7 +55,8 @@ namespace ChessMeters.Web.Controllers
                 treeMoves.Add(new TreeMoveViewModel
                 {
                     Move = move.Move,
-                    StockfishEvaluationCentipawns = move.EngineEvaluations.Single(x => x.EngineId == EngineEnum.Stockfish12).EvaluationCentipawns
+                    StockfishEvaluationCentipawns = move.EngineEvaluations.Single(x => x.EngineId == EngineEnum.Stockfish12).EvaluationCentipawns,
+                    Flags = move.TreeMoveFlags.Select(x => x.FlagId.ToString())
                 });
             }
             return new GameDetailsViewModel
@@ -75,7 +79,8 @@ namespace ChessMeters.Web.Controllers
                 UTCTime = game.UTCTime,
                 WhiteRatingDiff = game.WhiteRatingDiff,
                 BlackRatingDiff = game.BlackRatingDiff,
-                Variant = game.Variant
+                Variant = game.Variant,
+                Flags = game.GameFlags.Select(x => x.FlagId.ToString())
             };
         }
     }

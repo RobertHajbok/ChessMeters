@@ -1,7 +1,7 @@
 <h1>Game details</h1>
 
 <div class="row mt-4">
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div>
       <ngx-chess-board #chessBoard [dragDisabled]="true" [drawDisabled]="true" [lightDisabled]="true" [darkDisabled]="true" [pieceIcons]="pieceIcons">
       </ngx-chess-board>
@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="card">
       <div class="card-body">
         <dl class="row">
@@ -92,6 +92,14 @@
           <dd class="col">{{game?.variant || '-'}}</dd>
         </dl>
       </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div *ngFor="let flag of game?.flags" class="alert alert-danger" role="alert">
+      {{flag}}
+    </div>
+    <div *ngFor="let flag of game?.treeMoves[this.moveIndex - 1]?.flags" class="alert alert-warning" role="alert">
+      {{flag}}
     </div>
   </div>
   <div class="col-md-12 mt-5">

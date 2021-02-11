@@ -42,5 +42,7 @@ namespace ChessMeters.Web.ViewModels
         public string BlackRatingDiff { get; set; }
 
         public string Variant { get; set; }
+
+        public IEnumerable<string> Flags { get; set; }
     }
 }

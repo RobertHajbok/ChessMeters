@@ -50,7 +50,6 @@ dotnet user-secrets set "Authentication:Facebook:AppId" "&lt;app-id&gt;"
 dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
-- Show flags in game details page
 - Fix user colors when editing PGN in report generator
 - Configure email for contact, error notifications and user registrations
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations

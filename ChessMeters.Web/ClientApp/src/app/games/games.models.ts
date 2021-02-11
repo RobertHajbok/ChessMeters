@@ -28,11 +28,13 @@ export interface GameDetails {
   whiteRatingDiff: string;
   blackRatingDiff: string;
   variant: string;
+  flags: string[];
 }
 
 interface TreeMove {
   stockfishEvaluationCentipawns: number;
   move: string;
+  flags: string[];
 }
 
 export interface GamePreview {
