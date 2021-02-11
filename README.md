@@ -50,15 +50,11 @@ dotnet user-secrets set "Authentication:Facebook:AppId" "&lt;app-id&gt;"
 dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
-- Add user color to games table in DB and link it to UI which is ready
-- Change color to use enum table instead of short
-- Refactor Core and link coach to generator
+- Show flags in game details page
+- Fix user colors when editing PGN in report generator
 - Configure email for contact, error notifications and user registrations
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations
 - Configure lichess api with more parameters
-- Add first flag for castling
-- Show first flag on game details page if applicable
-- Add statuses for games and show on reports grid
 - PROD environments for swap
 - Notation for games on UI
 - Chessboard game to PGN and analyze

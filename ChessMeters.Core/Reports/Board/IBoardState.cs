@@ -1,4 +1,5 @@
 using ChessMeters.Core.Entities;
+using ChessMeters.Core.Enums;
 using System.Collections.Generic;
 
 namespace ChessMeters.Core.Reports
@@ -31,7 +32,9 @@ namespace ChessMeters.Core.Reports
 
         int WhiteDevelopedMinorPiecesCount { get; }
 
-        void Initialize(IEnumerable<TreeMove> moves);
+        ColorEnum UserColor { get; }
+
+        void Initialize(IEnumerable<TreeMove> moves, ColorEnum userColor);
 
         void SetNextTreeMove();
     }

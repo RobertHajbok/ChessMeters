@@ -54,14 +54,19 @@ namespace ChessMeters.Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            var pgn = await gameConverter.ConvertFromPGN(generateReport.PGN);
+            var games = await gameConverter.ConvertFromPGN(generateReport.PGN);
+            for (var i = 0; i < games.Count(); i++)
+            {
+                games.ElementAt(i).UserColorId = generateReport.UserColors.ElementAt(i);
+            }
+
             var report = new Report
             {
                 Description = generateReport.Description,
                 PGN = generateReport.PGN,
                 UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
                 CreationDate = DateTime.Now,
-                Games = pgn.ToList()
+                Games = games.ToList()
             };
             await chessMetersContext.Reports.AddAsync(report);
             await chessMetersContext.SaveChangesAsync();

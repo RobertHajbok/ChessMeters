@@ -99,4 +99,8 @@ export class GameDetailsComponent implements OnInit {
       this.move();
     }
   }
+
+  public zeroNgStyle(tick) {
+    return tick == 0 ? { stroke: '#900' } : null;
+  }
 }

@@ -14,6 +14,10 @@ namespace ChessMeters.Core.Reports
             {
                 return null;
             }
+            else if (board.UserColor != board.CurrentTreeMove.ColorId)
+            {
+                return null;
+            }
 
             // This rule applies only after move 12;
             if (board.CurrentTreeMove.MoveNumber < 5)

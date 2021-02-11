@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ChessMeters.Core.Entities;
+using ChessMeters.Core.Enums;
 
 namespace ChessMeters.Core.Reports
 {
@@ -12,6 +13,8 @@ namespace ChessMeters.Core.Reports
         private List<string> whiteUndevelopedMinorPieces;
         private List<string> blackDevelopedMinorPieces;
         private List<string> blackUndevelopedMinorPieces;
+
+        public ColorEnum UserColor { get; private set; }
 
         public bool WhiteCastledShort { get; private set; }
 
@@ -27,9 +30,10 @@ namespace ChessMeters.Core.Reports
 
         public TreeMove CurrentTreeMove { get { return Moves.ElementAt(currentMoveNumber); } }
 
-        public void Initialize(IEnumerable<TreeMove> moves)
+        public void Initialize(IEnumerable<TreeMove> moves, ColorEnum userColor)
         {
             Moves = moves;
+            UserColor = userColor;
             currentMoveNumber = 0;
 
             whiteDevelopedMinorPieces = new List<string>();

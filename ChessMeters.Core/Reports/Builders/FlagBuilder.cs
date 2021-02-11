@@ -37,7 +37,7 @@ namespace ChessMeters.Core.Reports
                 treeMoves.Add(moves.Single(x => x.Id == moveId));
             }
 
-            coachBoard.Initialize(treeMoves);
+            coachBoard.Initialize(treeMoves, game.UserColorId);
             var rules = assemblyLoader.GetAllTypesOf<IRule>();
             var gameFlags = new HashSet<FlagEnum>();
 

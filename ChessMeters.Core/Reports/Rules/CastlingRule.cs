@@ -13,6 +13,10 @@ namespace ChessMeters.Core.Reports
             {
                 return null;
             }
+            else if (board.UserColor != board.CurrentTreeMove.ColorId)
+            {
+                return null;
+            }
 
             // This rule applies only if player did not castle yet.
             var didAlreadyCastle = board.CurrentTreeMove.ColorId == ColorEnum.White ?

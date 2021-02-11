@@ -91,8 +91,7 @@ namespace ChessMeters.Core.Entities
 
         public TimeSpan? StartTime { get; set; }
 
-        // TODO: Make this not nullable after linking from UI
-        public ColorEnum? UserColorId { get; set; }
+        public ColorEnum UserColorId { get; set; }
 
         public bool Analyzed { get; set; }
 

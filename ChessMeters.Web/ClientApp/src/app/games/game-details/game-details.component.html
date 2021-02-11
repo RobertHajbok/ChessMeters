@@ -98,7 +98,7 @@
     <div class="chart-container">
       <ngx-charts-line-chart [legend]="true" [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true"
                              [showYAxisLabel]="true" [xAxisLabel]="'Ply'" [yAxisLabel]="'Evaluation'"
-                             [results]="chartData">
+                             [results]="chartData" [referenceLines]="[{value: 0}]" [showRefLines]="true">
       </ngx-charts-line-chart>
     </div>
   </div>
