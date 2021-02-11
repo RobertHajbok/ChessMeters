@@ -11,13 +11,13 @@ namespace ChessMeters.Core.Reports
 {
     public class FlagBuilder : IFlagBuilder
     {
-        private readonly IBoardState coachBoard;
+        private readonly IBoardState boardState;
         private readonly IAssemblyLoader assemblyLoader;
         private readonly ChessMetersContext chessMetersContext;
 
-        public FlagBuilder(IBoardState coachBoard, IAssemblyLoader assemblyLoader, ChessMetersContext chessMetersContext)
+        public FlagBuilder(IBoardState boardState, IAssemblyLoader assemblyLoader, ChessMetersContext chessMetersContext)
         {
-            this.coachBoard = coachBoard;
+            this.boardState = boardState;
             this.assemblyLoader = assemblyLoader;
             this.chessMetersContext = chessMetersContext;
         }
@@ -37,7 +37,7 @@ namespace ChessMeters.Core.Reports
                 treeMoves.Add(moves.Single(x => x.Id == moveId));
             }
 
-            coachBoard.Initialize(treeMoves, game.UserColorId);
+            boardState.Initialize(treeMoves, game.UserColorId);
             var rules = assemblyLoader.GetAllTypesOf<IRule>();
             var gameFlags = new HashSet<FlagEnum>();
 
@@ -46,14 +46,13 @@ namespace ChessMeters.Core.Reports
                 var treeMoveFlags = new HashSet<FlagEnum>();
                 foreach (var rule in rules)
                 {
-                    var flag = rule.Evaluate(coachBoard);
-                    if (flag == null)
+                    if (!rule.Evaluate(boardState))
                         continue;
 
                     if (rule.IsGameRule)
-                        gameFlags.Add(flag.Value);
+                        gameFlags.Add(rule.Flag);
                     else
-                        treeMoveFlags.Add(flag.Value);
+                        treeMoveFlags.Add(rule.Flag);
                 }
 
                 chessMetersContext.TreeMoveFlags.RemoveRange(treeMove.TreeMoveFlags.Where(x => !treeMoveFlags.Contains(x.FlagId)));
@@ -63,7 +62,7 @@ namespace ChessMeters.Core.Reports
                     FlagId = x
                 }));
 
-                coachBoard.SetNextTreeMove();
+                boardState.SetNextTreeMove();
             }
 
             chessMetersContext.GameFlags.RemoveRange(game.GameFlags);

@@ -6,38 +6,27 @@ namespace ChessMeters.Core.Reports
     {
         public bool IsGameRule { get { return true; } }
 
-        public FlagEnum? Evaluate(IBoardState board)
+        public FlagEnum Flag { get { return FlagEnum.DidNotCastle; } }
+
+        public bool Evaluate(IBoardState board)
         {
             // This rule applies only after move 10;
-            if (board.CurrentTreeMove.MoveNumber < 10)
+            if (board.CurrentTreeMove.MoveNumber < 10 || board.UserColor != board.CurrentTreeMove.ColorId)
             {
-                return null;
-            }
-            else if (board.UserColor != board.CurrentTreeMove.ColorId)
-            {
-                return null;
+                return false;
             }
 
             // This rule applies only if player did not castle yet.
             var didAlreadyCastle = board.CurrentTreeMove.ColorId == ColorEnum.White ?
                 (board.WhiteCastledShort || board.WhiteCastledLong) :
                 (board.BlackCastledShort || board.BlackCastledLong);
-            if (didAlreadyCastle)
+            if (didAlreadyCastle || (board.CurrentTreeMove.ColorId == ColorEnum.White && board.IsWhiteCastling) ||
+                (board.CurrentTreeMove.ColorId == ColorEnum.Black && board.IsBlackCastling))
             {
-                return null;
+                return false;
             }
 
-            // This rule applies only if player is still not castling.
-            if (board.CurrentTreeMove.ColorId == ColorEnum.White && board.IsWhiteCastling)
-            {
-                return null;
-            }
-            if (board.CurrentTreeMove.ColorId == ColorEnum.Black && board.IsBlackCastling)
-            {
-                return null;
-            }
-
-            return FlagEnum.DidNotCastle;
+            return true;
         }
     }
 }

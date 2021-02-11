@@ -8,31 +8,24 @@ namespace ChessMeters.Core.Reports
 
         public bool IsGameRule { get { return true; } }
 
-        public FlagEnum? Evaluate(IBoardState board)
-        {
-            if (isDisabled)
-            {
-                return null;
-            }
-            else if (board.UserColor != board.CurrentTreeMove.ColorId)
-            {
-                return null;
-            }
+        public FlagEnum Flag { get { return FlagEnum.DidNotDevelopAllPieces; } }
 
-            // This rule applies only after move 12;
-            if (board.CurrentTreeMove.MoveNumber < 12)
+        public bool Evaluate(IBoardState board)
+        {
+            if (isDisabled || board.UserColor != board.CurrentTreeMove.ColorId ||
+                board.CurrentTreeMove.MoveNumber < 12)
             {
-                return null;
+                return false;
             }
 
             if ((board.CurrentTreeMove.ColorId == ColorEnum.White && !board.DidWhiteAlreadyDevelopAllMinorPieces) ||
                 (board.CurrentTreeMove.ColorId == ColorEnum.Black && !board.DidBlackAlreadyDevelopAllMinorPieces))
             {
                 isDisabled = true;
-                return FlagEnum.DidNotDevelopAllPieces;
+                return true;
             }
 
-            return null;
+            return false;
         }
     }
 }

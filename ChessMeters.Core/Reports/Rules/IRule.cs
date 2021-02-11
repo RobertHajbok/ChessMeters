@@ -6,6 +6,8 @@ namespace ChessMeters.Core.Reports
     {
         bool IsGameRule { get; }
 
-        FlagEnum? Evaluate(IBoardState board);
+        FlagEnum Flag { get; }
+
+        bool Evaluate(IBoardState board);
     }
 }

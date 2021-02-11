@@ -10,13 +10,13 @@ namespace ChessMeters.Core.Reports
     public class ReportGenerator : IReportGenerator
     {
         private readonly ITreeMovesBuilder treeMoveBuilder;
-        private readonly IFlagBuilder coach;
+        private readonly IFlagBuilder flagBuilder;
         private readonly ChessMetersContext chessMetersContext;
 
-        public ReportGenerator(ITreeMovesBuilder treeMoveBuilder, IFlagBuilder coach, ChessMetersContext chessMetersContext)
+        public ReportGenerator(ITreeMovesBuilder treeMoveBuilder, IFlagBuilder flagBuilder, ChessMetersContext chessMetersContext)
         {
             this.treeMoveBuilder = treeMoveBuilder;
-            this.coach = coach;
+            this.flagBuilder = flagBuilder;
             this.chessMetersContext = chessMetersContext;
         }
 
@@ -31,7 +31,7 @@ namespace ChessMeters.Core.Reports
                 {
                     var treeMoves = await treeMoveBuilder.BuildTree(engineDepth, game);
                     game.LastTreeMoveId = treeMoves.LastOrDefault()?.Id;
-                    await coach.AnalizeGame(game);
+                    await flagBuilder.AnalizeGame(game);
                     game.Analyzed = true;
                     chessMetersContext.Games.Update(game);
                 }

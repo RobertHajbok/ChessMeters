@@ -9,19 +9,21 @@ namespace ChessMeters.Core.Reports
     {
         public bool IsGameRule { get { return false; } }
 
-        public FlagEnum? Evaluate(IBoardState board)
+        public FlagEnum Flag { get { return FlagEnum.Blunder; } }
+
+        public bool Evaluate(IBoardState board)
         {
             // Cannot blunder on ply number 1 of the game.
             if (board.CurrentTreeMove.MoveNumber <= 1)
             {
-                return null;
+                return false;
             }
 
             // Check any sensitive differences on evals.
             var currentEvaluation = GetEvaluationAverage(board.CurrentTreeMove);
             var previousEvaluation = GetEvaluationAverage(board.PreviousTreeMove);
 
-            return Math.Abs(currentEvaluation - previousEvaluation) > 250 ? FlagEnum.Blunder : null;
+            return Math.Abs(currentEvaluation - previousEvaluation) > 250;
         }
 
         private static double GetEvaluationAverage(TreeMove treeMove)
