@@ -11,5 +11,9 @@ namespace ChessMeters.Web.ViewModels
         public DateTime CreationDate { get; set; }
 
         public int NumberOfGames { get; set; }
+
+        public int AnalyzedGames { get; set; }
+
+        public int AnalyzeErrorGames { get; set; }
     }
 }

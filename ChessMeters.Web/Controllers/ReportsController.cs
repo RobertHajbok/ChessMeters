@@ -42,7 +42,9 @@ namespace ChessMeters.Web.Controllers
                     Id = x.Id,
                     Description = x.Description,
                     CreationDate = x.CreationDate,
-                    NumberOfGames = x.Games.Count
+                    NumberOfGames = x.Games.Count,
+                    AnalyzedGames = x.Games.Count(x => x.Analyzed),
+                    AnalyzeErrorGames = x.Games.Count(x => !x.Analyzed && !string.IsNullOrWhiteSpace(x.AnalyzeExceptionStackTrace))
                 }).ToListAsync();
         }
 
@@ -161,7 +163,7 @@ namespace ChessMeters.Web.Controllers
                     White = x.White,
                     Black = x.Black,
                     Result = x.Result,
-                    Status = !string.IsNullOrWhiteSpace(x.AnalyzeExceptionStackTrace) ? "Analyze error" : "Ready"
+                    Status = !x.Analyzed && !string.IsNullOrWhiteSpace(x.AnalyzeExceptionStackTrace) ? "Analyze error" : "Ready"
                 })
             };
         }

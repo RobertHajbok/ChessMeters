@@ -3,20 +3,22 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as signalR from '@aspnet/signalr';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Color, GamePreview } from '../games/games.models';
-import { EditReport, GenerateReport, Report, ReportDetails } from './reports.models';
+import { EditReport, GenerateReport, Report, ReportAnalyzedGame, ReportDetails } from './reports.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportsService {
   private hubConnection: signalR.HubConnection;
+  private reportAnalyzedGames: BehaviorSubject<ReportAnalyzedGame>;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private router: Router,
     private toastrService: ToastrService, private authorizeService: AuthorizeService) {
+    this.reportAnalyzedGames = new BehaviorSubject(null);
     this.startSignalrConnection();
   }
 
@@ -95,12 +97,17 @@ export class ReportsService {
     return newPGN
   }
 
+  public getReportAnalyzedGames(): Observable<ReportAnalyzedGame> {
+    return this.reportAnalyzedGames.asObservable();
+  }
+
   private startSignalrConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.baseUrl}notification`, {
       accessTokenFactory: () => this.authorizeService.getAccessToken().toPromise()
     }).build();
     this.hubConnection.start();
     this.addReportGeneratedListener();
+    this.addReportGameAnalyzedListener();
   }
 
   private addReportGeneratedListener(): void {
@@ -108,6 +115,12 @@ export class ReportsService {
       this.toastrService.success('Report successfully generated, you can click here to view it.').onTap.subscribe(() => {
         this.router.navigateByUrl(`/reports/${reportId}`);
       });
+    });
+  }
+
+  private addReportGameAnalyzedListener(): void {
+    this.hubConnection.on('reportGameAnalyzed', (reportAnalyzedGame: ReportAnalyzedGame) => {
+      this.reportAnalyzedGames.next(reportAnalyzedGame);
     });
   }
 

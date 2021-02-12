@@ -5,6 +5,8 @@ export interface Report {
   description: string;
   creationTime: Date;
   numberOfGames: number;
+  analyzedGames: number;
+  analyzeErrorGames: number;
 }
 
 export interface GenerateReport {
@@ -20,4 +22,10 @@ export interface EditReport {
 export interface ReportDetails {
   description: string;
   games: Game[];
+}
+
+export interface ReportAnalyzedGame {
+  reportId: number;
+  analyzedGames: number;
+  analyzeErrorGames: number;
 }

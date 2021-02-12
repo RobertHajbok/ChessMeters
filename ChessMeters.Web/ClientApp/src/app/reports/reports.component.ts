@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { faEdit, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
-import { Report } from './reports.models';
+import { Report, ReportAnalyzedGame } from './reports.models';
 import { ReportsService } from './reports.service';
 
 @Component({
@@ -25,6 +25,21 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllReports();
+    this.reportsService.getReportAnalyzedGames().subscribe((reportAnalyzedGame: ReportAnalyzedGame) => {
+      let report = this.reports?.find(x => x.id == reportAnalyzedGame.reportId);
+      if (!report)
+        return;
+      console.log(reportAnalyzedGame);
+      if (reportAnalyzedGame.analyzedGames > report.numberOfGames)
+        report.analyzedGames = report.numberOfGames;
+      else if (report.analyzedGames < reportAnalyzedGame.analyzedGames)
+        report.analyzedGames = reportAnalyzedGame.analyzedGames;
+
+      if (reportAnalyzedGame.analyzeErrorGames > report.numberOfGames)
+        report.analyzeErrorGames = report.numberOfGames;
+      else if (report.analyzeErrorGames < reportAnalyzedGame.analyzeErrorGames)
+        report.analyzeErrorGames = reportAnalyzedGame.analyzeErrorGames;
+    });
   }
 
   public openReportGenerator(): void {
@@ -47,6 +62,15 @@ export class ReportsComponent implements OnInit {
 
   public view(id: number): void {
     this.router.navigateByUrl(`/reports/${id}`);
+  }
+
+  public getReportStatus(report: Report): string {
+    if (report.analyzedGames == report.numberOfGames)
+      return 'Ready';
+    let analyzedGamesPercentage = Math.round(report.analyzedGames * 100 / report.numberOfGames);
+    let errorPercentage = Math.round(report.analyzeErrorGames * 100 / report.numberOfGames);
+    return `${analyzedGamesPercentage}% games analyzed, ${errorPercentage}% games errored while analyzing,
+            ${100 - analyzedGamesPercentage - errorPercentage}% still pending`;
   }
 
   private getAllReports(): void {

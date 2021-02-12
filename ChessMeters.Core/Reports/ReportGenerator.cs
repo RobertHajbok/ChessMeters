@@ -27,25 +27,30 @@ namespace ChessMeters.Core.Reports
 
             foreach (var game in report.Games)
             {
-                try
-                {
-                    var treeMoves = await treeMoveBuilder.BuildTree(engineDepth, game);
-                    game.LastTreeMoveId = treeMoves.LastOrDefault()?.Id;
-                    await flagBuilder.AnalizeGame(game);
-                    game.Analyzed = true;
-                    chessMetersContext.Games.Update(game);
-                }
-                catch (Exception ex)
-                {
-                    game.AnalyzeExceptionStackTrace = ex.ToString();
-                }
-                finally
-                {
-                    await chessMetersContext.SaveChangesAsync();
-                }
+                await Schedule(game, engineDepth);
             }
 
             return report;
+        }
+
+        public async Task Schedule(Game game, short engineDepth)
+        {
+            try
+            {
+                var treeMoves = await treeMoveBuilder.BuildTree(engineDepth, game);
+                game.LastTreeMoveId = treeMoves.LastOrDefault()?.Id;
+                await flagBuilder.AnalizeGame(game);
+                game.Analyzed = true;
+                chessMetersContext.Games.Update(game);
+            }
+            catch (Exception ex)
+            {
+                game.AnalyzeExceptionStackTrace = ex.ToString();
+            }
+            finally
+            {
+                await chessMetersContext.SaveChangesAsync();
+            }
         }
     }
 }

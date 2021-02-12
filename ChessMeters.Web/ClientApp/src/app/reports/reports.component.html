@@ -11,8 +11,9 @@
       <tr>
         <th>Actions</th>
         <th>Description</th>
-        <th>Number of games</th>
         <th>Creation date</th>
+        <th>Number of games</th>
+        <th class="w-25">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -29,8 +30,9 @@
           </a>
         </td>
         <td>{{ report.description }}</td>
-        <td>{{ report.numberOfGames }}</td>
         <td>{{ report.creationDate | date:'medium' }}</td>
+        <td>{{ report.numberOfGames }}</td>
+        <td>{{ getReportStatus(report) }}</td>
       </tr>
     </tbody>
   </table>
