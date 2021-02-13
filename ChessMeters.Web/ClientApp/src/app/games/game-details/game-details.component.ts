@@ -79,6 +79,8 @@ export class GameDetailsComponent implements OnInit {
   }
 
   public move(): void {
+    if (this.moveIndex == this.game.treeMoves.length)
+      return;
     this.chessBoard.move(this.game.treeMoves[this.moveIndex].move);
     this.moveIndex++;
   }

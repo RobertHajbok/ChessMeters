@@ -50,6 +50,7 @@ dotnet user-secrets set "Authentication:Facebook:AppId" "&lt;app-id&gt;"
 dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
+- Fix SignalR on production
 - Add lichess and chess.com user name to profile and automatically populate them when generating reports
 - Fix user colors when editing PGN in report generator
 - Configure email for contact, error notifications and user registrations
