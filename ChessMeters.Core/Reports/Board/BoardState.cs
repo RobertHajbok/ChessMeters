@@ -129,13 +129,13 @@ namespace ChessMeters.Core.Reports
 
         private bool IsWhiteDevelopingBishop => IsWhiteDevelopingBishopC || IsWhiteDevelopingBishopF;
 
-        private bool IsWhiteDevelopingKnightB => CurrentTreeMove.Move.Contains("b1") && whiteUndevelopedMinorPieces.Contains("Nb");
+        private bool IsWhiteDevelopingKnightB => CurrentTreeMove.Move.StartsWith("b1") && whiteUndevelopedMinorPieces.Contains("Nb");
 
-        private bool IsWhiteDevelopingKnightG => CurrentTreeMove.Move.Contains("g1") && whiteUndevelopedMinorPieces.Contains("Ng");
+        private bool IsWhiteDevelopingKnightG => CurrentTreeMove.Move.StartsWith("g1") && whiteUndevelopedMinorPieces.Contains("Ng");
 
-        private bool IsWhiteDevelopingBishopC => CurrentTreeMove.Move.Contains("c1") && whiteUndevelopedMinorPieces.Contains("Bc");
+        private bool IsWhiteDevelopingBishopC => CurrentTreeMove.Move.StartsWith("c1") && whiteUndevelopedMinorPieces.Contains("Bc");
 
-        private bool IsWhiteDevelopingBishopF => CurrentTreeMove.Move.Contains("f1") && whiteUndevelopedMinorPieces.Contains("Bf");
+        private bool IsWhiteDevelopingBishopF => CurrentTreeMove.Move.StartsWith("f1") && whiteUndevelopedMinorPieces.Contains("Bf");
 
         private bool IsBlackDevelopingMinorPiece => IsBlackDevelopingKnight || IsBlackDevelopingBishop;
 
@@ -143,12 +143,12 @@ namespace ChessMeters.Core.Reports
 
         private bool IsBlackDevelopingBishop => IsBlackDevelopingBishopC || IsBlackDevelopingBishopF;
 
-        private bool IsBlackDevelopingKnightB => CurrentTreeMove.Move.Contains("b8") && whiteUndevelopedMinorPieces.Contains("Nb");
+        private bool IsBlackDevelopingKnightB => CurrentTreeMove.Move.StartsWith("b8") && whiteUndevelopedMinorPieces.Contains("Nb");
 
-        private bool IsBlackDevelopingKnightG => CurrentTreeMove.Move.Contains("g8") && whiteUndevelopedMinorPieces.Contains("Ng");
+        private bool IsBlackDevelopingKnightG => CurrentTreeMove.Move.StartsWith("g8") && whiteUndevelopedMinorPieces.Contains("Ng");
 
-        private bool IsBlackDevelopingBishopC => CurrentTreeMove.Move.Contains("c8") && whiteUndevelopedMinorPieces.Contains("Bc");
+        private bool IsBlackDevelopingBishopC => CurrentTreeMove.Move.StartsWith("c8") && whiteUndevelopedMinorPieces.Contains("Bc");
 
-        private bool IsBlackDevelopingBishopF => CurrentTreeMove.Move.Contains("f8") && whiteUndevelopedMinorPieces.Contains("Bf");
+        private bool IsBlackDevelopingBishopF => CurrentTreeMove.Move.StartsWith("f8") && whiteUndevelopedMinorPieces.Contains("Bf");
     }
 }
