@@ -1,0 +1,31 @@
+﻿@page
+@model LinkedAccountsModel
+@{
+    ViewData["Title"] = "Linked accounts";
+    ViewData["ActivePage"] = ManageNavPages.LinkedAccounts;
+}
+
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="linked-accounts-form" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.LichessUsername"></label>
+                <input asp-for="Input.LichessUsername" class="form-control" />
+                <span asp-validation-for="Input.LichessUsername" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ChessComUsername"></label>
+                <input asp-for="Input.ChessComUsername" class="form-control" />
+                <span asp-validation-for="Input.ChessComUsername" class="text-danger"></span>
+            </div>
+            <button id="update-linked-accounts-button" type="submit" asp-page-handler="ChangeLinkedAccounts" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

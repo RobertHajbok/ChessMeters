@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessMeters.Web", "ChessMet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessMeters.Core", "ChessMeters.Core\ChessMeters.Core.csproj", "{818CA570-7D43-4351-A9DF-C7F4C00EE617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessMeters.Core.Tests", "ChessMeters.Core.Tests\ChessMeters.Core.Tests.csproj", "{17177822-EB4B-41A0-B6CD-CBFCD899D5F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessMeters.Core.Tests", "ChessMeters.Core.Tests\ChessMeters.Core.Tests.csproj", "{17177822-EB4B-41A0-B6CD-CBFCD899D5F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -29,7 +29,6 @@ export class ReportsComponent implements OnInit {
       let report = this.reports?.find(x => x.id == reportAnalyzedGame.reportId);
       if (!report)
         return;
-      console.log(reportAnalyzedGame);
       if (reportAnalyzedGame.analyzedGames > report.numberOfGames)
         report.analyzedGames = report.numberOfGames;
       else if (report.analyzedGames < reportAnalyzedGame.analyzedGames)

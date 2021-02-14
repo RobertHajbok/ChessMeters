@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faExchangeAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
 import { Color, GamePreview } from '../../games/games.models';
+import { UsersService } from '../../shared/users.service';
 import { GenerateReport } from '../reports.models';
 import { ReportsService } from '../reports.service';
 
 @Component({
   templateUrl: './report-generator.component.html'
 })
-export class ReportGeneratorComponent {
+export class ReportGeneratorComponent implements OnInit {
   public report: GenerateReport;
   public uploadedPGN: File;
   public lichessUsername: string;
@@ -22,10 +23,18 @@ export class ReportGeneratorComponent {
   public pageSize: number;
   public color = Color;
 
-  constructor(private reportsService: ReportsService, private toastrService: ToastrService, private router: Router) {
+  constructor(private reportsService: ReportsService, private usersService: UsersService, private toastrService: ToastrService,
+    private router: Router) {
     this.report = { description: '', pgn: '', userColors: [] };
     this.page = 1;
     this.pageSize = 5;
+  }
+
+  ngOnInit(): void {
+    this.usersService.getUserLinkedAccounts().subscribe(result => {
+      this.lichessUsername = result.lichessUsername;
+      this.chessComUsername = result.chessComUsername;
+    });
   }
 
   public generate(): void {
