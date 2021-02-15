@@ -1,5 +1,6 @@
 ﻿using ChessMeters.Core.Database;
 using ChessMeters.Core.Enums;
+using ChessMeters.Core.Extensions;
 using ChessMeters.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,7 +56,7 @@ namespace ChessMeters.Web.Controllers
                 {
                     Move = move.Move,
                     StockfishEvaluationCentipawns = move.EngineEvaluations.Single(x => x.EngineId == EngineEnum.Stockfish12).EvaluationCentipawns,
-                    Flags = move.TreeMoveFlags.Select(x => x.FlagId.ToString())
+                    Flags = move.TreeMoveFlags.Select(x => x.FlagId.GetEnumDisplayUI())
                 });
             }
             return new GameDetailsViewModel
@@ -79,7 +80,7 @@ namespace ChessMeters.Web.Controllers
                 WhiteRatingDiff = game.WhiteRatingDiff,
                 BlackRatingDiff = game.BlackRatingDiff,
                 Variant = game.Variant,
-                Flags = game.GameFlags.Select(x => x.FlagId.ToString())
+                Flags = game.GameFlags.Select(x => x.FlagId.GetEnumDisplayUI())
             };
         }
     }

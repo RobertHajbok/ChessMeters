@@ -62,4 +62,4 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 - Light/dark themes (maybe from Bootstrap)
 - Docker images for Linux and Windows
 - Add sorting to whatever columns we need to sort by in grids
-
+- Add a job to analyze games in background at greater depths
