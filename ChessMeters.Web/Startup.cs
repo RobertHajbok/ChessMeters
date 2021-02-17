@@ -5,6 +5,7 @@ using ChessMeters.Core.Entities;
 using ChessMeters.Core.Helpers;
 using ChessMeters.Core.Jobs;
 using ChessMeters.Core.Reports;
+using ChessMeters.Web.Email;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,6 +73,8 @@ namespace ChessMeters.Web
             services.AddTransient<IFlagBuilder, FlagBuilder>();
             services.AddTransient<IBoardState, BoardState>();
             services.AddTransient<IAssemblyLoader, AssemblyLoader>();
+            services.AddSingleton(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddScoped<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

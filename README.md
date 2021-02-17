@@ -51,7 +51,7 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
 - Fix user colors when editing PGN in report generator
-- Configure email for contact, error notifications and user registrations
+- Configure email error notifications and user registrations
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations
 - Configure lichess api with more parameters
 - PROD environments for swap
@@ -63,3 +63,5 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 - Docker images for Linux and Windows
 - Add sorting to whatever columns we need to sort by in grids
 - Add a job to analyze games in background at greater depths
+- Add settings table to DB and move email etc. settings there
+- Add MySQL Workbench on production server

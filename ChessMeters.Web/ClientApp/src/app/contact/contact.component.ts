@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 import { Contact } from './contact.model';
@@ -11,21 +12,19 @@ import { ContactService } from './contact.service';
 export class ContactComponent {
   public contact: Contact;
 
-  constructor(private contactService: ContactService, private toastrService: ToastrService) {
+  constructor(private contactService: ContactService, private toastrService: ToastrService, private router: Router) {
     this.contact = {
       firstName: '',
       lastName: '',
       email: '',
       subject: '',
-      message: ''
+      message: '' 
     };
   }
 
   public send(): void {
-    this.contactService.send(this.contact).subscribe(() => {
-      this.toastrService.error('Not implemented yet.');
-    }, () => {
-      this.toastrService.error('An error occurred while trying to submit the form, please try again later.');
-    });
+    this.contactService.send(this.contact).subscribe();
+    this.toastrService.success('Email successfully sent.');
+    this.router.navigateByUrl('/');
   }
 }
