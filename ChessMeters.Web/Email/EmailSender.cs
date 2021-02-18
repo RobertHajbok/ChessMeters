@@ -1,5 +1,6 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
+using MimeKit.Text;
 using System.Threading.Tasks;
 
 namespace ChessMeters.Web.Email
@@ -25,7 +26,7 @@ namespace ChessMeters.Web.Email
             emailMessage.From.Add(message.From);
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
-            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
+            emailMessage.Body = new TextPart(TextFormat.Html) { Text = message.Content };
             return emailMessage;
         }
 

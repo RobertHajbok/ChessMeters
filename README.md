@@ -51,7 +51,7 @@ dotnet user-secrets set "Authentication:Facebook:AppSecret" "&lt;app-secret&gt;"
 
 ## TODO
 - Fix user colors when editing PGN in report generator
-- Configure email error notifications and user registrations
+- Configure email error notifications
 - Evaluation centipawns for mate, maybe add notes to EngineEvaluations
 - Configure lichess api with more parameters
 - PROD environments for swap
