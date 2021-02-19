@@ -1,19 +1,21 @@
-﻿using ChessMeters.Core.Database;
+using ChessMeters.Core.Converters;
+using ChessMeters.Core.Database;
 using ChessMeters.Core.Engines;
-using ChessMeters.Core.Reports;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ChessMeters.Core.Tests
+namespace ChessMeters.Core.Reports.Tests
 {
-    public class EngineAnalyzeEvaluatorTests
+
+    public class ReportGeneratorTests
     {
         private readonly DbContextOptions<ChessMetersContext> options;
 
-        public EngineAnalyzeEvaluatorTests()
+        public ReportGeneratorTests()
         {
             var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             string mySqlConnectionString = configuration.GetConnectionString("ChessMeters");
@@ -23,19 +25,23 @@ namespace ChessMeters.Core.Tests
 
         [Fact]
         [Trait("Category", "Integration")]
-        public async Task BuildEngineEvaluations_Should_EvaluateWithStockfishAndSaveToDbIfEvaluationNotFound()
+        public async Task Schedule_Should_ParsePGNAndScheduleReport()
         {
             using var context = new ChessMetersContext(options, new OperationalStoreOptionsMigrations());
+
             var engineProcess = new EngineProcess();
             var stockfishEngine = new StockfishEngine(engineProcess);
             var engineAnalyzeEvaluator = new EngineEvaluationBuilder(stockfishEngine, context);
+            var gameAnalyzer = new TreeMovesBuilder(context, engineAnalyzeEvaluator);
 
-            var treeMove = await context.TreeMoves.FirstAsync(x => !x.ParentTreeMoveId.HasValue);
-            await engineAnalyzeEvaluator.StartNewGame(10);
-            var result = await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMove);
+            var gameConverter = new GameConverter();
 
-            Assert.NotNull(result);
-            Assert.True(result.Id > 0);
+            var reportGenerator = new ReportGenerator(gameAnalyzer, null, context);
+            var reportId = await context.Reports.Select(x => x.Id).FirstAsync();
+
+            var report = await reportGenerator.Schedule(reportId, 10);
+
+            Assert.NotNull(report);
         }
     }
 }

@@ -1,9 +1,8 @@
-using ChessMeters.Core.Converters;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ChessMeters.Core.Tests
+namespace ChessMeters.Core.Converters.Tests
 {
     public class GameConverterTests
     {
