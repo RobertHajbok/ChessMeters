@@ -106,7 +106,8 @@
     <div class="chart-container">
       <ngx-charts-line-chart [legend]="true" [xAxis]="true" [yAxis]="true" [showXAxisLabel]="true"
                              [showYAxisLabel]="true" [xAxisLabel]="'Ply'" [yAxisLabel]="'Evaluation'"
-                             [results]="chartData" [referenceLines]="[{value: 0}]" [showRefLines]="true">
+                             [results]="chartData" [referenceLines]="[{value: 0}]" [showRefLines]="true"
+                             (select)="chartMoveSelected($event.name)">
       </ngx-charts-line-chart>
     </div>
   </div>

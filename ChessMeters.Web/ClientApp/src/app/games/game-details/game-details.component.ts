@@ -97,12 +97,25 @@ export class GameDetailsComponent implements OnInit {
   }
 
   public goToEnd(): void {
-    for (var i = this.moveIndex; i < this.game.treeMoves.length; i++) {
+    for (let i = this.moveIndex; i < this.game.treeMoves.length; i++) {
       this.move();
     }
   }
 
   public zeroNgStyle(tick) {
     return tick == 0 ? { stroke: '#900' } : null;
+  }
+
+  public chartMoveSelected(index: number): void {
+    if (index > this.moveIndex) {
+      for (let i = this.moveIndex; i < index; i++) {
+        this.move();
+      }
+    } else if (index < this.moveIndex) {
+      this.reset();
+      for (let i = 0; i < index; i++) {
+        this.move();
+      }
+    }
   }
 }

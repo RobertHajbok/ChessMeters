@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel.Engine;
 using Quartz;
-using System.Collections;
 using Xunit;
 
 namespace ChessMeters.Core.Helpers.Tests
