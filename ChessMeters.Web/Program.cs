@@ -1,5 +1,8 @@
+using ChessMeters.Core.Extensions;
 using ChessMeters.Core.Jobs;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Quartz;
 using System;
@@ -13,8 +16,17 @@ namespace ChessMeters.Web
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false).Build();
+
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var mySqlConnectionString = configuration.GetConnectionString("ChessMeters");
+                    config.AddDatabaseConfiguration(options => options.UseMySql(mySqlConnectionString,
+                        ServerVersion.AutoDetect(mySqlConnectionString)));
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.ConfigureKestrel(options =>
@@ -38,5 +50,6 @@ namespace ChessMeters.Web
 
                     services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
                 });
+        }
     }
 }

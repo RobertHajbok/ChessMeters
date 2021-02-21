@@ -37,7 +37,7 @@ namespace ChessMeters.Web.Email
             {
                 await client.ConnectAsync(emailConfig.SmtpServer, emailConfig.Port, true);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
-                await client.AuthenticateAsync(emailConfig.UserName, emailConfig.Password);
+                await client.AuthenticateAsync(emailConfig.Username, emailConfig.Password);
                 await client.SendAsync(mailMessage);
             }
             catch

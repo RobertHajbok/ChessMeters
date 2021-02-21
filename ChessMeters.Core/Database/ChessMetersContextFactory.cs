@@ -10,10 +10,10 @@ namespace ChessMeters.Core.Database
         public ChessMetersContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-            	.SetBasePath(Directory.GetCurrentDirectory())
-		.AddJsonFile("appsettings.json")
-		.AddEnvironmentVariables()
-		.Build();
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
             var mySqlConnectionString = configuration.GetConnectionString("ChessMeters");
             var optionsBuilder = new DbContextOptionsBuilder<ChessMetersContext>();
             optionsBuilder.UseMySql(mySqlConnectionString, ServerVersion.AutoDetect(mySqlConnectionString));

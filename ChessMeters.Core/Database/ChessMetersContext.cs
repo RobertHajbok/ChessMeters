@@ -10,6 +10,8 @@ namespace ChessMeters.Core.Database
 {
     public class ChessMetersContext : ApiAuthorizationDbContext<User>
     {
+        public DbSet<Setting> Settings { get; set; }
+
         public DbSet<Flag> Flags { get; set; }
 
         public DbSet<GameFlag> GameFlags { get; set; }
