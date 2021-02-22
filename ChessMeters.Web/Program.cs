@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Web;
 using Quartz;
 using System;
 
@@ -33,6 +35,7 @@ namespace ChessMeters.Web
                     {
                         options.ListenAnyIP(6000, listenOptions =>
                         {
+                            var x = configuration["IdentityServer__Key__Password"];
                             listenOptions.UseHttps("certificate.pfx", Environment.GetEnvironmentVariable("IdentityServer__Key__Password"));
                         });
                     });
@@ -49,7 +52,11 @@ namespace ChessMeters.Web
                     });
 
                     services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
-                });
+                }).ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Trace);
+                }).UseNLog();
         }
     }
 }
