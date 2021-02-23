@@ -39,7 +39,7 @@ namespace ChessMeters.Core.Reports.Tests
             var reportGenerator = new ReportGenerator(gameAnalyzer, null, context);
             var reportId = await context.Reports.Select(x => x.Id).FirstAsync();
 
-            var report = await reportGenerator.Schedule(reportId, 10);
+            var report = await reportGenerator.Schedule(reportId, EngineConsts.defaultAnalyzeDepth);
 
             Assert.NotNull(report);
         }

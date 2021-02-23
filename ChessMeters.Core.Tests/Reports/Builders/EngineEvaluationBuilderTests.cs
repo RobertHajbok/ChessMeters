@@ -30,7 +30,7 @@ namespace ChessMeters.Core.Reports.Tests
             var engineAnalyzeEvaluator = new EngineEvaluationBuilder(stockfishEngine, context);
 
             var treeMove = await context.TreeMoves.FirstAsync(x => !x.ParentTreeMoveId.HasValue);
-            await engineAnalyzeEvaluator.StartNewGame(10);
+            await engineAnalyzeEvaluator.StartNewGame(EngineConsts.defaultAnalyzeDepth);
             var result = await engineAnalyzeEvaluator.BuildEngineEvaluations(treeMove);
 
             Assert.NotNull(result);

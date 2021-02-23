@@ -13,7 +13,7 @@ namespace ChessMeters.Core.Reports
         public bool Evaluate(IBoardState board)
         {
             if (isDisabled || board.UserColor != board.CurrentTreeMove.ColorId ||
-                board.CurrentTreeMove.MoveNumber < 5)
+                board.CurrentTreeMove.MoveNumber < RuleConsts.developAtLeastOneMinorPieceBeforeMove)
             {
                 return false;
             }

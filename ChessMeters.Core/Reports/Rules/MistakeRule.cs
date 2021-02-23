@@ -22,7 +22,8 @@ namespace ChessMeters.Core.Reports
             var currentEvaluation = GetEvaluationAverage(board.CurrentTreeMove);
             var previousEvaluation = GetEvaluationAverage(board.PreviousTreeMove);
 
-            return Math.Abs(currentEvaluation - previousEvaluation) > 100;
+            var evaluationChange = Math.Abs(currentEvaluation - previousEvaluation);
+            return evaluationChange >= RuleConsts.mistakeThreshold && evaluationChange < RuleConsts.blunderThreshold;
         }
 
         private static double GetEvaluationAverage(TreeMove treeMove)

@@ -25,7 +25,7 @@ export class ReportGeneratorComponent implements OnInit {
 
   constructor(private reportsService: ReportsService, private usersService: UsersService, private toastrService: ToastrService,
     private router: Router) {
-    this.report = { description: '', pgn: '', userColors: [] };
+    this.report = { description: 'New report', pgn: '', userColors: [] };
     this.page = 1;
     this.pageSize = 5;
   }

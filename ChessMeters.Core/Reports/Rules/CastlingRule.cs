@@ -10,8 +10,7 @@ namespace ChessMeters.Core.Reports
 
         public bool Evaluate(IBoardState board)
         {
-            // This rule applies only after move 10;
-            if (board.CurrentTreeMove.MoveNumber < 10 || board.UserColor != board.CurrentTreeMove.ColorId)
+            if (board.CurrentTreeMove.MoveNumber < RuleConsts.castlingBeforeMove || board.UserColor != board.CurrentTreeMove.ColorId)
             {
                 return false;
             }

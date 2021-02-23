@@ -1,5 +1,6 @@
 ﻿using ChessMeters.Core.Database;
 using ChessMeters.Core.Dtos;
+using ChessMeters.Core.Engines;
 using ChessMeters.Core.Reports;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,7 @@ namespace ChessMeters.Core.Jobs
             var analyzeErrorGames = 0;
             foreach (var game in report.Games)
             {
-                await reportGenerator.Schedule(game, 10);
+                await reportGenerator.Schedule(game, EngineConsts.defaultAnalyzeDepth);
                 if (game.Analyzed)
                     analyzedGames++;
                 else

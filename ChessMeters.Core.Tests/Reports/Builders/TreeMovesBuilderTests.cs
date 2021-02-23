@@ -46,7 +46,7 @@ namespace ChessMeters.Core.Reports.Tests
             await context.Reports.AddAsync(report);
             await context.SaveChangesAsync();
 
-            var moves = await gameAnalyzer.BuildTree(10, new Game
+            var moves = await gameAnalyzer.BuildTree(EngineConsts.defaultAnalyzeDepth, new Game
             {
                 ReportId = report.Id,
                 Result = "0-1",
