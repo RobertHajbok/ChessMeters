@@ -33,6 +33,7 @@ import { FeaturesSectionComponent } from './home/features-section/features-secti
 import { PricingSectionComponent } from './home/pricing-section/pricing-section.component';
 import { FaqSectionComponent } from './home/faq-section/faq-section.component';
 import { FooterComponent } from './footer/footer.component';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { FooterComponent } from './footer/footer.component';
     FeaturesSectionComponent,
     PricingSectionComponent,
     FaqSectionComponent,
-    FooterComponent
+    FooterComponent,
+    ScrollToTopComponent
 
   ],
   imports: [

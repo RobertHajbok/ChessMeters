@@ -1,0 +1,28 @@
+@import '../../colors';
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+  border: 1px solid $primary-link-color;
+  background-color: $primary-link-color;
+  color: $bg-color-dark;
+  border-radius:100%;
+  height:40px;
+  width:40px;
+
+  &:hover {
+    .btn {
+      color: $primary-link-color;
+    }
+
+    background-color: $bg-color;
+  }
+}
+
+.show-scrollTop {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}
