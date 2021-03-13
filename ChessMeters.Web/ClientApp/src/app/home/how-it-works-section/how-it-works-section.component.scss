@@ -1,0 +1,60 @@
+@import '../../../colors';
+
+.info-box {
+  text-align: center;
+  padding: 40px 30px;
+  border-radius: 15px;
+  margin-bottom: 50px;
+  box-shadow: 0 3px 20px rgba(62, 64, 74, 0.85);
+  background-color: $bg-color-light;
+  transition: all ease-in-out .3s;
+  border-color: rgba(0, 161,112,0);
+  position: relative;
+  z-index: 1;
+
+  .icon {
+    background-color: $primary-link-color;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    border-radius: 100%;
+    margin-bottom: 20px;
+
+    .info-icon {
+      height: 2em;
+      width: 1.75em;
+      padding-top: 12px;
+    }
+  }
+
+  .description {
+
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-weight: 200;
+    }
+  }
+
+  &:hover {
+    transform: translate(0, -5px);
+    border: 2px solid rgba(0, 161, 112, 0.80);
+    box-shadow: 0 1rem 3rem rgba(1, 132, 92, 0.70) !important;
+  }
+
+  .count {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    color: rgba(36, 38, 48, 0.85);
+    font-size: 90px;
+    font-weight: 700;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+  }
+}

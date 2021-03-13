@@ -1,0 +1,68 @@
+<section class="container-fluid pt-5 pb-5 pl-0 pr-0 dark-bg">
+  <div class="row no-gutters">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+          <div class="section-title">
+            <p class="title h6">FAQ's</p>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="accordions">
+            <accordion [isAnimated]="true" [closeOthers]="true">
+              <accordion-group [panelClass]="accordionClass">
+                <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+                  <div class="pull-left float-left">I can have markup!</div>
+
+                  <span>
+                    <fa-icon [icon]="faPlus" [classes]="['float-right', 'pull-right', 'mt-1']"></fa-icon>
+                  </span>
+                  <!--<span class="badge badge-secondary float-right pull-right">Some HTML here</span>-->
+                </button>
+                <p>Some content</p>
+              </accordion-group>
+              <accordion-group heading="Another group" panelClass="faq-accordion">
+                <p>Some content</p>
+              </accordion-group>
+              <accordion-group heading="Another group" panelClass="faq-accordion">
+                <p>Some content</p>
+              </accordion-group>
+              <accordion-group heading="Another group" panelClass="faq-accordion">
+                <p>Some content</p>
+              </accordion-group>
+            </accordion>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="accordions">
+            <accordion [isAnimated]="true" [closeOthers]="true">
+              <accordion-group [panelClass]="accordionClass">
+                <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+                  <div class="pull-left float-left">I can have markup!</div>
+
+                  <span>
+                    <fa-icon [icon]="faPlus" [classes]="['float-right', 'pull-right', 'mt-1']"></fa-icon>
+                  </span>
+                  <!--<span class="badge badge-secondary float-right pull-right">Some HTML here</span>-->
+                </button>
+                <p>Some content</p>
+              </accordion-group>
+              <accordion-group heading="Another group" panelClass="faq-accordion">
+                <p>Some content</p>
+              </accordion-group>
+              <accordion-group heading="Another group" panelClass="faq-accordion">
+                <p>Some content</p>
+              </accordion-group>
+              <accordion-group heading="Another group" panelClass="faq-accordion">
+                <p>Some content</p>
+              </accordion-group>
+            </accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,12 +1,15 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { faAngleDoubleLeft, faArrowLeft, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDoubleLeft, faArrowLeft, faSync, faChessKnight, faChessRook, faChessKing, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { NgxChessBoardView, PieceIconInput } from 'ngx-chess-board';
 import { ToastrService } from 'ngx-toastr';
+import { query, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
   @ViewChild('chessBoard', { static: false }) chessBoard: NgxChessBoardView;
   public pieceIcons: PieceIconInput;
@@ -14,6 +17,14 @@ export class HomeComponent implements OnInit {
   public faArrowLeft = faArrowLeft;
   public faAngleDoubleLeft = faAngleDoubleLeft;
   public boardSize: number;
+
+  public faChessKing = faChessKing;
+  public faChessKnight = faChessKnight;
+  public faChessRook = faChessRook;
+  public faPlus = faPlus;
+  public faMinus = faMinus;
+
+  public accordionClass = 'faq-accordion';
 
   constructor(private toastrService: ToastrService, private breakpointObserver: BreakpointObserver) {
     this.pieceIcons = {

@@ -1,0 +1,37 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nanum+Gothic&display=swap');
+
+$bg-color: #363945;
+$primary-text: #dddddd;
+$primary-link-color: #00A170;
+$secondary-link-color: #d7d7d7;
+
+body {
+    background-color: $bg-color;
+    color: $primary-text;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+
+.nav-item {
+    a {
+        color: $primary-link-color;
+        transition: all .3s ease-in-out;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.00);
+
+        &:hover {
+            color: $secondary-link-color;
+            border-bottom: 1px solid $primary-link-color;
+        }
+    }
+
+    &.link-active {
+        a {
+            color: $secondary-link-color;
+            border-bottom: 1px solid $primary-link-color;
+        }
+    }
+}

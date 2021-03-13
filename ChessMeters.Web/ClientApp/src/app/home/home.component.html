@@ -1,19 +1,9 @@
-<div class="row justify-content-center">
-  <div class="center">
-    <div class="col-12">
-      <ngx-chess-board #chessBoard [pieceIcons]="pieceIcons" [size]="boardSize"></ngx-chess-board>
-    </div>
-    <div class="col-12 mt-4">
-      <a class="btn btn-default board-control" (click)="chessBoard.reverse()" title="Flip board">
-        <fa-icon [icon]="faSync" size="2x"></fa-icon>
-      </a>
-      <a class="btn btn-default board-control" (click)="chessBoard.reset()" title="Reset">
-        <fa-icon [icon]="faAngleDoubleLeft" size="2x"></fa-icon>
-      </a>
-      <a class="btn btn-default board-control" (click)="chessBoard.undo()" title="Previous">
-        <fa-icon [icon]="faArrowLeft" size="2x"></fa-icon>
-      </a>
-      <button class="btn btn-success float-right" (click)="analyzeGame()">Analyze</button>
-    </div>
-  </div>
-</div>
+<hero-section></hero-section>
+
+<how-it-works-section></how-it-works-section>
+
+<features-section></features-section>
+
+<pricing-section></pricing-section>
+
+<faq-section></faq-section>

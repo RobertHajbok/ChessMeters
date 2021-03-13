@@ -26,6 +26,12 @@ import { ContactComponent } from './contact/contact.component';
 import { environment } from '../environments/environment.prod';
 import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { HeroSectionComponent } from './home/hero-section/hero-section.component';
+import { HowItWorksSectionComponent } from './home/how-it-works-section/how-it-works-section.component';
+import { FeaturesSectionComponent } from './home/features-section/features-section.component';
+import { PricingSectionComponent } from './home/pricing-section/pricing-section.component';
+import { FaqSectionComponent } from './home/faq-section/faq-section.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReportDetailsComponent,
     GamesComponent,
     GameDetailsComponent,
-    ContactComponent
+    ContactComponent,
+    HeroSectionComponent,
+    HowItWorksSectionComponent,
+    FeaturesSectionComponent,
+    PricingSectionComponent,
+    FaqSectionComponent
+
   ],
   imports: [
     SharedModule,
@@ -67,7 +79,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       { path: 'games/:id', component: GameDetailsComponent, canActivate: [AuthorizeGuard] },
       { path: 'contact', component: ContactComponent }
     ]),
-    FontAwesomeModule
+    FontAwesomeModule,
+    AccordionModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
