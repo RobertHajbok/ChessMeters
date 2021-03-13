@@ -1,6 +1,6 @@
 <header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm" [ngClass]="{'scrolled': windowScrolled}">
+    <div class="container">
       <a class="navbar-brand" [routerLink]="['/']">ChessMeters</a>
       <button class="navbar-toggler"
               type="button"

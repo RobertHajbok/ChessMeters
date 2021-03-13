@@ -1,3 +1,38 @@
+@import '../../colors';
+
+
+.nav-item {
+  a {
+    color: $primary-text;
+    transition: all .3s ease-in-out;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.00);
+
+    &:hover {
+      color: $primary-link-color;
+    }
+  }
+
+  &.link-active {
+    a {
+      color: $primary-link-color;
+    }
+  }
+}
+
+.navbar {
+
+  transition:all .3s;
+
+  &.scrolled {
+    background-color: $bg-color;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    box-shadow:1px 1px 3px $bg-color-dark;
+  }
+}
+
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;

@@ -1,0 +1,36 @@
+@import '../../colors';
+
+
+.nav-item {
+  .btn {
+    background-color: $primary-link-color;
+    border-radius: 30px;
+    margin-right: 10px;
+    color: $primary-text;
+    border: 1px solid $primary-link-color;
+    padding: 5px 10px;
+
+    .nav-item {
+      a {
+        color: $primary-link-color;
+        transition: all .3s ease-in-out;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.00);
+
+        &:hover {
+          color: $secondary-link-color;
+        }
+      }
+
+      &.link-active {
+        a {
+          color: $secondary-link-color;
+        }
+      }
+    }
+
+    &:hover {
+      background-color: $bg-color;
+      color: $primary-link-color;
+    }
+  }
+}
