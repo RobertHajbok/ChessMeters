@@ -1,0 +1,46 @@
+@import '../../colors';
+
+
+
+.contact-form {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 20px 30px;
+  background-color: $bg-color-dark;
+  box-shadow: 2px 3px 10px $dark-shadow;
+  border-radius: 10px;
+
+  .icon-container {
+    position: relative;
+    top: -45px;
+  }
+
+  .icon-wrapper {
+    height: 60px;
+    width: 60px;
+    background-color: $primary-link-color;
+    border-radius: 100%;
+    box-shadow: 1px 1px 3px $dark-shadow;
+  }
+
+  .btn {
+    background-color: $primary-link-color;
+    border-radius: 30px;
+    margin-right: 10px;
+    color: $primary-text;
+    border: 1px solid $primary-link-color;
+    padding: 5px 10px;
+    font-weight: 600;
+
+    &[disabled]{
+        cursor:default;
+    }
+
+    &:not([disabled]) {
+      &:hover {
+        background-color: $bg-color;
+        color: $primary-link-color;
+      }
+    }
+  }
+}

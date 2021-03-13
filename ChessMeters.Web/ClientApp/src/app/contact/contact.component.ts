@@ -4,13 +4,16 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Contact } from './contact.model';
 import { ContactService } from './contact.service';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-contact',
-  templateUrl: './contact.component.html'
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
   public contact: Contact;
+  public faEnvelope = faEnvelope;
 
   constructor(private contactService: ContactService, private toastrService: ToastrService, private router: Router) {
     this.contact = {

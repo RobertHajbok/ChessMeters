@@ -15,23 +15,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   background-color: $bg-color-dark;
 }
 
-.nav-item {
-  a {
-    color: $primary-link-color;
-    transition: all .3s ease-in-out;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.00);
 
-    &:hover {
-      color: $secondary-link-color;
-    }
-  }
-
-  &.link-active {
-    a {
-      color: $secondary-link-color;
-    }
-  }
-}
 
 .btn {
 
@@ -44,10 +28,18 @@ input, textarea {
   background-color: transparent !important;
   color: $primary-link-color !important;
   border-radius: 0;
+  transition: all .3s;
 
   &:focus {
     border-color: $primary-link-color !important;
     box-shadow: 0 0 0 0.2rem rgba(0, 161, 112, 0.25) !important;
+  }
+
+  &.ng-invalid {
+    &.ng-touched {
+      border-color: $text-danger;
+      box-shadow: 0 0 0 0.2rem rgba(161, 30, 0, 0.25) !important;
+    }
   }
 
   &:-webkit-autofill, &:-internal-autofill-selected {
@@ -117,27 +109,27 @@ input, textarea {
 }
 
 .feauture-box {
-    border: 1px solid $bg-color-light;
-    padding:20px 40px 20px 20px;
-    border-radius:10px;
-    margin-bottom:20px;
+  border: 1px solid $bg-color-light;
+  padding: 20px 40px 20px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 
-    .icon {
-        background-color:$primary-link-color;
-        display:inline-block;
-        border-radius:100%;
-        width:50px;
-        height:50px;
-    }
+  .icon {
+    background-color: $primary-link-color;
+    display: inline-block;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+  }
 
-    h3 {
-        font-weight:900;
-        font-size:20px;
-    }
+  h3 {
+    font-weight: 900;
+    font-size: 20px;
+  }
 
-    p {
-        font-family:12px;
-    }
+  p {
+    font-family: 12px;
+  }
 }
 
 .pricing-item-container {
