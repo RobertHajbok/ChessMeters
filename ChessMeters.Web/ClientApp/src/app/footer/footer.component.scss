@@ -1,0 +1,22 @@
+@import '../../colors';
+
+li {
+
+  font-size:12px;
+  &:not(:last-of-type) {
+
+    &::after {
+      content: ' | ';
+      color: $primary-link-color-dark;
+    }
+  }
+
+  a {
+      color:$primary-text;
+      text-decoration:none;
+
+      &:hover {
+          color:$primary-link-color;
+      }
+  }
+}

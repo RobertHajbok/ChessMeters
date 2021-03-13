@@ -32,6 +32,7 @@ import { HowItWorksSectionComponent } from './home/how-it-works-section/how-it-w
 import { FeaturesSectionComponent } from './home/features-section/features-section.component';
 import { PricingSectionComponent } from './home/pricing-section/pricing-section.component';
 import { FaqSectionComponent } from './home/faq-section/faq-section.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FaqSectionComponent } from './home/faq-section/faq-section.component';
     HowItWorksSectionComponent,
     FeaturesSectionComponent,
     PricingSectionComponent,
-    FaqSectionComponent
+    FaqSectionComponent,
+    FooterComponent
 
   ],
   imports: [
