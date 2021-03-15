@@ -8,8 +8,11 @@
               data-target=".navbar-collapse"
               aria-label="Toggle navigation"
               [attr.aria-expanded]="isExpanded"
-              (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
+              (click)="toggle()"
+              [ngClass]="{'collapsed': !isExpanded}">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
            [ngClass]="{ show: isExpanded }">
