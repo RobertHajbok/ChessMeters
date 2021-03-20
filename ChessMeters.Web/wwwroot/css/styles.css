@@ -7,14 +7,221 @@ body {
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-family: 'Nanum Gothic', sans-serif; }
 
+a {
+  text-decoration: none;
+  color: #dddddd; }
+  a:hover {
+    text-decoration: none;
+    color: #00A170; }
+  a.invert {
+    color: #00A170; }
+    a.invert:hover {
+      color: #006949; }
+
+.dark-bg {
+  background-color: #22232A; }
+
+.btn:focus, .btn.focus, .btn:visited {
+  box-shadow: none !important; }
+
+.btn.full-w {
+  width: 100%; }
+
+.text-grey-50 {
+  color: #3E404A; }
+
+.text-grey-100 {
+  color: #22232A; }
+
+input, textarea {
+  background-color: transparent !important;
+  color: #00A170 !important;
+  border-radius: 0;
+  transition: all .3s; }
+  input:focus, textarea:focus {
+    border-color: #00A170 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 161, 112, 0.25) !important; }
+  input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+    border-color: #a11e00;
+    box-shadow: 0 0 0 0.2rem rgba(161, 30, 0, 0.25) !important; }
+  input:-webkit-autofill, input:-internal-autofill-selected, textarea:-webkit-autofill, textarea:-internal-autofill-selected {
+    background-color: transparent !important; }
+
+.section-title {
+  margin-bottom: 40px; }
+  .section-title .title {
+    background-color: #00A170;
+    padding: 5px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    display: inline-block; }
+    .section-title .titleh6, .section-title .title.h6 {
+      font-size: 10px; }
+  .section-title .description {
+    font-weight: 700;
+    text-transform: capitalize; }
+
+.img-brand {
+  max-width: 50px;
+  margin-right: .5rem; }
+
+.navbar-brand {
+  color: #dddddd; }
+
 .nav-item a {
-  color: #00A170;
+  color: #dddddd;
   transition: all .3s ease-in-out;
   border-bottom: 1px solid transparent; }
   .nav-item a:hover {
-    color: #d7d7d7;
-    border-bottom: 1px solid #00A170; }
+    color: #00A170; }
 
 .nav-item.link-active a {
-  color: #d7d7d7;
-  border-bottom: 1px solid #00A170; }
+  color: #00A170; }
+
+.navbar-toggler {
+  position: relative; }
+  .navbar-toggler:focus {
+    outline: none; }
+  .navbar-toggler span {
+    display: block;
+    height: 3px;
+    width: 25px;
+    margin: 4px 0;
+    left: 0;
+    opacity: 1;
+    background-color: #dddddd;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transition: all .35s ease-in-out; }
+  .navbar-toggler:not(.collapsed) span:nth-child(1) {
+    position: absolute;
+    left: -8px;
+    top: -5px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    opacity: .9; }
+  .navbar-toggler:not(.collapsed) span:nth-child(2) {
+    position: absolute;
+    top: -5px;
+    left: 60px;
+    opacity: 0; }
+  .navbar-toggler:not(.collapsed) span:nth-child(3) {
+    position: absolute;
+    left: -8px;
+    top: -5px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    opacity: .9; }
+
+.navbar {
+  transition: box-shadow .3s; }
+  .navbar.scrolled {
+    background-color: #363945;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    box-shadow: 1px 1px 3px #22232A; }
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all; }
+
+html {
+  font-size: 14px; }
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px; } }
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05); }
+
+.navbar-toggler-icon {
+  color: #dddddd; }
+
+.nav-item .btn {
+  background-color: #00A170;
+  border-radius: 30px;
+  margin-right: 10px;
+  color: #dddddd;
+  border: 1px solid #00A170;
+  padding: 5px 10px; }
+  .nav-item .btn .nav-item a {
+    color: #00A170;
+    transition: all .3s ease-in-out;
+    border-bottom: 1px solid transparent; }
+    .nav-item .btn .nav-item a:hover {
+      color: #d7d7d7; }
+  .nav-item .btn .nav-item.link-active a {
+    color: #d7d7d7; }
+  .nav-item .btn:hover {
+    background-color: #363945;
+    color: #00A170; }
+
+.wallpaper {
+  background: url("/assets/hero-bg-2.jpg");
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.4; }
+
+.login-form, .register-form, .forgot-pass-form {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 20px 30px;
+  background-color: #22232A;
+  box-shadow: 2px 3px 10px #000000;
+  border-radius: 10px; }
+  .login-form .icon-container, .register-form .icon-container, .forgot-pass-form .icon-container {
+    position: relative;
+    top: -45px; }
+  .login-form .icon-wrapper, .register-form .icon-wrapper, .forgot-pass-form .icon-wrapper {
+    height: 60px;
+    width: 60px;
+    background-color: #00A170;
+    border-radius: 100%;
+    box-shadow: 1px 1px 3px #000000; }
+  .login-form .btn, .register-form .btn, .forgot-pass-form .btn {
+    background-color: #00A170;
+    border-radius: 30px;
+    margin-right: 10px;
+    color: #dddddd;
+    border: 1px solid #00A170;
+    padding: 5px 10px;
+    font-weight: 600; }
+    .login-form .btn:not([disabled]):hover, .register-form .btn:not([disabled]):hover, .forgot-pass-form .btn:not([disabled]):hover {
+      background-color: #363945;
+      color: #00A170; }
+    .login-form .btn.facebook-color, .register-form .btn.facebook-color, .forgot-pass-form .btn.facebook-color {
+      background-color: #3d59a3;
+      border-color: #3d59a3; }
+      .login-form .btn.facebook-color:not([disabled]):hover, .register-form .btn.facebook-color:not([disabled]):hover, .forgot-pass-form .btn.facebook-color:not([disabled]):hover {
+        color: #3d59a3; }
+    .login-form .btn.google-color, .register-form .btn.google-color, .forgot-pass-form .btn.google-color {
+      background-color: #e15150;
+      border-color: #e15150; }
+      .login-form .btn.google-color:not([disabled]):hover, .register-form .btn.google-color:not([disabled]):hover, .forgot-pass-form .btn.google-color:not([disabled]):hover {
+        color: #e15150; }
+    .login-form .btn[disabled], .register-form .btn[disabled], .forgot-pass-form .btn[disabled] {
+      cursor: default; }
+
+@media (max-width: 767.98px) {
+  .mb-md-1 {
+    margin-bottom: 1rem; } }
+
+footer li {
+  font-size: 12px; }
+  footer li:not(:last-of-type)::after {
+    content: ' | ';
+    color: #006949; }
+  footer li a {
+    color: #dddddd;
+    text-decoration: none; }
+    footer li a:hover {
+      color: #00A170; }

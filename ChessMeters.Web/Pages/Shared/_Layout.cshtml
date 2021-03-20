@@ -9,19 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ChessMeters</title>
     <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Identity/css/site.css" />
+    @*<link rel="stylesheet" href="~/Identity/css/site.css" />*@
     <link rel="stylesheet" href="/css/styles.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="~/">ChessMeters</a>
+        <nav class="navbar navbar-expand-md navbar-light navbar-toggleable-md">
+            <div class="container">
+                <a class="navbar-brand" href="~/">
+                    <img class="img img-brand" src="/assets/logo-1.png" />
+                    ChessMeters
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
                     @{
                         var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                     }
@@ -45,6 +51,22 @@
             @RenderBody()
         </main>
     </div>
+    <footer class="container">
+        <div class="row">
+            <div class="col-md-12 pt-3 pb-3 text-center">
+                <ul class="list list-unstyled list-inline">
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#">Cookie Policy</a></li>
+                    <li class="list-inline-item"><a href="#">Contact</a></li>
+                    <li class="list-inline-item"><a href="#">About</a></li>
+                    <li class="list-inline-item"><a href="#">Help</a></li>
+                </ul>
+                <p class="small">
+                    ChessMeters &copy; @DateTime.UtcNow.Year
+                </p>
+            </div>
+        </div>
+    </footer>
     <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/Identity/js/site.js" asp-append-version="true"></script>

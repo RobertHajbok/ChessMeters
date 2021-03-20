@@ -5,13 +5,21 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row position-relative">
+    <div class="wallpaper"></div>
+    <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4 login-form">
         <section>
+            <div class="d-flex justify-content-center align-items-center icon-container">
+                <div class="icon-wrapper d-flex justify-content-center align-items-center">
+                    <i class="fas fa-chess-knight"></i>
+                </div>
+            </div>
             <form id="account" method="post">
-                <h4>Use a local account to log in. bbboooo</h4>
-                <hr />
+                <div class="text-center">
+                    <h1>@ViewData["Title"]</h1>
+                    <h5>Use a local account to log in.</h5>
+                </div>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Input.Email"></label>
@@ -22,6 +30,9 @@
                     <label asp-for="Input.Password"></label>
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <p class="small text-right">
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                    </p>
                 </div>
                 <div class="form-group">
                     <div class="checkbox">
@@ -31,27 +42,23 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary full-w">Log in</button>
                 </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
+                <div class="form-group text-center">
+                    <p class="small">
+                        <span class="text-grey-50">Don't have an account yet?</span>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
-                    <p>
+                    <p class="small">
                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                     </p>
                 </div>
             </form>
         </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
+        <section class="text-center">
+            <h6 class="mb-3">Or login with</h6>
+
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
@@ -69,7 +76,10 @@
                             <p>
                                 @foreach (var provider in Model.ExternalLogins)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    <button type="submit" class="btn btn-primary @provider.DisplayName.ToLower()-color" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                        <i class="fab fa-@provider.DisplayName.ToLower()"></i>
+                                        @provider.DisplayName
+                                    </button>
                                 }
                             </p>
                         </div>
