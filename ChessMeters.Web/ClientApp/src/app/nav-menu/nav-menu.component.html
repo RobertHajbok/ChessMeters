@@ -1,7 +1,10 @@
 <header>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm" [ngClass]="{'scrolled': windowScrolled}">
+  <nav class="navbar navbar-expand-md navbar-toggleable-md" [ngClass]="{'scrolled': windowScrolled}">
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">ChessMeters</a>
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img class="img img-brand" src="/assets/logo-1.png" />
+      ChessMeters
+      </a>
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -14,7 +17,7 @@
         <span></span>
         <span></span>
       </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+      <div class="navbar-collapse collapse d-md-inline-flex justify-content-end"
            [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <li class="nav-item"

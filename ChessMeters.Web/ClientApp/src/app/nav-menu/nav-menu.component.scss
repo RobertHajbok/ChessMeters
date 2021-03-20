@@ -1,5 +1,13 @@
 @import '../../colors';
 
+.img-brand {
+    max-width:50px;
+    margin-right:.5rem;
+}
+
+.navbar-brand {
+    color:$primary-text;
+}
 
 .nav-item {
   a {
@@ -107,3 +115,5 @@ html {
 .navbar-toggler-icon {
     color: $primary-text;
 }
+
+
