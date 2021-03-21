@@ -68,7 +68,7 @@ input, textarea {
   margin-right: .5rem; }
 
 .navbar-brand {
-  color: #dddddd; }
+  color: #dddddd !important; }
 
 .nav-item a {
   color: #dddddd;
